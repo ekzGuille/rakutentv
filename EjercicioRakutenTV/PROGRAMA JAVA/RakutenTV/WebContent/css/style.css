@@ -1,0 +1,7 @@
+:root{
+   --colorFondo: #202020;
+}
+
+body{
+    background-color: var(--colorFondo);
+}
