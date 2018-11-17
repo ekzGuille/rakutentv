@@ -126,3 +126,9 @@ Comentario{
     },
     fechaComentario: string
 }
+
+ValoracionGlobalPelicula{
+    idPelicula: number,
+    valoracionesTotale: number,
+    mediaValoraciones: double
+}
