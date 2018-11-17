@@ -1,0 +1,128 @@
+Director{
+    idDirector: number,
+    nombreDir: string,
+    apellidosDir: string,
+    fotoDirector: string
+}
+
+Actor{
+    idActor: number,
+    nombreActor: string,
+    apellidosActor: string,
+    fotoActor: string
+}
+
+Genero{
+    idGenero: number,
+    descGenero: string
+}
+
+Puntuacion{
+    idPuntuacion: number,
+    descPuntuacion: string,
+    fotoPuntuacion: string
+}
+
+Pelicula{
+    idPelicula: number,
+    tituloPeli: string,
+    resumenPeli: string,
+    trailerPeli: string,
+    caratulaPeli: string,
+    imagenPeli: string,
+    fechaEstreno: string,
+    audiosDisponibles: string,
+    subtitulosDisponibles: string,
+    duracionPeli: number,
+    precioPeli: double,
+    directorPeli: [
+        {
+            idDirector: number
+        }
+    ],
+    generoPeli:[
+        {
+            idGenero: number
+        }
+    ],
+    actorPeli: [
+        {
+            idActor: number
+        }
+    ],
+    puntuacionPeli:{
+            idPuntuacion: number
+        },
+    comentarios:[
+        {
+            idComentario: number
+        }
+    ]
+}
+
+Usuario{
+    idUsuario: number,
+    email: string,
+    username: string,
+    contrasena, string,
+    fechaCreacion: string,
+    fotoUsuario: string,
+    metodoPago: {
+        idMetodoPago: number
+    },
+    infoMetodoPago: string,
+    compradasPelis: [
+        {
+            idCompra: number,
+        }
+    ],
+    favoritasPelis: [
+        {
+            idPelicula: number,
+        }
+    ],
+    activo: boolean
+}
+
+MetodoPago{
+    idMetodoPago: number,
+    descMetodoPago: string
+}
+
+Compra{
+    idCompra: number,
+    pelicula:{
+        idPelicula: number
+    },
+    usuario:{
+        idUsuario: number
+    },
+    percioCompra: number,
+    fechaCompra: string
+}
+
+Factura{
+    idFactura: number,
+    descFactura: string,
+    idCompra: {
+        idCompra: number
+    },
+    pelicula:{
+        idPelicula: number
+    },
+    usuario:{
+        idUsuario: number
+    }
+}
+
+Comentario{
+    idComentario: number,
+    descComentario: string,
+    usuario:{
+        idUsuario: number
+    },
+    pelicula:{
+        idPelicula: number
+    },
+    fechaComentario: string
+}
