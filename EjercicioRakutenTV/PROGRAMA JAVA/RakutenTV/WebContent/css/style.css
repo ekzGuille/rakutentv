@@ -1,7 +1,43 @@
-:root{
-   --colorFondo: #202020;
+:root {
+    --colorFondo: #202020;
+}
+html{
+    height: 100%;
+}
+body {
+     background: rgba(32, 32, 32, 1);
+    /* background: -moz-radial-gradient(center, ellipse cover, rgba(32, 32, 32, 1) 0%, rgba(0, 0, 0, 1) 100%);
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(32, 32, 32, 1)), color-stop(100%, rgba(0, 0, 0, 1)));
+    background: -webkit-radial-gradient(center, ellipse cover, rgba(32, 32, 32, 1) 0%, rgba(0, 0, 0, 1) 100%);
+    background: -o-radial-gradient(center, ellipse cover, rgba(32, 32, 32, 1) 0%, rgba(0, 0, 0, 1) 100%);
+    background: -ms-radial-gradient(center, ellipse cover, rgba(32, 32, 32, 1) 0%, rgba(0, 0, 0, 1) 100%);
+    background: radial-gradient(ellipse at center, rgba(32, 32, 32, 1) 0%, rgba(0, 0, 0, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#202020', endColorstr='#000000', GradientType=1); */
 }
 
-body{
-    background-color: var(--colorFondo);
+img {
+    max-width: 200px;
+}
+.cuadriculaPeliculas{
+    /* margin-left: 0.5%; */
+    padding-left: 0.5%;
+}
+.imagenCaratula{
+    max-height: 268px;
+}
+.caratulaPelicula {
+    /* margin: 1% 0.5% 1% 0.5%; */
+    padding: 1% 0.5% 1% 0.5%;
+    display: inline-block;
+}
+.imgValoracion,
+.infoValoracion {
+    text-align: center;
+}
+.estrellasValoracion{
+    max-width: 150px;
+}
+
+h4{
+    color: #FFF;
 }
