@@ -226,4 +226,46 @@ public class UsuarioDAO implements DAO<Usuario, Integer> {
 		return (!lstUsuario.isEmpty()) ? lstUsuario.get(0) : null;
 	}
 
+	public Usuario findByCredentials(String userMail, String contrasena) {
+		String sql = "SELECT * FROM `usuario` WHERE (`email` = ? AND `contrasena` = ?) OR (`username` = ? AND `contrasena` = ?)";
+
+		List<Usuario> lstUsuario = null;
+
+		try {
+			pst = this.motor.connect().prepareStatement(sql);
+
+			pst.setString(1, userMail);
+			pst.setString(2, contrasena);
+			pst.setString(3, userMail);
+			pst.setString(4, contrasena);
+
+			ResultSet rs = this.motor.executeQuery(pst);
+			lstUsuario = new ArrayList<Usuario>();
+
+			while (rs.next()) {
+				Usuario usuario = new Usuario();
+
+				usuario.setIdUsuario(rs.getInt(1));
+				usuario.setEmail(rs.getString(2));
+				usuario.setUsername(rs.getString(3));
+				usuario.setContrasena(rs.getString(4));
+				usuario.setFechaCreacion(rs.getString(5));
+				usuario.setFotoUsuario(rs.getString(6));
+				usuario.setIdMetodoPago(rs.getInt(7));
+				usuario.setInfoMetodoPago(rs.getString(8));
+				usuario.setActivoUsuario(rs.getInt(9));
+
+				lstUsuario.add(usuario);
+
+			}
+
+		} catch (SQLException e) {
+
+		} finally {
+			this.motor.disconnect();
+		}
+
+		return (!lstUsuario.isEmpty()) ? lstUsuario.get(0) : null;
+	}
+
 }

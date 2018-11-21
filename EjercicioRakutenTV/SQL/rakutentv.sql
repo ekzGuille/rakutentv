@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 16-11-2018 a las 21:36:33
--- Versión del servidor: 10.1.36-MariaDB
--- Versión de PHP: 7.2.11
+-- Servidor: localhost
+-- Tiempo de generación: 20-11-2018 a las 20:55:04
+-- Versión del servidor: 10.1.31-MariaDB
+-- Versión de PHP: 7.2.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -211,8 +211,8 @@ CREATE TABLE `pelicula` (
   `tituloPeli` varchar(40) COLLATE utf8_spanish2_ci NOT NULL,
   `resumenPeli` varchar(200) COLLATE utf8_spanish2_ci NOT NULL,
   `trailerPeli` varchar(60) COLLATE utf8_spanish2_ci NOT NULL,
-  `caratulaPeli` varchar(25) COLLATE utf8_spanish2_ci NOT NULL,
-  `imagenPeli` varchar(25) COLLATE utf8_spanish2_ci NOT NULL,
+  `caratulaPeli` varchar(30) COLLATE utf8_spanish2_ci NOT NULL,
+  `imagenPeli` varchar(30) COLLATE utf8_spanish2_ci NOT NULL,
   `fechaEstreno` date NOT NULL,
   `audiosDisponibles` varchar(30) COLLATE utf8_spanish2_ci NOT NULL,
   `subtitulosDisponibles` varchar(30) COLLATE utf8_spanish2_ci NOT NULL,
@@ -226,7 +226,14 @@ CREATE TABLE `pelicula` (
 
 INSERT INTO `pelicula` (`idPelicula`, `tituloPeli`, `resumenPeli`, `trailerPeli`, `caratulaPeli`, `imagenPeli`, `fechaEstreno`, `audiosDisponibles`, `subtitulosDisponibles`, `duracionPeli`, `precioPeli`) VALUES
 (1, 'John Wick: Otro Día para Matar', 'La ciudad de Nueva York se convierte en el patio acribillado a balazos de un ex-asesino mientras él elimina a los gánsteres que destruyeron todo lo que él quería.', 'https://www.youtube.com/watch?v=RllJtOw0USI', 'JohnWick_caratula.jpg', 'JohnWick_foto.jpg', '2014-10-13', 'ESP,EN,ITA', 'RU,EN,ESP', 101, '5.50'),
-(2, 'Deadpool', 'Un ex mercenario quien, tras haber sido sometido a un cruel experimento adquiere el súper poder de sanar rápidamente, pretende vengarse del hombre que destrozó su vida.', 'https://www.youtube.com/watch?v=ONHBaC-pfsk', 'Deadpool_caratula.jpg', 'Deadpool_foto.jpg', '2016-01-21', 'ESP,RU', 'EN,ESP', 109, '7.20');
+(2, 'Deadpool', 'Un ex mercenario quien, tras haber sido sometido a un cruel experimento adquiere el súper poder de sanar rápidamente, pretende vengarse del hombre que destrozó su vida.', 'https://www.youtube.com/watch?v=ONHBaC-pfsk', 'Deadpool_caratula.jpg', 'Deadpool_foto.jpg', '2016-01-21', 'ESP,RU', 'EN,ESP', 109, '7.20'),
+(3, 'Matrix', 'Un experto en computadoras descubre que su mundo es una simulación computarizada creada por malvada ciberinteligencia.', 'https://www.youtube.com/watch?v=m8e-FF8MsqU', 'Matrix_caratula.jpg', 'Matrix_foto.jpg', '1999-06-23', 'ESP,EN', 'ESP', 150, '4.50'),
+(4, 'Piratas del Caribe', 'Piratas del Caribe es el título de una serie cinematográfica de aventura fantástica y piratas, producidas por Jerry Bruckheimer.', 'https://youtu.be/ojvNfJjX8OQ', 'PiratasDelCaribe_caratula.jpg', 'PiratasDelCaribe_foto.jpg', '2006-08-11', 'EN,RU', 'ITA,BR', 151, '5.80'),
+(5, 'X-Men: primera generación', 'A principios de los años 60, Charles Xavier y Magneto se convierten en grandes amigos. Usando sus poderes, se unen para proteger al mundo de una guerra nuclear.', 'https://www.youtube.com/watch?v=UrbHykKUfTM', 'XMenFirstClass_caratula.jpg', 'XMenFirstClass_foto.jpg', '2011-05-25', 'ESP,RU,ITA', 'EN', 132, '6.40'),
+(6, 'El Quinto Elemento', 'a historia del director Luc Besson, sobre un taxista del futuro que tropieza con la mujer que puede salvar al mundo.\r\n', 'https://youtu.be/aB-AUTGqUCU', 'ElQuintoElemento_caratula.jpg', 'ElQuintoElemento_foto.jpg', '1997-05-30', 'EN', 'ESP', 127, '3.50'),
+(7, 'Dr. Dolittle', 'Un cirujano se convierte en mejor doctor, cuando recobra su vieja y casi olvidada habilidad de hablar con los animales.', 'https://youtu.be/ozMmf9Yi7TM', 'DrDolittle_caratula.jpg', 'DrDolittle_foto.jpg', '1998-09-11', 'ES', 'ES', 90, '4.50'),
+(8, 'Mi gran noche', 'Un hombre desempleado consigue trabajo como extra en la filmación de un especial de Año Nuevo para TV, donde debe recibir el año sin parar y en pésimas condiciones.\r\n', 'https://www.youtube.com/watch?v=KBahnqECT7o', 'MiGranNoche_caratula.jpg', 'MiGranNoche_foto.jpg', '2015-10-23', 'ES,EN,GER', 'EN,FR', 100, '5.50'),
+(9, 'Kingsman: Servicio secreto', 'Gary \"Eggsy\" Unwin, cuyo fallecido padre trabajó calladamente para una agencia de espionaje ultra secreta, vive en una urbanización del sur de Londres y parece dirigirse hacia las rejas. ', 'https://www.youtube.com/watch?v=m4NCribDx4U', 'Kingsman_caratula.jpg', 'Kingsman_foto.jpg', '2015-01-24', 'ESP,EN', 'ESP', 130, '6.70');
 
 -- --------------------------------------------------------
 
@@ -363,13 +370,17 @@ ALTER TABLE `actor`
 -- Indices de la tabla `comentario`
 --
 ALTER TABLE `comentario`
-  ADD PRIMARY KEY (`idComentario`);
+  ADD PRIMARY KEY (`idComentario`),
+  ADD KEY `FK_idPeliculaCom` (`idPelicula`),
+  ADD KEY `FK_idUsuario` (`idUsuario`);
 
 --
 -- Indices de la tabla `compra`
 --
 ALTER TABLE `compra`
-  ADD PRIMARY KEY (`idCompra`);
+  ADD PRIMARY KEY (`idCompra`),
+  ADD KEY `FK_idPeliculaCompra` (`idPelicula`),
+  ADD KEY `FK_idUsuarioCompra` (`idUsuario`);
 
 --
 -- Indices de la tabla `director`
@@ -381,7 +392,8 @@ ALTER TABLE `director`
 -- Indices de la tabla `factura`
 --
 ALTER TABLE `factura`
-  ADD PRIMARY KEY (`idFactura`);
+  ADD PRIMARY KEY (`idFactura`),
+  ADD KEY `FK_idCompra` (`idCompra`);
 
 --
 -- Indices de la tabla `genero`
@@ -399,7 +411,8 @@ ALTER TABLE `infopuntuacion`
 -- Indices de la tabla `marcarfavorito`
 --
 ALTER TABLE `marcarfavorito`
-  ADD PRIMARY KEY (`idMarcarFavorito`);
+  ADD PRIMARY KEY (`idMarcarFavorito`),
+  ADD KEY `FK_idUsuarioFavPeli` (`idUsuario`);
 
 --
 -- Indices de la tabla `metodopago`
@@ -418,31 +431,40 @@ ALTER TABLE `pelicula`
 --
 ALTER TABLE `puntuacion`
   ADD PRIMARY KEY (`idPuntuacion`),
-  ADD UNIQUE KEY `idPelicula` (`idPelicula`,`idUsuario`) USING BTREE;
+  ADD UNIQUE KEY `idPelicula` (`idPelicula`,`idUsuario`) USING BTREE,
+  ADD KEY `FK_idInfoPuntuacionPuntuacion` (`idInfoPuntuacion`),
+  ADD KEY `FK_idUsuarioPuntuacion` (`idUsuario`);
 
 --
 -- Indices de la tabla `teneractor`
 --
 ALTER TABLE `teneractor`
-  ADD PRIMARY KEY (`idTenerActor`,`idActor`,`idPelicula`);
+  ADD PRIMARY KEY (`idTenerActor`,`idActor`,`idPelicula`),
+  ADD KEY `FK_idActor` (`idActor`),
+  ADD KEY `FK_idPeliculaAct` (`idPelicula`);
 
 --
 -- Indices de la tabla `tenerdirector`
 --
 ALTER TABLE `tenerdirector`
-  ADD PRIMARY KEY (`idTenerDirector`,`idDirector`,`idPelicula`);
+  ADD PRIMARY KEY (`idTenerDirector`,`idDirector`,`idPelicula`),
+  ADD KEY `FK_idDirector` (`idDirector`),
+  ADD KEY `FK_idPeliculaDir` (`idPelicula`);
 
 --
 -- Indices de la tabla `tenergenero`
 --
 ALTER TABLE `tenergenero`
-  ADD PRIMARY KEY (`idTenerGenero`,`idGenero`,`idPelicula`);
+  ADD PRIMARY KEY (`idTenerGenero`,`idGenero`,`idPelicula`),
+  ADD KEY `FK_idGenero` (`idGenero`),
+  ADD KEY `FK_idPeliculaGen` (`idPelicula`);
 
 --
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`idUsuario`);
+  ADD PRIMARY KEY (`idUsuario`),
+  ADD KEY `FK_idMetodoPago` (`idMetodoPago`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -506,7 +528,7 @@ ALTER TABLE `metodopago`
 -- AUTO_INCREMENT de la tabla `pelicula`
 --
 ALTER TABLE `pelicula`
-  MODIFY `idPelicula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idPelicula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `puntuacion`
