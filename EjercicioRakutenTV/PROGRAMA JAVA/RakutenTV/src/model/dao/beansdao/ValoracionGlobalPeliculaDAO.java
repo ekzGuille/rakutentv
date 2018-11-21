@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.beans.Puntuacion;
 import model.beans.ValoracionGlobalPelicula;
 import model.dao.DAO;
 import model.motor.Motor;

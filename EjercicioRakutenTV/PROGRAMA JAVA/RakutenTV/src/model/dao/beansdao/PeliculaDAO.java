@@ -315,12 +315,52 @@ public class PeliculaDAO implements DAO<Pelicula, Integer> {
 		return lstPeliculas;
 	}
 
-	public List<Pelicula> findUltimasAdd() {
-		String sql = "SELECT * FROM `pelicula` WHERE 1 ORDER BY `pelicula`.`idPelicula` DESC LIMIT 5";
+	public List<Pelicula> findUltimasAdd(Integer cantidad) {
+		String sql = "SELECT * FROM `pelicula` ORDER BY `pelicula`.`idPelicula` DESC LIMIT ?";
 		List<Pelicula> lstPeliculas = null;
 
 		try {
 			pst = this.motor.connect().prepareStatement(sql);
+
+			pst.setInt(1, cantidad);
+
+			ResultSet rs = this.motor.executeQuery(pst);
+			lstPeliculas = new ArrayList<Pelicula>();
+
+			while (rs.next()) {
+				Pelicula pelicula = new Pelicula();
+
+				pelicula.setIdPelicula(rs.getInt(1));
+				pelicula.setTituloPeli(rs.getString(2));
+				pelicula.setResumenPeli(rs.getString(3));
+				pelicula.setTrailerPeli(rs.getString(4));
+				pelicula.setCaratulaPeli(rs.getString(5));
+				pelicula.setImagenPeli(rs.getString(6));
+				pelicula.setFechaEstreno(rs.getString(7));
+				pelicula.setAudiosDisponibles(rs.getString(8));
+				pelicula.setSubtitulosDisponibles(rs.getString(9));
+				pelicula.setDuracionPeli(rs.getInt(10));
+				pelicula.setPrecioPeli(rs.getDouble(11));
+
+				lstPeliculas.add(pelicula);
+			}
+
+		} catch (SQLException e) {
+		} finally {
+			this.motor.disconnect();
+		}
+		return lstPeliculas;
+	}
+
+	public List<Pelicula> findMasVotada(Integer cantidad) {
+		String sql = "SELECT * FROM `pelicula` WHERE `pelicula`.`idPelicula`= (SELECT `valoracionglobalpelicula`.`idPelicula` FROM `valoracionglobalpelicula` ORDER by `valoracionesTotales` DESC LIMIT ?)";
+		List<Pelicula> lstPeliculas = null;
+
+		try {
+			pst = this.motor.connect().prepareStatement(sql);
+
+			pst.setInt(1, cantidad);
+
 			ResultSet rs = this.motor.executeQuery(pst);
 			lstPeliculas = new ArrayList<Pelicula>();
 

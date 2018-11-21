@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="images/icon/favicon/tv.png" type="image/x-icon" />
-    <link rel="shortcut icon" href="images/icon/favicon/tv.png"
-        type="image/x-icon" />
+    <link rel="shortcut icon" href="images/icon/favicon/tv.png" type="image/x-icon" />
     <title>PeliculasOnline</title>
     <!-- Google Icon Font -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -15,116 +14,83 @@
     <!-- Materialize -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-	<!-- JQuery -->
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
-		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-		crossorigin="anonymous"></script>
-<!-- Mis archivos -->
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <!-- Mis archivos -->
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/peliculaAjax.js"></script>
-    <script src="js/usuarioAjax.js"></script>
+    <script src="js/script.js"></script>
 </head>
 
 <body>
-
-<div id="algo"></div>
-
-<!--     
-    <nav>Menu
-    </nav>
+    <nav>Menu</nav>
+    <div id="menuLateral">
+        <ul id="slide-out" class="sidenav">
+            <li><a href="#!">First Sidebar Link</a></li>
+            <li><a href="#!">Second Sidebar Link</a></li>
+            <li class="no-padding">
+                <ul class="collapsible collapsible-accordion">
+                    <li>
+                        <a class="collapsible-header">Dropdown<i class="material-icons">arrow_drop_down</i></a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li><a href="#!">First</a></li>
+                                <li><a href="#!">Second</a></li>
+                                <li><a href="#!">Third</a></li>
+                                <li><a href="#!">Fourth</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <a href="#" id="anchorMenu" data-target="slide-out" class="sidenav-trigger"></a>
+    </div>
     <div id="webContainer">
         <div class="cuadriculaPeliculas" id="pelisMasVistas">
-            <h4>Películas más vistas</h4>
-            <div class="caratulaPelicula">
-                <img class="imagenCaratula" src="images/peliculas/movieCaratula/PiratasDelCaribe_caratula.jpg" alt="">
-                <div class="imgValoracion">
-                    <img class="estrellasValoracion" src="images/icon/estrellas/4Estrella.png" alt="">
-                </div>
-                <div class="infoValoracion">
-                    300 votos
-                </div>
-            </div>
-            <div class="caratulaPelicula">
-                <img class="imagenCaratula" src="images/peliculas/movieCaratula/JohnWick_caratula.jpg" alt="">
-                <div class="imgValoracion">
-                    <img class="estrellasValoracion" src="images/icon/estrellas/5Estrella.png" alt="">
-                </div>
-                <div class="infoValoracion">
-                    300 votos
-                </div>
-            </div>
-            <div class="caratulaPelicula">
-                <img class="imagenCaratula" src="images/peliculas/movieCaratula/XMenFirstClass_caratula.jpg" alt="">
-                <div class="imgValoracion">
-                    <img class="estrellasValoracion" src="images/icon/estrellas/4Estrella.png" alt="">
-                </div>
-                <div class="infoValoracion">
-                    300 votos
+            <h4>Películas más votadas</h4>
+            <div id="PelisMasVistasWrapper">
+                <div class="caratulaPelicula">
+                    <img class="imagenCaratula" src="images/peliculas/movieCaratula/PiratasDelCaribe_caratula.jpg" alt="">
+                    <div class="imgValoracion">
+                        <img class="estrellasValoracion" src="images/icon/estrellas/4Estrella.png" alt="">
+                    </div>
+                    <div class="infoValoracion">
+                        300 votos
+                    </div>
                 </div>
             </div>
         </div>
         <div class="cuadriculaPeliculas" id="pelisUltimasAdd">
             <h4>Últimas Películas añadidas</h4>
-            <div class="caratulaPelicula">
-                <img class="imagenCaratula" src="images/peliculas/movieCaratula/Deadpool_caratula.jpg" alt="">
-                <div class="imgValoracion">
-                    <img class="estrellasValoracion" src="images/icon/estrellas/3Estrella.png" alt="">
-                </div>
-                <div class="infoValoracion">
-                    300 votos
-                </div>
-            </div>
-            <div class="caratulaPelicula">
-                <img class="imagenCaratula" src="images/peliculas/movieCaratula/Deadpool_caratula.jpg" alt="">
-                <div class="imgValoracion">
-                    <img class="estrellasValoracion" src="images/icon/estrellas/3Estrella.png" alt="">
-                </div>
-                <div class="infoValoracion">
-                    300 votos
-                </div>
-            </div>
-            <div class="caratulaPelicula">
-                <img class="imagenCaratula" src="images/peliculas/movieCaratula/JohnWick_caratula.jpg" alt="">
-                <div class="imgValoracion">
-                    <img class="estrellasValoracion" src="images/icon/estrellas/3Estrella.png" alt="">
-                </div>
-                <div class="infoValoracion">
-                    300 votos
+            <div id="UltimasPelisAddWrapper">
+                <div class="caratulaPelicula">
+                    <img class="imagenCaratula" src="images/peliculas/movieCaratula/DrDolittle_caratula.jpg" alt="">
+                    <div class="imgValoracion">
+                        <img class="estrellasValoracion" src="images/icon/estrellas/3Estrella.png" alt="">
+                    </div>
+                    <div class="infoValoracion">
+                        300 votos
+                    </div>
                 </div>
             </div>
         </div>
         <div class="cuadriculaPeliculas" id="pelisUltimosEstrenos">
             <h4>Últimos estrenos en cartelera</h4>
-            <div class="caratulaPelicula">
-                <img class="imagenCaratula" src="images/peliculas/movieCaratula/Deadpool_caratula.jpg" alt="">
-                <div class="imgValoracion">
-                    <img class="estrellasValoracion" src="images/icon/estrellas/3Estrella.png" alt="">
-                </div>
-                <div class="infoValoracion">
-                    300 votos
-                </div>
-            </div>
-            <div class="caratulaPelicula">
-                <img class="imagenCaratula" src="images/peliculas/movieCaratula/Deadpool_caratula.jpg" alt="">
-                <div class="imgValoracion">
-                    <img class="estrellasValoracion" src="images/icon/estrellas/3Estrella.png" alt="">
-                </div>
-                <div class="infoValoracion">
-                    300 votos
-                </div>
-            </div>
-            <div class="caratulaPelicula">
-                <img class="imagenCaratula" src="images/peliculas/movieCaratula/JohnWick_caratula.jpg" alt="">
-                <div class="imgValoracion">
-                    <img class="estrellasValoracion" src="images/icon/estrellas/3Estrella.png" alt="">
-                </div>
-                <div class="infoValoracion">
-                    300 votos
+            <div id="ultimosEstrenosCarteleraWrapper">
+                <div class="caratulaPelicula">
+                    <img class="imagenCaratula" src="images/peliculas/movieCaratula/Deadpool_caratula.jpg" alt="">
+                    <div class="imgValoracion">
+                        <img class="estrellasValoracion" src="images/icon/estrellas/3Estrella.png" alt="">
+                    </div>
+                    <div class="infoValoracion">
+                        300 votos
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <footer>fin</footer> -->
+    <footer>fin</footer>
 </body>
 
 </html>

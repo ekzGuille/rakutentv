@@ -40,6 +40,10 @@ public class PeliculaAction {
 			respuesta = findUltimasAdd(request, response);
 			break;
 
+		case "listMasVotadas":
+			respuesta = findMasVotadas(request, response);
+			break;
+
 		default:
 			respuesta = "[]";
 		}
@@ -66,6 +70,13 @@ public class PeliculaAction {
 		return respuesta;
 	}
 
+	/**
+	 * <code>SELECT * FROM `pelicula`</code>
+	 * 
+	 * @param request
+	 * @param response
+	 * @return String
+	 */
 	private String findAll(HttpServletRequest request, HttpServletResponse response) {
 		String respuesta = "";
 		List<Pelicula> lstPelicula = null;
@@ -82,6 +93,13 @@ public class PeliculaAction {
 		return respuesta;
 	}
 
+	/**
+	 * <code>SELECT * FROM `pelicula` ORDER BY `pelicula`.`tituloPeli` ASC</code>
+	 * 
+	 * @param request
+	 * @param response
+	 * @return String
+	 */
 	private String findTitulosAsc(HttpServletRequest request, HttpServletResponse response) {
 		String respuesta = "";
 		List<Pelicula> lstPelicula = null;
@@ -98,6 +116,13 @@ public class PeliculaAction {
 		return respuesta;
 	}
 
+	/**
+	 * <code>SELECT * FROM `pelicula` ORDER BY `pelicula`.`fechaEstreno` DESC</code>
+	 * 
+	 * @param request
+	 * @param response
+	 * @return String
+	 */
 	private String findAllNuevas(HttpServletRequest request, HttpServletResponse response) {
 		String respuesta = "";
 		List<Pelicula> lstPelicula = null;
@@ -114,17 +139,58 @@ public class PeliculaAction {
 		return respuesta;
 	}
 
+	/**
+	 * <code>SELECT * FROM `pelicula` WHERE 1 ORDER BY `pelicula`.`idPelicula` DESC LIMIT 5</code>
+	 * Las ultimas <b>5</b>
+	 * 
+	 * @param request
+	 * @param response
+	 * @return String
+	 */
 	private String findUltimasAdd(HttpServletRequest request, HttpServletResponse response) {
 		String respuesta = "";
 		List<Pelicula> lstPelicula = null;
 
-		PeliculaDAO peliculaDAO = new PeliculaDAO();
-		Gson gson = new Gson();
-		lstPelicula = peliculaDAO.findUltimasAdd();
-		if (lstPelicula != null) {
-			respuesta = gson.toJson(lstPelicula);
-		} else {
-			respuesta = "[]";
+		String cantidad = request.getParameter("CANTIDAD");
+
+		if (cantidad != null) {
+			PeliculaDAO peliculaDAO = new PeliculaDAO();
+			Gson gson = new Gson();
+			lstPelicula = peliculaDAO.findUltimasAdd(Integer.parseInt(cantidad));
+			if (lstPelicula != null) {
+				respuesta = gson.toJson(lstPelicula);
+			} else {
+				respuesta = "[]";
+			}
+		}
+
+		return respuesta;
+	}
+
+	/**
+	 * <code>SELECT * FROM `pelicula` WHERE `pelicula`.`idPelicula`= (SELECT `valoracionglobalpelicula`.`idPelicula` FROM `valoracionglobalpelicula` ORDER by `count(idPelicula)` DESC LIMIT 1)
+	</code> Las ultimas <b>1</b>
+	 * 
+	 * @param request
+	 * @param response
+	 * @return String
+	 */
+	private String findMasVotadas(HttpServletRequest request, HttpServletResponse response) {
+		String respuesta = "";
+		List<Pelicula> lstPelicula = null;
+
+		String cantidad = request.getParameter("CANTIDAD");
+
+		if (cantidad != null) {
+
+			PeliculaDAO peliculaDAO = new PeliculaDAO();
+			Gson gson = new Gson();
+			lstPelicula = peliculaDAO.findMasVotada(Integer.parseInt(cantidad));
+			if (lstPelicula != null) {
+				respuesta = gson.toJson(lstPelicula);
+			} else {
+				respuesta = "[]";
+			}
 		}
 
 		return respuesta;

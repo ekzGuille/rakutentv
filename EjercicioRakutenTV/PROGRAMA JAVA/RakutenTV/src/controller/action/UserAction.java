@@ -46,6 +46,13 @@ public class UserAction {
 		return respuesta;
 	}
 
+	/**
+	 * <code>SELECT * FROM `usuario` WHERE (`email` = ? AND `contrasena` = ?) OR (`username` = ? AND `contrasena` = ?)</code>
+	 * 
+	 * @param request
+	 * @param response
+	 * @return String
+	 */
 	private String login(HttpServletRequest request, HttpServletResponse response) {
 		String respuesta = "";
 		Usuario usuario = null;
@@ -69,24 +76,52 @@ public class UserAction {
 
 	}
 
+	/**
+	 * <code> </code>
+	 * 
+	 * @param request
+	 * @param response
+	 * @return String
+	 */
 	private String register(HttpServletRequest request, HttpServletResponse response) {
 		String respuesta = "";
 
 		return respuesta;
 	}
 
+	/**
+	 * <code> </code>
+	 * 
+	 * @param request
+	 * @param response
+	 * @return String
+	 */
 	private String update(HttpServletRequest request, HttpServletResponse response) {
 		String respuesta = "";
 
 		return respuesta;
 	}
 
+	/**
+	 * <code> </code>
+	 * 
+	 * @param request
+	 * @param response
+	 * @return String
+	 */
 	private String darBaja(HttpServletRequest request, HttpServletResponse response) {
 		String respuesta = "";
 
 		return respuesta;
 	}
 
+	/**
+	 * <code> </code>
+	 * 
+	 * @param request
+	 * @param response
+	 * @return String
+	 */
 	private String permaDelete(HttpServletRequest request, HttpServletResponse response) {
 		String respuesta = "";
 
