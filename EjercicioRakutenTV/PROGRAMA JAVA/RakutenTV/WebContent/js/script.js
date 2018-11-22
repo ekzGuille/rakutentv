@@ -21,7 +21,6 @@ function login(userMail, contrasena) {
 		data: datos,
 		datatype: 'json',
 		success: function (params) {
-
 			console.log(params);
 		}
 	});
@@ -35,6 +34,8 @@ function cargarPelisMasVotadas(cantidad) {
 		data: datos,
 		datatype: 'json',
 		success: function (params) {
+			console.log(JSON.parse(params));
+
 			crearImagenDiv('PelisMasVotadasWrapper', JSON.parse(params));
 		}
 	});
@@ -115,24 +116,51 @@ function crearImagenDiv(id, data) {
 		var divCaratulaPelicula = document.createElement('div');
 		divCaratulaPelicula.setAttribute('class', 'caratulaPelicula');
 		divCaratulaPelicula.setAttribute('id', pelicula.idPelicula);
+
+		var anchorModal = document.createElement('a');
+		anchorModal.setAttribute('href', '#modalPelicula' + pelicula.idPelicula);
+		anchorModal.setAttribute('class', 'modal-trigger');
+
 		var imgCaratula = document.createElement('img');
 		imgCaratula.setAttribute('class', 'imagenCaratula');
 		imgCaratula.setAttribute('src', 'images/peliculas/movieCaratula/' + pelicula.caratulaPeli);
-		divImgValoracion = document.createElement('div');
+
+		var divImgValoracion = document.createElement('div');
 		divImgValoracion.setAttribute('class', 'imgValoracion');
-		imgValoracion = document.createElement('img');
+
+		var imgValoracion = document.createElement('img');
 		imgValoracion.setAttribute('class', 'estrellasValoracion');
 		imgValoracion.setAttribute('src', 'images/icon/estrellas/' + Math.round(pelicula.mediaValoraciones) + 'Estrella.png');
 
-		divInfoValoracion = document.createElement('div');
+		var divInfoValoracion = document.createElement('div');
 		divInfoValoracion.setAttribute('class', 'infoValoracion');
 		divInfoValoracion.innerText = pelicula.valoracionesTotales + ' votos';
 
-		divImgValoracion.appendChild(imgValoracion);
+		var divModal = document.createElement('div');
+		divModal.setAttribute('id', 'modalPelicula' + pelicula.idPelicula);
+		divModal.setAttribute('class', 'modal modalContent');
 
-		divCaratulaPelicula.appendChild(imgCaratula);
+		var subDivModal = document.createElement('div');
+		subDivModal.setAttribute('class', 'modal-content');
+
+		var h5 = document.createElement('h5');
+		h5.setAttribute('class', 'h5ModalClass')
+		h5.innerText = pelicula.tituloPeli;
+
+		var p = document.createElement('p');
+		p.setAttribute('class', 'pModalClass');
+		p.innerText = pelicula.resumenPeli;
+
+		subDivModal.appendChild(h5);
+		subDivModal.appendChild(p);
+		divModal.appendChild(subDivModal);
+
+		divImgValoracion.appendChild(imgValoracion);
+		anchorModal.appendChild(imgCaratula);
+		divCaratulaPelicula.appendChild(anchorModal);
 		divCaratulaPelicula.appendChild(divImgValoracion);
 		divCaratulaPelicula.appendChild(divInfoValoracion);
+		divCaratulaPelicula.appendChild(divModal)
 		divWrapper.appendChild(divCaratulaPelicula);
 
 	});
