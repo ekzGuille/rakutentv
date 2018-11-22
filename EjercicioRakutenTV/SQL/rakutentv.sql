@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 22-11-2018 a las 09:24:28
+-- Tiempo de generación: 22-11-2018 a las 22:38:01
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -225,15 +225,15 @@ CREATE TABLE `pelicula` (
 --
 
 INSERT INTO `pelicula` (`idPelicula`, `tituloPeli`, `resumenPeli`, `trailerPeli`, `caratulaPeli`, `imagenPeli`, `fechaEstreno`, `audiosDisponibles`, `subtitulosDisponibles`, `duracionPeli`, `precioPeli`) VALUES
-(1, 'John Wick: Otro Día para Matar', 'La ciudad de Nueva York se convierte en el patio acribillado a balazos de un ex-asesino mientras él elimina a los gánsteres que destruyeron todo lo que él quería.', 'https://www.youtube.com/watch?v=RllJtOw0USI', 'JohnWick_caratula.jpg', 'JohnWick_foto.jpg', '2014-10-13', 'ESP,EN,ITA', 'RU,EN,ESP', 101, '5.50'),
-(2, 'Deadpool', 'Un ex mercenario quien, tras haber sido sometido a un cruel experimento adquiere el súper poder de sanar rápidamente, pretende vengarse del hombre que destrozó su vida.', 'https://www.youtube.com/watch?v=ONHBaC-pfsk', 'Deadpool_caratula.jpg', 'Deadpool_foto.jpg', '2016-01-21', 'ESP,RU', 'EN,ESP', 109, '7.20'),
-(3, 'Matrix', 'Un experto en computadoras descubre que su mundo es una simulación computarizada creada por malvada ciberinteligencia.', 'https://www.youtube.com/watch?v=m8e-FF8MsqU', 'Matrix_caratula.jpg', 'Matrix_foto.jpg', '1999-06-23', 'ESP,EN', 'ESP', 150, '4.50'),
-(4, 'Piratas del Caribe', 'Piratas del Caribe es el título de una serie cinematográfica de aventura fantástica y piratas, producidas por Jerry Bruckheimer.', 'https://youtu.be/ojvNfJjX8OQ', 'PiratasDelCaribe_caratula.jpg', 'PiratasDelCaribe_foto.jpg', '2006-08-11', 'EN,RU', 'ITA,BR', 151, '5.80'),
-(5, 'X-Men: primera generación', 'A principios de los años 60, Charles Xavier y Magneto se convierten en grandes amigos. Usando sus poderes, se unen para proteger al mundo de una guerra nuclear.', 'https://www.youtube.com/watch?v=UrbHykKUfTM', 'XMenFirstClass_caratula.jpg', 'XMenFirstClass_foto.jpg', '2011-05-25', 'ESP,RU,ITA', 'EN', 132, '6.40'),
-(6, 'El Quinto Elemento', 'a historia del director Luc Besson, sobre un taxista del futuro que tropieza con la mujer que puede salvar al mundo.\r\n', 'https://youtu.be/aB-AUTGqUCU', 'ElQuintoElemento_caratula.jpg', 'ElQuintoElemento_foto.jpg', '1997-05-30', 'EN', 'ESP', 127, '3.50'),
-(7, 'Dr. Dolittle', 'Un cirujano se convierte en mejor doctor, cuando recobra su vieja y casi olvidada habilidad de hablar con los animales.', 'https://youtu.be/ozMmf9Yi7TM', 'DrDolittle_caratula.jpg', 'DrDolittle_foto.jpg', '1998-09-11', 'ES', 'ES', 90, '4.50'),
-(8, 'Mi gran noche', 'Un hombre desempleado consigue trabajo como extra en la filmación de un especial de Año Nuevo para TV, donde debe recibir el año sin parar y en pésimas condiciones.\r\n', 'https://www.youtube.com/watch?v=KBahnqECT7o', 'MiGranNoche_caratula.jpg', 'MiGranNoche_foto.jpg', '2015-10-23', 'ES,EN,GER', 'EN,FR', 100, '5.50'),
-(9, 'Kingsman: Servicio secreto', 'Gary \"Eggsy\" Unwin, cuyo fallecido padre trabajó calladamente para una agencia de espionaje ultra secreta, vive en una urbanización del sur de Londres y parece dirigirse hacia las rejas. ', 'https://www.youtube.com/watch?v=m4NCribDx4U', 'Kingsman_caratula.jpg', 'Kingsman_foto.jpg', '2015-01-24', 'ESP,EN', 'ESP', 130, '6.70');
+(1, 'John Wick: Otro Día para Matar', 'La ciudad de Nueva York se convierte en el patio acribillado a balazos de un ex-asesino mientras él elimina a los gánsteres que destruyeron todo lo que él quería.', 'https://www.youtube.com/embed/RllJtOw0USI', 'JohnWick_caratula.jpg', 'JohnWick_foto.jpg', '2014-10-13', 'ESP,EN,ITA', 'RU,EN,ESP', 101, '5.50'),
+(2, 'Deadpool', 'Un ex mercenario quien, tras haber sido sometido a un cruel experimento adquiere el súper poder de sanar rápidamente, pretende vengarse del hombre que destrozó su vida.', 'https://www.youtube.com/embed/ONHBaC-pfsk', 'Deadpool_caratula.jpg', 'Deadpool_foto.jpg', '2016-01-21', 'ESP,RU', 'EN,ESP', 109, '7.20'),
+(3, 'Matrix', 'Un experto en computadoras descubre que su mundo es una simulación computarizada creada por malvada ciberinteligencia.', 'https://www.youtube.com/embed/m8e-FF8MsqU', 'Matrix_caratula.jpg', 'Matrix_foto.jpg', '1999-06-23', 'ESP,EN', 'ESP', 150, '4.50'),
+(4, 'Piratas del Caribe', 'Piratas del Caribe es el título de una serie cinematográfica de aventura fantástica y piratas, producidas por Jerry Bruckheimer.', 'https://www.youtube.com/embed/ojvNfJjX8OQ', 'PiratasDelCaribe_caratula.jpg', 'PiratasDelCaribe_foto.jpg', '2006-08-11', 'EN,RU', 'ITA,BR', 151, '5.80'),
+(5, 'X-Men: primera generación', 'A principios de los años 60, Charles Xavier y Magneto se convierten en grandes amigos. Usando sus poderes, se unen para proteger al mundo de una guerra nuclear.', 'https://www.youtube.com/embed/UrbHykKUfTM', 'XMenFirstClass_caratula.jpg', 'XMenFirstClass_foto.jpg', '2011-05-25', 'ESP,RU,ITA', 'EN', 132, '6.40'),
+(6, 'El Quinto Elemento', 'La historia del director Luc Besson, sobre un taxista del futuro que tropieza con la mujer que puede salvar al mundo.\r\n', 'https://www.youtube.com/embed/aB-AUTGqUCU', 'ElQuintoElemento_caratula.jpg', 'ElQuintoElemento_foto.jpg', '1997-05-30', 'EN', 'ESP', 127, '3.50'),
+(7, 'Dr. Dolittle', 'Un cirujano se convierte en mejor doctor, cuando recobra su vieja y casi olvidada habilidad de hablar con los animales.', 'https://www.youtube.com/embed/ozMmf9Yi7TM', 'DrDolittle_caratula.jpg', 'DrDolittle_foto.jpg', '1998-09-11', 'ES', 'ES', 90, '4.50'),
+(8, 'Mi gran noche', 'Un hombre desempleado consigue trabajo como extra en la filmación de un especial de Año Nuevo para TV, donde debe recibir el año sin parar y en pésimas condiciones.\r\n', 'https://www.youtube.com/embed/KBahnqECT7o', 'MiGranNoche_caratula.jpg', 'MiGranNoche_foto.jpg', '2015-10-23', 'ES,EN,GER', 'EN,FR', 100, '5.50'),
+(9, 'Kingsman: Servicio secreto', 'Gary \"Eggsy\" Unwin, cuyo fallecido padre trabajó calladamente para una agencia de espionaje ultra secreta, vive en una urbanización del sur de Londres y parece dirigirse hacia las rejas. ', 'https://www.youtube.com/embed/m4NCribDx4U', 'Kingsman_caratula.jpg', 'Kingsman_foto.jpg', '2015-01-24', 'ESP,EN', 'ESP', 130, '6.70');
 
 -- --------------------------------------------------------
 
@@ -256,7 +256,8 @@ CREATE TABLE `puntuacion` (
 INSERT INTO `puntuacion` (`idPuntuacion`, `idPelicula`, `idUsuario`, `idInfoPuntuacion`, `fechaPuntuacion`) VALUES
 (1, 3, 1, 5, '2018-11-21 23:31:17'),
 (2, 6, 3, 3, '2018-11-22 07:18:19'),
-(4, 6, 2, 4, '2018-11-22 07:18:39');
+(4, 6, 2, 4, '2018-11-22 07:18:39'),
+(5, 7, 2, 1, '2018-11-22 09:58:29');
 
 -- --------------------------------------------------------
 
@@ -545,7 +546,7 @@ ALTER TABLE `pelicula`
 -- AUTO_INCREMENT de la tabla `puntuacion`
 --
 ALTER TABLE `puntuacion`
-  MODIFY `idPuntuacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idPuntuacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `teneractor`

@@ -7,9 +7,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	// 	}
 	// })
 
-	cargarPelisMasVotadas(5);
-	cargarPelisEstrenos(5);
-	cargarultimasPelisAdd(5);
+	cargarPelisMasVotadas(1);
+	cargarPelisEstrenos(3);
+	cargarultimasPelisAdd(4);
 });
 
 function login(userMail, contrasena) {
@@ -118,7 +118,7 @@ function crearImagenDiv(id, data) {
 		divCaratulaPelicula.setAttribute('id', pelicula.idPelicula);
 
 		var anchorModal = document.createElement('a');
-		anchorModal.setAttribute('href', '#modalPelicula' + pelicula.idPelicula);
+		anchorModal.setAttribute('href', '#modal' + pelicula.idPelicula);
 		anchorModal.setAttribute('class', 'modal-trigger');
 
 		var imgCaratula = document.createElement('img');
@@ -137,23 +137,39 @@ function crearImagenDiv(id, data) {
 		divInfoValoracion.innerText = pelicula.valoracionesTotales + ' votos';
 
 		var divModal = document.createElement('div');
-		divModal.setAttribute('id', 'modalPelicula' + pelicula.idPelicula);
+		divModal.setAttribute('id', 'modal' + pelicula.idPelicula);
 		divModal.setAttribute('class', 'modal modalContent');
 
 		var subDivModal = document.createElement('div');
-		subDivModal.setAttribute('class', 'modal-content');
+		subDivModal.setAttribute('class', 'modal-content fondoModal');
+		subDivModal.setAttribute('id', 'submodal' + pelicula.idPelicula);
 
-		var h5 = document.createElement('h5');
-		h5.setAttribute('class', 'h5ModalClass')
-		h5.innerText = pelicula.tituloPeli;
+		var h4 = document.createElement('h4');
+		h4.setAttribute('class', 'h5ModalClass')
+		h4.innerText = pelicula.tituloPeli;
+
+		var imgCaratulaModal = document.createElement('img');
+		imgCaratulaModal.setAttribute('class', 'imagenCaratula');
+		imgCaratulaModal.setAttribute('src', 'images/peliculas/movieCaratula/' + pelicula.caratulaPeli);
 
 		var p = document.createElement('p');
 		p.setAttribute('class', 'pModalClass');
 		p.innerText = pelicula.resumenPeli;
 
-		subDivModal.appendChild(h5);
+		var divFooter = document.createElement('div');
+		divFooter.setAttribute('class', 'modal-footer modalContent');
+
+		var anchorFooter = document.createElement('a');
+		anchorFooter.setAttribute('href', '#!');
+		anchorFooter.setAttribute('class', 'modal-close waves-effect waves-green btn-flat');
+		anchorFooter.innerText = 'Cerrar';
+
+		divFooter.appendChild(anchorFooter);
+		subDivModal.appendChild(h4);
+		subDivModal.appendChild(imgCaratulaModal);
 		subDivModal.appendChild(p);
 		divModal.appendChild(subDivModal);
+		divModal.appendChild(divFooter);
 
 		divImgValoracion.appendChild(imgValoracion);
 		anchorModal.appendChild(imgCaratula);
@@ -163,5 +179,10 @@ function crearImagenDiv(id, data) {
 		divCaratulaPelicula.appendChild(divModal)
 		divWrapper.appendChild(divCaratulaPelicula);
 
+
+		document.getElementById('submodal' + pelicula.idPelicula).style.background = "url('images/peliculas/movieFotos/" + pelicula.imagenPeli+"')";
+
+		$('.modal').modal();
 	});
+
 }

@@ -26,9 +26,11 @@ img {
     margin: 0 15%;
     min-width: 40%;
 }
-.modalContent{
+
+.modalContent {
     background: var(--colorFondo);
 }
+
 .cuadriculaPeliculas {
     padding-left: 0.5%;
 }
@@ -39,8 +41,19 @@ img {
 }
 
 .caratulaPelicula {
-    padding: 1% 1% 1% 1%;
+    /* padding: 1% 1% 1% 1%; */
+    padding: 1%;
     display: inline-block;
+}
+
+.fondoModal {
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+}
+
+.pModalClass{
+    font-size: 16pt !important;
+    text-shadow: 2px 2px 10px #000 !important;
 }
 
 .imgValoracion,
