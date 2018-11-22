@@ -12,3 +12,5 @@
 
 CREATE VIEW `valoracionglobalpelicula`  AS  
 SELECT idPelicula ,COUNT(idPelicula) 'valoracionesTotales', AVG(idInfoPuntuacion ) 'mediaValoraciones' FROM puntuacion GROUP BY idPelicula;
+
+SELECT pelicula.`idPelicula`,`tituloPeli`,`resumenPeli`,`trailerPeli`,`caratulaPeli`,`imagenPeli`,`fechaEstreno`,`audiosDisponibles`,`subtitulosDisponibles`,`duracionPeli`,`precioPeli`, `valoracionesTotales`, `mediaValoraciones` FROM `pelicula` LEFT OUTER JOIN `valoracionglobalpelicula` ON pelicula.idPelicula = valoracionglobalpelicula.idPelicula

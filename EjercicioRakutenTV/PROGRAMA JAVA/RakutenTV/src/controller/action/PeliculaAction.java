@@ -32,8 +32,12 @@ public class PeliculaAction {
 			respuesta = findTitulosAsc(request, response);
 			break;
 
-		case "listAllNuevas":
-			respuesta = findAllNuevas(request, response);
+		case "listAllEstrenos":
+			respuesta = findAllEstrenos(request, response);
+			break;
+
+		case "listEstrenos":
+			respuesta = findEstrenos(request, response);
 			break;
 
 		case "listUltimasAdd":
@@ -44,6 +48,10 @@ public class PeliculaAction {
 			respuesta = findMasVotadas(request, response);
 			break;
 
+		case "listMejorVotadas":
+			respuesta = findMejorVotadas(request, response);
+			break;
+
 		default:
 			respuesta = "[]";
 		}
@@ -51,6 +59,13 @@ public class PeliculaAction {
 		return respuesta;
 	}
 
+	/**
+	 * <code>SELECT pelicula.`idPelicula`,`tituloPeli`,`resumenPeli`,`trailerPeli`,`caratulaPeli`,`imagenPeli`,`fechaEstreno`,`audiosDisponibles`,`subtitulosDisponibles`,`duracionPeli`,`precioPeli`, `valoracionesTotales`, `mediaValoraciones` FROM `pelicula` LEFT OUTER JOIN `valoracionglobalpelicula` ON pelicula.idPelicula = valoracionglobalpelicula.idPelicula WHERE pelicula.idPelicula = ?</code>
+	 * 
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	private String findById(HttpServletRequest request, HttpServletResponse response) {
 		String respuesta = "";
 		Pelicula pelicula = null;
@@ -71,7 +86,7 @@ public class PeliculaAction {
 	}
 
 	/**
-	 * <code>SELECT * FROM `pelicula`</code>
+	 * <code>SELECT pelicula.`idPelicula`,`tituloPeli`,`resumenPeli`,`trailerPeli`,`caratulaPeli`,`imagenPeli`,`fechaEstreno`,`audiosDisponibles`,`subtitulosDisponibles`,`duracionPeli`,`precioPeli`, `valoracionesTotales`, `mediaValoraciones` FROM `pelicula` LEFT OUTER JOIN `valoracionglobalpelicula` ON pelicula.idPelicula = valoracionglobalpelicula.idPelicula </code>
 	 * 
 	 * @param request
 	 * @param response
@@ -94,7 +109,7 @@ public class PeliculaAction {
 	}
 
 	/**
-	 * <code>SELECT * FROM `pelicula` ORDER BY `pelicula`.`tituloPeli` ASC</code>
+	 * <code>SELECT pelicula.`idPelicula`,`tituloPeli`,`resumenPeli`,`trailerPeli`,`caratulaPeli`,`imagenPeli`,`fechaEstreno`,`audiosDisponibles`,`subtitulosDisponibles`,`duracionPeli`,`precioPeli`, `valoracionesTotales`, `mediaValoraciones` FROM `pelicula` LEFT OUTER JOIN `valoracionglobalpelicula` ON pelicula.idPelicula = valoracionglobalpelicula.idPelicula ORDER BY `pelicula`.`tituloPeli` ASC</code>
 	 * 
 	 * @param request
 	 * @param response
@@ -117,19 +132,19 @@ public class PeliculaAction {
 	}
 
 	/**
-	 * <code>SELECT * FROM `pelicula` ORDER BY `pelicula`.`fechaEstreno` DESC</code>
+	 * <code>SELECT pelicula.`idPelicula`,`tituloPeli`,`resumenPeli`,`trailerPeli`,`caratulaPeli`,`imagenPeli`,`fechaEstreno`,`audiosDisponibles`,`subtitulosDisponibles`,`duracionPeli`,`precioPeli`, `valoracionesTotales`, `mediaValoraciones` FROM `pelicula` LEFT OUTER JOIN `valoracionglobalpelicula` ON pelicula.idPelicula = valoracionglobalpelicula.idPelicula ORDER BY `pelicula`.`fechaEstreno` DESC</code>
 	 * 
 	 * @param request
 	 * @param response
 	 * @return String
 	 */
-	private String findAllNuevas(HttpServletRequest request, HttpServletResponse response) {
+	private String findAllEstrenos(HttpServletRequest request, HttpServletResponse response) {
 		String respuesta = "";
 		List<Pelicula> lstPelicula = null;
 
 		PeliculaDAO peliculaDAO = new PeliculaDAO();
 		Gson gson = new Gson();
-		lstPelicula = peliculaDAO.findAllMasNuevas();
+		lstPelicula = peliculaDAO.findAllEstrenos();
 		if (lstPelicula != null) {
 			respuesta = gson.toJson(lstPelicula);
 		} else {
@@ -140,7 +155,33 @@ public class PeliculaAction {
 	}
 
 	/**
-	 * <code>SELECT * FROM `pelicula` WHERE 1 ORDER BY `pelicula`.`idPelicula` DESC LIMIT 5</code>
+	 * <code>SELECT pelicula.`idPelicula`,`tituloPeli`,`resumenPeli`,`trailerPeli`,`caratulaPeli`,`imagenPeli`,`fechaEstreno`,`audiosDisponibles`,`subtitulosDisponibles`,`duracionPeli`,`precioPeli`, `valoracionesTotales`, `mediaValoraciones` FROM `pelicula` LEFT OUTER JOIN `valoracionglobalpelicula` ON pelicula.idPelicula = valoracionglobalpelicula.idPelicula ORDER BY `pelicula`.`idPelicula` DESC LIMIT ?</code>
+	 * 
+	 * @param request
+	 * @param response
+	 * @return String
+	 */
+	private String findEstrenos(HttpServletRequest request, HttpServletResponse response) {
+		String respuesta = "";
+		List<Pelicula> lstPelicula = null;
+
+		String cantidad = request.getParameter("CANTIDAD");
+
+		if (cantidad != null) {
+			PeliculaDAO peliculaDAO = new PeliculaDAO();
+			Gson gson = new Gson();
+			lstPelicula = peliculaDAO.findEstrenos(Integer.parseInt(cantidad));
+			if (lstPelicula != null) {
+				respuesta = gson.toJson(lstPelicula);
+			} else {
+				respuesta = "[]";
+			}
+		}
+		return respuesta;
+	}
+
+	/**
+	 * <code>SELECT pelicula.`idPelicula`,`tituloPeli`,`resumenPeli`,`trailerPeli`,`caratulaPeli`,`imagenPeli`,`fechaEstreno`,`audiosDisponibles`,`subtitulosDisponibles`,`duracionPeli`,`precioPeli`, `valoracionesTotales`, `mediaValoraciones` FROM `pelicula` LEFT OUTER JOIN `valoracionglobalpelicula` ON pelicula.idPelicula = valoracionglobalpelicula.idPelicula ORDER BY `pelicula`.`idPelicula` DESC LIMIT ?"</code>
 	 * Las ultimas <b>5</b>
 	 * 
 	 * @param request
@@ -168,8 +209,8 @@ public class PeliculaAction {
 	}
 
 	/**
-	 * <code>SELECT * FROM `pelicula` WHERE `pelicula`.`idPelicula`= (SELECT `valoracionglobalpelicula`.`idPelicula` FROM `valoracionglobalpelicula` ORDER by `count(idPelicula)` DESC LIMIT 1)
-	</code> Las ultimas <b>1</b>
+	 * <code>SELECT pelicula.`idPelicula`,`tituloPeli`,`resumenPeli`,`trailerPeli`,`caratulaPeli`,`imagenPeli`,`fechaEstreno`,`audiosDisponibles`,`subtitulosDisponibles`,`duracionPeli`,`precioPeli`, `valoracionesTotales`, `mediaValoraciones`  FROM `pelicula`,`valoracionglobalpelicula` WHERE `pelicula`.`idPelicula`= `valoracionglobalpelicula`.`idPelicula` ORDER BY `valoracionesTotales` DESC LIMIT ?"</code>
+	 * Las ultimas <b>1</b>
 	 * 
 	 * @param request
 	 * @param response
@@ -186,6 +227,35 @@ public class PeliculaAction {
 			PeliculaDAO peliculaDAO = new PeliculaDAO();
 			Gson gson = new Gson();
 			lstPelicula = peliculaDAO.findMasVotada(Integer.parseInt(cantidad));
+			if (lstPelicula != null) {
+				respuesta = gson.toJson(lstPelicula);
+			} else {
+				respuesta = "[]";
+			}
+		}
+
+		return respuesta;
+	}
+
+	/**
+	 * <code>SELECT pelicula.`idPelicula`,`tituloPeli`,`resumenPeli`,`trailerPeli`,`caratulaPeli`,`imagenPeli`,`fechaEstreno`,`audiosDisponibles`,`subtitulosDisponibles`,`duracionPeli`,`precioPeli`, `valoracionesTotales`, `mediaValoraciones` FROM `pelicula`,`valoracionglobalpelicula` WHERE `pelicula`.`idPelicula`= `valoracionglobalpelicula`.`idPelicula` ORDER BY `mediaValoraciones` DESC LIMIT ?
+	</code> Las ultimas <b>1</b>
+	 * 
+	 * @param request
+	 * @param response
+	 * @return String
+	 */
+	private String findMejorVotadas(HttpServletRequest request, HttpServletResponse response) {
+		String respuesta = "";
+		List<Pelicula> lstPelicula = null;
+
+		String cantidad = request.getParameter("CANTIDAD");
+
+		if (cantidad != null) {
+
+			PeliculaDAO peliculaDAO = new PeliculaDAO();
+			Gson gson = new Gson();
+			lstPelicula = peliculaDAO.findMejorVotada(Integer.parseInt(cantidad));
 			if (lstPelicula != null) {
 				respuesta = gson.toJson(lstPelicula);
 			} else {

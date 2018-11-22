@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 22-11-2018 a las 00:48:49
+-- Tiempo de generación: 22-11-2018 a las 09:24:28
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -254,7 +254,9 @@ CREATE TABLE `puntuacion` (
 --
 
 INSERT INTO `puntuacion` (`idPuntuacion`, `idPelicula`, `idUsuario`, `idInfoPuntuacion`, `fechaPuntuacion`) VALUES
-(1, 3, 1, 5, '2018-11-21 23:31:17');
+(1, 3, 1, 5, '2018-11-21 23:31:17'),
+(2, 6, 3, 3, '2018-11-22 07:18:19'),
+(4, 6, 2, 4, '2018-11-22 07:18:39');
 
 -- --------------------------------------------------------
 
@@ -328,7 +330,7 @@ CREATE TABLE `usuario` (
   `email` varchar(35) COLLATE utf8_spanish2_ci NOT NULL,
   `username` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
   `contrasena` varchar(15) COLLATE utf8_spanish2_ci NOT NULL,
-  `fechaCreacion` date NOT NULL,
+  `fechaCreacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `fotoUsuario` varchar(25) COLLATE utf8_spanish2_ci NOT NULL,
   `idMetodoPago` int(11) NOT NULL DEFAULT '-1',
   `infoMetodoPago` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
@@ -340,7 +342,9 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`idUsuario`, `email`, `username`, `contrasena`, `fechaCreacion`, `fotoUsuario`, `idMetodoPago`, `infoMetodoPago`, `activoUsuario`) VALUES
-(1, 'ejemplo@ejemplo.com', 'ejemplo', 'ejemplo1', '2018-11-15', '', -1, 'ejemplo', 1);
+(1, 'ejemplo@ejemplo.com', 'ejemplo', 'ejemplo1', '2018-11-14 23:00:00', '', -1, '', 1),
+(2, 'gss@svalero.com', 'gss', '1234', '2018-11-21 23:00:00', '', -1, '', 1),
+(3, 'alberto@svalero.com', 'alberto', 'akk', '2018-11-21 23:00:00', '', -1, '', 1);
 
 -- --------------------------------------------------------
 
@@ -541,7 +545,7 @@ ALTER TABLE `pelicula`
 -- AUTO_INCREMENT de la tabla `puntuacion`
 --
 ALTER TABLE `puntuacion`
-  MODIFY `idPuntuacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idPuntuacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `teneractor`
@@ -565,7 +569,7 @@ ALTER TABLE `tenergenero`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas

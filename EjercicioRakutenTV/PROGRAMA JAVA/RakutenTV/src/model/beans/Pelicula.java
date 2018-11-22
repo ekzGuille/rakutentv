@@ -20,13 +20,17 @@ public class Pelicula {
 	private List<Integer> idActorPeli;
 	private List<Integer> idComentarioPeli;
 
+	private int valoracionesTotales;
+	private double mediaValoraciones;
+
 	public Pelicula() {
 	}
 
 	public Pelicula(int idPelicula, String tituloPeli, String resumenPeli, String trailerPeli, String caratulaPeli,
 			String imagenPeli, String fechaEstreno, String audiosDisponibles, String subtitulosDisponibles,
 			int duracionPeli, double precioPeli, List<Integer> idDirectorPeli, List<Integer> idGeneroPeli,
-			List<Integer> idActorPeli, List<Integer> idComentarioPeli) {
+			List<Integer> idActorPeli, List<Integer> idComentarioPeli, int valoracionesTotales,
+			double mediaValoraciones) {
 		this.idPelicula = idPelicula;
 		this.tituloPeli = tituloPeli;
 		this.resumenPeli = resumenPeli;
@@ -42,6 +46,8 @@ public class Pelicula {
 		this.idGeneroPeli = idGeneroPeli;
 		this.idActorPeli = idActorPeli;
 		this.idComentarioPeli = idComentarioPeli;
+		this.valoracionesTotales = valoracionesTotales;
+		this.mediaValoraciones = mediaValoraciones;
 	}
 
 	public int getIdPelicula() {
@@ -162,6 +168,22 @@ public class Pelicula {
 
 	public void setIdComentarioPeli(List<Integer> idComentarioPeli) {
 		this.idComentarioPeli = idComentarioPeli;
+	}
+
+	public int getValoracionesTotales() {
+		return valoracionesTotales;
+	}
+
+	public void setValoracionesTotales(int valoracionesTotales) {
+		this.valoracionesTotales = valoracionesTotales;
+	}
+
+	public double getMediaValoraciones() {
+		return mediaValoraciones;
+	}
+
+	public void setMediaValoraciones(double mediaValoraciones) {
+		this.mediaValoraciones = mediaValoraciones;
 	}
 
 }

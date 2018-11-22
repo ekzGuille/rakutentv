@@ -7,8 +7,9 @@ html {
 }
 
 body {
-    background: rgba(32, 32, 32, 1);
-    /* background: -moz-radial-gradient(center, ellipse cover, rgba(32, 32, 32, 1) 0%, rgba(0, 0, 0, 1) 100%);
+    color: #FFF;
+     background: rgba(32, 32, 32, 1);
+    /*background: -moz-radial-gradient(center, ellipse cover, rgba(32, 32, 32, 1) 0%, rgba(0, 0, 0, 1) 100%);
     background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(32, 32, 32, 1)), color-stop(100%, rgba(0, 0, 0, 1)));
     background: -webkit-radial-gradient(center, ellipse cover, rgba(32, 32, 32, 1) 0%, rgba(0, 0, 0, 1) 100%);
     background: -o-radial-gradient(center, ellipse cover, rgba(32, 32, 32, 1) 0%, rgba(0, 0, 0, 1) 100%);
@@ -21,15 +22,12 @@ img {
     max-width: 200px;
 }
 
-#webContainer{
-    /* text-align: center; */
-    /* background: var(--colorFondo); */
-    margin: 0 20%;
-    min-width: 80%;
+#webContainer {
+    margin: 0 15%;
+    min-width: 40%;
 }
 
 .cuadriculaPeliculas {
-    /* margin-left: 0.5%; */
     padding-left: 0.5%;
 }
 
@@ -39,8 +37,7 @@ img {
 }
 
 .caratulaPelicula {
-    /* margin: 1% 0.5% 1% 0.5%; */
-    padding: 1% 0.5% 1% 0.5%;
+    padding: 1% 1% 1% 1%;
     display: inline-block;
 }
 
