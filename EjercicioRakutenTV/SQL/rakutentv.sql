@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 22-11-2018 a las 22:38:01
+-- Tiempo de generación: 24-11-2018 a las 19:13:40
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -225,15 +225,26 @@ CREATE TABLE `pelicula` (
 --
 
 INSERT INTO `pelicula` (`idPelicula`, `tituloPeli`, `resumenPeli`, `trailerPeli`, `caratulaPeli`, `imagenPeli`, `fechaEstreno`, `audiosDisponibles`, `subtitulosDisponibles`, `duracionPeli`, `precioPeli`) VALUES
-(1, 'John Wick: Otro Día para Matar', 'La ciudad de Nueva York se convierte en el patio acribillado a balazos de un ex-asesino mientras él elimina a los gánsteres que destruyeron todo lo que él quería.', 'https://www.youtube.com/embed/RllJtOw0USI', 'JohnWick_caratula.jpg', 'JohnWick_foto.jpg', '2014-10-13', 'ESP,EN,ITA', 'RU,EN,ESP', 101, '5.50'),
-(2, 'Deadpool', 'Un ex mercenario quien, tras haber sido sometido a un cruel experimento adquiere el súper poder de sanar rápidamente, pretende vengarse del hombre que destrozó su vida.', 'https://www.youtube.com/embed/ONHBaC-pfsk', 'Deadpool_caratula.jpg', 'Deadpool_foto.jpg', '2016-01-21', 'ESP,RU', 'EN,ESP', 109, '7.20'),
-(3, 'Matrix', 'Un experto en computadoras descubre que su mundo es una simulación computarizada creada por malvada ciberinteligencia.', 'https://www.youtube.com/embed/m8e-FF8MsqU', 'Matrix_caratula.jpg', 'Matrix_foto.jpg', '1999-06-23', 'ESP,EN', 'ESP', 150, '4.50'),
+(1, 'John Wick: Otro Día para Matar', 'La ciudad de Nueva York se convierte en el patio acribillado a balazos de un ex-asesino mientras él elimina a los gánsteres que destruyeron todo lo que él quería.', 'https://www.youtube.com/embed/RllJtOw0USI', 'JohnWick_caratula.jpg', 'JohnWick_foto.jpg', '2014-10-13', 'ES,EN,ITA', 'RU,EN,ES', 101, '5.50'),
+(2, 'Deadpool', 'Un ex mercenario quien, tras haber sido sometido a un cruel experimento adquiere el súper poder de sanar rápidamente, pretende vengarse del hombre que destrozó su vida.', 'https://www.youtube.com/embed/ONHBaC-pfsk', 'Deadpool_caratula.jpg', 'Deadpool_foto.jpg', '2016-01-21', 'ES,RU', 'EN,ES', 109, '7.20'),
+(3, 'Matrix', 'Un experto en computadoras descubre que su mundo es una simulación computarizada creada por malvada ciberinteligencia.', 'https://www.youtube.com/embed/m8e-FF8MsqU', 'Matrix_caratula.jpg', 'Matrix_foto.jpg', '1999-06-23', 'ES,EN', 'ES', 150, '4.50'),
 (4, 'Piratas del Caribe', 'Piratas del Caribe es el título de una serie cinematográfica de aventura fantástica y piratas, producidas por Jerry Bruckheimer.', 'https://www.youtube.com/embed/ojvNfJjX8OQ', 'PiratasDelCaribe_caratula.jpg', 'PiratasDelCaribe_foto.jpg', '2006-08-11', 'EN,RU', 'ITA,BR', 151, '5.80'),
-(5, 'X-Men: primera generación', 'A principios de los años 60, Charles Xavier y Magneto se convierten en grandes amigos. Usando sus poderes, se unen para proteger al mundo de una guerra nuclear.', 'https://www.youtube.com/embed/UrbHykKUfTM', 'XMenFirstClass_caratula.jpg', 'XMenFirstClass_foto.jpg', '2011-05-25', 'ESP,RU,ITA', 'EN', 132, '6.40'),
-(6, 'El Quinto Elemento', 'La historia del director Luc Besson, sobre un taxista del futuro que tropieza con la mujer que puede salvar al mundo.\r\n', 'https://www.youtube.com/embed/aB-AUTGqUCU', 'ElQuintoElemento_caratula.jpg', 'ElQuintoElemento_foto.jpg', '1997-05-30', 'EN', 'ESP', 127, '3.50'),
+(5, 'X-Men: primera generación', 'A principios de los años 60, Charles Xavier y Magneto se convierten en grandes amigos. Usando sus poderes, se unen para proteger al mundo de una guerra nuclear.', 'https://www.youtube.com/embed/UrbHykKUfTM', 'XMenFirstClass_caratula.jpg', 'XMenFirstClass_foto.jpg', '2011-05-25', 'ES,RU,ITA', 'EN', 132, '6.40'),
+(6, 'El Quinto Elemento', 'La historia del director Luc Besson, sobre un taxista del futuro que tropieza con la mujer que puede salvar al mundo.\r\n', 'https://www.youtube.com/embed/aB-AUTGqUCU', 'ElQuintoElemento_caratula.jpg', 'ElQuintoElemento_foto.jpg', '1997-05-30', 'EN', 'ES', 127, '3.50'),
 (7, 'Dr. Dolittle', 'Un cirujano se convierte en mejor doctor, cuando recobra su vieja y casi olvidada habilidad de hablar con los animales.', 'https://www.youtube.com/embed/ozMmf9Yi7TM', 'DrDolittle_caratula.jpg', 'DrDolittle_foto.jpg', '1998-09-11', 'ES', 'ES', 90, '4.50'),
 (8, 'Mi gran noche', 'Un hombre desempleado consigue trabajo como extra en la filmación de un especial de Año Nuevo para TV, donde debe recibir el año sin parar y en pésimas condiciones.\r\n', 'https://www.youtube.com/embed/KBahnqECT7o', 'MiGranNoche_caratula.jpg', 'MiGranNoche_foto.jpg', '2015-10-23', 'ES,EN,GER', 'EN,FR', 100, '5.50'),
-(9, 'Kingsman: Servicio secreto', 'Gary \"Eggsy\" Unwin, cuyo fallecido padre trabajó calladamente para una agencia de espionaje ultra secreta, vive en una urbanización del sur de Londres y parece dirigirse hacia las rejas. ', 'https://www.youtube.com/embed/m4NCribDx4U', 'Kingsman_caratula.jpg', 'Kingsman_foto.jpg', '2015-01-24', 'ESP,EN', 'ESP', 130, '6.70');
+(9, 'Kingsman: Servicio secreto', 'Gary \"Eggsy\" Unwin, cuyo fallecido padre trabajó calladamente para una agencia de espionaje ultra secreta, vive en una urbanización del sur de Londres y parece dirigirse hacia las rejas. ', 'https://www.youtube.com/embed/m4NCribDx4U', 'Kingsman_caratula.jpg', 'Kingsman_foto.jpg', '2015-01-24', 'ESP,EN', 'ESP', 130, '6.70'),
+(10, 'Origen', 'Dom Cobb (Leonardo DiCaprio) es un ladrón con una extraña habilidad para entrar a los sueños de la gente y robarle los secretos de sus subconscientes.', 'https://www.youtube.com/embed/YoHD9XEInc0', 'Origen_caratula.jpg', 'Origen_foto.jpg', '2010-08-06', 'ES,EN,PT', 'PT,FR', 148, '6.50'),
+(11, 'Slumdog Millionaire', 'Mientras Jamal Malik (Dev Patel), de 18 años de edad, responde preguntas en la versión india de \"Quién Quiere Ser Millonario\", escenas retrospectivas muestran cómo llegó ahí. ', 'https://www.youtube.com/embed/AIzbwV7on6Q', 'Slum_Millionaire_caratula.jpg', 'Slum_Millionaire_foto.jpg', '2009-02-13', 'RU,RUS,GER', 'FR,ES', 120, '7.50'),
+(12, 'V de Vendetta', 'Un vigilante conocido sólo como V utiliza tácticas terroristas para luchar contra el estado totalitario en el que ahora vive. ', 'https://www.youtube.com/embed/k_13fFIrhPk', 'VVendetta_caratula.jpg', 'VVendetta_foto.jpg', '2006-04-07', 'ES,EN', 'PT,RU', 133, '8.30'),
+(13, 'El gran showman', 'P. T. Barnum es un padre de familia del siglo XIX que decide cambiar su vida cuando la empresa para la que trabaja cae en bancarrota. ', 'https://www.youtube.com/embed/AXCTMGYUg9A', 'GranShowman_caratula.jpg', 'GranShowman_foto.jpg', '2017-12-29', 'RU,GER', 'ES,PT', 106, '5.30'),
+(14, 'La teoría del todo', 'Durante los años sesenta, el estudiante de la Universidad de Cambridge y futuro físico Stephen Hawking se enamora de su compañera Jane Wilde. ', 'https://www.youtube.com/embed/Salz7uGp72c', 'TeoriaDelTodo_caratula.jpg', 'TeoriaDelTodo_foto.jpg', '2017-11-07', 'EN', 'ES', 123, '7.50'),
+(15, 'Jumanji', 'Una historia de Chris Allsburg sobre un juego que libera una estampida de peligros de la selva contra sus jugadores.', 'https://www.youtube.com/embed/GrlMYIYt-SI', 'Jumanji_caratula.jpg', 'Jumanji_foto.jpg', '1996-02-12', 'ES', 'ES', 104, '3.40'),
+(16, 'The Imitation Game (Descifrando Enigma)', 'El genio británico de la lógica y criptógrafo Alan Turing ayuda con el Código Enigma de Alemania durante la Segunda Guerra Mundial, pero es perseguido por su gobierno por actos homosexuales ilegales.', 'https://www.youtube.com/embed/nuPZUUED5uk', 'TheImiGame_caratula.jpg', 'TheImiGame_foto.jpg', '2015-01-07', 'PT,FR,GER', 'EN, RU', 114, '6.60'),
+(17, 'Matilda', 'Una niña (Mara Wilson) desarrolla una capacidad mental extraordinaria, a pesar de sus padres (Danny DeVito, Rhea Perlman) descuidados y de una directora abusiva.', 'https://www.youtube.com/embed/hUGHWje7liM', 'Matilda_caratula.jpg', 'Matilda_foto.jpg', '1996-12-23', 'ES', 'ES', 102, '3.80'),
+(18, 'La isla', 'En el año 2019, un mercenario (Djimon Hounsou) persigue a dos clones (Ewan McGregor, Scarlett Johansson) que escaparon de unas instalaciones de investigación tras descubrir su verdadero destino.', 'https://www.youtube.com/embed/xb4PR2zYUrk', 'LaIsla_caratula.jpg', 'LaIsla_foto.jpg', '2005-08-05', 'PT,FR', 'GER,RU', 138, '4.20'),
+(19, 'La familia Bélier', 'Una adolescente, que vive con sus padres sordos, descubre que tiene un sorprendente don para el canto.', 'https://www.youtube.com/embed/y36W7P1FxJI', 'FamiliaBelier_caratula.jpg', 'FamiliaBelier_foto.jpg', '2014-12-25', 'FR', 'FR,ES,EN', 106, '4.40'),
+(20, 'Focus', 'Un estafador veterano apoya a una joven y atractiva mujer, pero las cosas se complican cuando ellos se involucran románticamente.', 'https://www.youtube.com/embed/MxCRgtdAuBo', 'Focus_caratula.jpg', 'Focus_foto.jpg', '2015-01-26', 'ES,RU,EN', 'PT,FR', 105, '7.40');
 
 -- --------------------------------------------------------
 
@@ -540,7 +551,7 @@ ALTER TABLE `metodopago`
 -- AUTO_INCREMENT de la tabla `pelicula`
 --
 ALTER TABLE `pelicula`
-  MODIFY `idPelicula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idPelicula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `puntuacion`
