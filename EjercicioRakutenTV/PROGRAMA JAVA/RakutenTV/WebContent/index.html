@@ -23,31 +23,80 @@
 </head>
 
 <body>
-    <nav>Menu
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo center"><img id="logoPelis" src="images/icon/logo/LogoNegro.png"></a>
+            <ul id="nav-mobile" class="right">
+                <li><a>Entra</a></li>
+                <li><a>Registrate</a></li>
+                <li><a>Mi perfil <i class="material-icons left">person</i></a></li>
+                <li><a>Salir<i class="material-icons left">exit_to_app</i></a></li>
+            </ul>
+        </div>
     </nav>
-    <!-- <div id="menuLateral">
-        <ul id="slide-out" class="sidenav">
-            <li><a href="#!">First Sidebar Link</a></li>
-            <li><a href="#!">Second Sidebar Link</a></li>
-            <li class="no-padding">
-                <ul class="collapsible collapsible-accordion">
+
+    <a href="#" id="anchorMenu" data-target="slide-out-Entra" class="sidenav-trigger">Entra</a>
+    <div id="menuLateralEntra">
+        <ul id="slide-out-Entra" class="sidenav">
+            <div class="liWrapper">
+                <p class="headerFormWrapper formHeader">Ingresa con tus datos</p>
+                <form id="formEntra">
                     <li>
-                        <a class="collapsible-header">Dropdown<i class="material-icons">arrow_drop_down</i></a>
-                        <div class="collapsible-body">
-                            <ul>
-                                <li><a href="#!">First</a></li>
-                                <li><a href="#!">Second</a></li>
-                                <li><a href="#!">Third</a></li>
-                                <li><a href="#!">Fourth</a></li>
-                            </ul>
-                        </div>
+                        <div class="formHeader">Email o nombre de usuario<input type="text" name="userMail" id="userMailEntrar"></div>
                     </li>
-                </ul>
-            </li>
+                    <li>
+                        <div class="formHeader">Contraseña<input type="password" name="contrasena" id="contrasenaEntrar"></div>
+                    </li>
+                </form>
+                <div class="btnWrapper">
+                    <button id="btnSubmitRegister" class="waves-effect waves-light btn">Entrar</button>
+                </div>
+            </div>
         </ul>
-        <a href="#" id="anchorMenu" data-target="slide-out" class="btn-floating btn-large waves-effect waves-light red sidenav-trigger"><i
-                class="material-icons">menu</i></a>
-    </div> -->
+    </div>
+
+    <a href="#" id="anchorMenu" data-target="slide-out-Register" class="sidenav-trigger">Registrate</a>
+    <div id="menuLateralRegister">
+        <ul id="slide-out-Register" class="sidenav">
+            <div class="liWrapper">
+                <p class="headerFormWrapper formHeader">Completa tus datos para registrarte</p>
+                <form id="formRegister">
+                    <li>
+                        <div class="formHeader">Email<input type="text" name="userMail" id="userMailRegistrar"></div>
+                    </li>
+                    <li>
+                        <div class="formHeader">Contraseña<input type="password" name="contrasena" id="contrasenaRegistrar"></div>
+                    </li>
+                    <li>
+                        <div class="formHeader">Repite la contraseña<input type="password" name="contrasenaRRegistrar"
+                                id="contrasenaR"></div>
+                    </li>
+                </form>
+                <div class="btnWrapper">
+                    <button id="btnSubmitRegister" class="waves-effect waves-light btn">Registrarme</button>
+                </div>
+            </div>
+        </ul>
+    </div>
+
+    <a href="#" id="anchorMenu" data-target="slide-out-Ajustes" class="sidenav-trigger">Ajustes</a>
+    <div id="menuLateralAjustes">
+        <ul id="slide-out-Ajustes" class="sidenav">
+            <div class="liWrapper" id="ajustesWrapper">
+                <p class="headerFormWrapper formHeader">Mi perfil</p>
+                <li>
+                    <div id="profImgWrapper">
+                        <div id="profImg" class="circle"><img class="circle" src="images/usuarios/default/undefinedProfile.png"></div>
+                    </div>
+                </li>
+                <li><a class="aAjustes perfilTextIcon">Modificar mi perfil<i class="material-icons left">settings</i></a></li>
+                <li><a class="aAjustes perfilTextIcon">Mis peliculas favoritas<i class="material-icons left">star</i></a></li>
+            </div>
+            <div class="liWrapper" id="darBajaWrapper">
+                <li><a class="aAjustes" id="darseBaja">Dar de baja mi cuenta</a></li>
+            </div>
+        </ul>
+    </div>
 
     <!-- <div class="fixed-action-btn">
         <a class="btn-floating btn-large red">
@@ -61,30 +110,91 @@
         </ul>
     </div> -->
 
-    <div class="caratulaPelicula">
-        <a href="#modal" class="modal-trigger"><img class="imagenCaratula" src="images/peliculas/movieCaratula/JohnWick_caratula.jpg"
-                alt=""></a>
-        <div class="imgValoracion">
-            <img class="estrellasValoracion" src="images/icon/estrellas/2Estrella.png" alt="">
-        </div>
-        <div class="infoValoracion">
-            200 votos
-        </div>
+    <div class="row">
 
-        <div id="modal" class="modal modalContent fondoModal">
-            <div class="modal-content" style="background-image: url('images/peliculas/movieFotos/JohnWick_foto.jpg')">
-                <h4>Modal Header</h4>
-                <img class="imagenCaratula" src="images/peliculas/movieCaratula/JohnWick_caratula.jpg" alt="">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/uNWWV4mbv3Q?controls=0&autoplay=0&disablekb=0&fs=0&modestbranding=1&rel=0&showinfo=0" frameborder="0"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                <p class="pModalClass">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam consequuntur, neque quo itaque
-                    consequatur
-                    pariatur velit aliquid molestiae, provident voluptates dolor porro voluptatum magni fugiat, nisi
-                    odio
-                    quis sequi atque.</p>
+        <div class="caratulaPelicula">
+            <a href="#m1" class="modal-trigger"><img class="imagenCaratula" src="images/peliculas/movieCaratula/JohnWick_caratula.jpg"
+                    alt=""></a>
+            <div class="imgValoracion">
+                <img class="estrellasValoracion" src="images/icon/estrellas/2Estrella.png" alt="">
             </div>
-            <div class="modal-footer modalContent">
-                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+            <div class="infoValoracion">
+                200 votos
+            </div>
+
+            <div id="m1" class="modal modalContent fondoModal">
+                <div class="modal-content" style="background-image: url('images/peliculas/movieFotos/JohnWick_foto.jpg')">
+                    <h4>Modal Header</h4>
+                    <img class="imagenCaratula" src="images/peliculas/movieCaratula/JohnWick_caratula.jpg" alt="">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/uNWWV4mbv3Q?controls=0&autoplay=0&disablekb=0&fs=0&modestbranding=1&rel=0&showinfo=0"
+                        frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                    <p class="pModalClass">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam consequuntur,
+                        neque quo itaque
+                        consequatur
+                        pariatur velit aliquid molestiae, provident voluptates dolor porro voluptatum magni fugiat,
+                        nisi
+                        odio
+                        quis sequi atque.</p>
+                </div>
+                <div class="modal-footer modalContent">
+                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                </div>
+            </div>
+        </div>
+        <div class="caratulaPelicula">
+            <a href="#m2" class="modal-trigger"><img class="imagenCaratula" src="images/peliculas/movieCaratula/JohnWick_caratula.jpg"
+                    alt=""></a>
+            <div class="imgValoracion">
+                <img class="estrellasValoracion" src="images/icon/estrellas/2Estrella.png" alt="">
+            </div>
+            <div class="infoValoracion">
+                20 votos
+            </div>
+
+            <div id="m2" class="modal modalContent fondoModal">
+                <div class="modal-content" style="background-image: url('images/peliculas/movieFotos/JohnWick_foto.jpg')">
+                    <h4>Modal Header</h4>
+                    <img class="imagenCaratula" src="images/peliculas/movieCaratula/JohnWick_caratula.jpg" alt="">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/uNWWV4mbv3Q?controls=0&autoplay=0&disablekb=0&fs=0&modestbranding=1&rel=0&showinfo=0"
+                        frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                    <p class="pModalClass">
+                        pariatur velit aliquid molestiae, provident voluptates dolor porro voluptatum magni fugiat,
+                        nisi
+                        odio
+                        quis sequi atque.</p>
+                </div>
+                <div class="modal-footer modalContent">
+                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                </div>
+            </div>
+        </div>
+        <div class="caratulaPelicula">
+            <a href="#m3" class="modal-trigger"><img class="imagenCaratula" src="images/peliculas/movieCaratula/JohnWick_caratula.jpg"
+                    alt=""></a>
+            <div class="imgValoracion">
+                <img class="estrellasValoracion" src="images/icon/estrellas/2Estrella.png" alt="">
+            </div>
+            <div class="infoValoracion">
+                100 votos
+            </div>
+
+            <div id="m3" class="modal modalContent fondoModal">
+                <div class="modal-content" style="background-image: url('images/peliculas/movieFotos/JohnWick_foto.jpg')">
+                    <h4>Modal Header</h4>
+                    <img class="imagenCaratula" src="images/peliculas/movieCaratula/JohnWick_caratula.jpg" alt="">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/uNWWV4mbv3Q?controls=0&autoplay=0&disablekb=0&fs=0&modestbranding=1&rel=0&showinfo=0"
+                        frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                    <p class="pModalClass">sdfasdfasfasf
+                        nisi
+                        odio
+                        quis sequi atque.</p>
+                </div>
+                <div class="modal-footer modalContent">
+                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                </div>
             </div>
         </div>
     </div>

@@ -1,5 +1,9 @@
 :root {
+    --colorFondoSec: #212121;
     --colorFondo: #202020;
+    --colorInput: #9E9E9E;
+    --colorNav: #484848;
+    --colorCirculoImg: #A0A0A0;
 }
 
 html {
@@ -8,18 +12,93 @@ html {
 
 body {
     color: #FFF;
-    background: rgba(32, 32, 32, 1);
-    /*background: -moz-radial-gradient(center, ellipse cover, rgba(32, 32, 32, 1) 0%, rgba(0, 0, 0, 1) 100%);
-    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(32, 32, 32, 1)), color-stop(100%, rgba(0, 0, 0, 1)));
-    background: -webkit-radial-gradient(center, ellipse cover, rgba(32, 32, 32, 1) 0%, rgba(0, 0, 0, 1) 100%);
-    background: -o-radial-gradient(center, ellipse cover, rgba(32, 32, 32, 1) 0%, rgba(0, 0, 0, 1) 100%);
-    background: -ms-radial-gradient(center, ellipse cover, rgba(32, 32, 32, 1) 0%, rgba(0, 0, 0, 1) 100%);
-    background: radial-gradient(ellipse at center, rgba(32, 32, 32, 1) 0%, rgba(0, 0, 0, 1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#202020', endColorstr='#000000', GradientType=1); */
+    background: var(--colorFondo);
 }
 
 img {
     max-width: 200px;
+}
+
+#logoPelis {
+    padding: 3%;
+}
+
+nav {
+    background: var(--colorNav);
+}
+
+.sidenav {
+    background-color: var(--colorFondo) !important;
+    width: 350px !important;
+}
+
+.liWrapper {
+    margin-top: 15%;
+}
+
+#ajustesWrapper {
+    position: relative;
+    margin: 0 10% 0 10%;
+}
+
+#ajustesWrapper>p {
+    text-align: center;
+}
+
+.btnWrapper {
+    margin-top: 15%;
+    text-align: center;
+}
+
+.btnWrapper>button {
+    background-color: var(--colorInput) !important;
+}
+
+.formHeader {
+    font-size: 11pt !important;
+    font-weight: 100 !important;
+    color: var(--colorInput) !important;
+    box-sizing: border-box !important;
+    padding: 0 12% 0 12% !important;
+}
+
+.headerFormWrapper {
+    font-size: 12pt !important;
+    font-weight: 400 !important;
+}
+
+#profImgWrapper {
+    text-align: center;
+}
+
+#profImg {
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    width: 180px;
+    height: 180px;
+    border: 5px solid var(--colorCirculoImg);
+}
+
+#profImg>img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: auto;
+    height: auto;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+input {
+    color: var(--colorInput) !important;
+    border-bottom: 1px solid var(--colorInput) !important;
+}
+
+input:focus {
+    border-bottom: 1px solid var(--colorInput) !important;
+    box-shadow: 0 1px 0 0 var(--colorInput) !important
 }
 
 #webContainer {
@@ -51,7 +130,7 @@ img {
     background-repeat: no-repeat !important;
 }
 
-.pModalClass{
+.pModalClass {
     font-size: 16pt !important;
     text-shadow: 2px 2px 10px #000 !important;
 }
@@ -67,4 +146,36 @@ img {
 
 h4 {
     color: #FFF;
+}
+
+.aAjustes {
+    margin-left: 8%;
+}
+
+.aAjustes:hover {
+    background-color: var(--colorFondo) !important;
+}
+
+#darBajaWrapper {
+    height: 50%;
+}
+
+#darseBaja {
+    font-size: 12pt !important;
+    font-weight: 500 !important;
+    position: absolute;
+    bottom: 10%;
+    left: 10%;
+    color: #FF5D5D;
+}
+
+.perfilTextIcon {
+    font-size: 12pt !important;
+    font-weight: 300 !important;
+    color: var(--colorInput) !important;
+}
+
+.perfilTextIcon>i {
+    color: var(--colorInput) !important;
+    margin-right: 2% !important;
 }

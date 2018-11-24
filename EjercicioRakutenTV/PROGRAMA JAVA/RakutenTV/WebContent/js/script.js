@@ -34,8 +34,7 @@ function cargarPelisMasVotadas(cantidad) {
 		data: datos,
 		datatype: 'json',
 		success: function (params) {
-			console.log(JSON.parse(params));
-
+			// console.log(JSON.parse(params));
 			crearImagenDiv('PelisMasVotadasWrapper', JSON.parse(params));
 		}
 	});
