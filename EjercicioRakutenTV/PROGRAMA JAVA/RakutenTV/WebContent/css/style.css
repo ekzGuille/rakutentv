@@ -102,8 +102,7 @@ input:focus {
 }
 
 #webContainer {
-    margin: 0 15%;
-    min-width: 40%;
+    margin: 0 18%;
 }
 
 .modalContent {
@@ -115,7 +114,8 @@ input:focus {
 }
 
 .imagenCaratula {
-    max-height: 268px;
+    max-height: 300px;
+    /* max-width: 250px; */
     border-radius: 5px;
 }
 
@@ -178,4 +178,43 @@ h4 {
 .perfilTextIcon>i {
     color: var(--colorInput) !important;
     margin-right: 2% !important;
+}
+
+#anchorEntra,
+#anchorRegistrar {
+    display: block;
+}
+
+#anchorPerfil,
+#anchorSalir {
+    display: none;
+}
+
+.tituloWrapperPeliculas {
+    display: inline-flex;
+}
+
+.tituloWrapperPeliculas>a {
+    color: #FFF;
+    display: inline-flex;
+    margin-top: 32px;
+    margin-left: 15px;
+    transition-property: margin-left;
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
+    transition-delay: 0s;
+}
+
+.tituloWrapperPeliculas>a:hover {
+    color: #FFF;
+    display: inline-flex;
+    margin-top: 32px;
+
+    margin-left: 20px;
+}
+
+.page-footer{
+    background-color: var(--colorFondoSec) !important;
+    text-align: center;
+    font-weight: 600 !important;
 }

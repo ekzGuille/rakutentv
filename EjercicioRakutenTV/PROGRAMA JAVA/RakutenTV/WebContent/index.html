@@ -25,17 +25,18 @@
 <body>
     <nav>
         <div class="nav-wrapper">
-            <a href="#" class="brand-logo center"><img id="logoPelis" src="images/icon/logo/LogoNegro.png"></a>
+            <a class="brand-logo center"><img id="logoPelis" src="images/icon/logo/LogoNegro.png"></a>
             <ul id="nav-mobile" class="right">
-                <li><a>Entra</a></li>
-                <li><a>Registrate</a></li>
-                <li><a>Mi perfil <i class="material-icons left">person</i></a></li>
-                <li><a>Salir<i class="material-icons left">exit_to_app</i></a></li>
+                <li><a href="peliculas.html" id="anchorPeliciulas">Todas las películas <i class="material-icons left">local_movies</i> </a></li>
+                <li><a id="anchorEntra">Entra</a></li>
+                <li><a id="anchorRegistrar">Registrate</a></li>
+                <li><a id="anchorPerfil">Mi perfil <i class="material-icons left">person</i></a></li>
+                <li><a id="anchorSalir">Salir<i class="material-icons left">exit_to_app</i></a></li>
             </ul>
         </div>
     </nav>
 
-    <a href="#" id="anchorMenu" data-target="slide-out-Entra" class="sidenav-trigger">Entra</a>
+    <a href="#" id="menuEntra" data-target="slide-out-Entra" class="sidenav-trigger"></a>
     <div id="menuLateralEntra">
         <ul id="slide-out-Entra" class="sidenav">
             <div class="liWrapper">
@@ -55,7 +56,7 @@
         </ul>
     </div>
 
-    <a href="#" id="anchorMenu" data-target="slide-out-Register" class="sidenav-trigger">Registrate</a>
+    <a href="#" id="menuRegistrar" data-target="slide-out-Register" class="sidenav-trigger"></a>
     <div id="menuLateralRegister">
         <ul id="slide-out-Register" class="sidenav">
             <div class="liWrapper">
@@ -79,7 +80,7 @@
         </ul>
     </div>
 
-    <a href="#" id="anchorMenu" data-target="slide-out-Ajustes" class="sidenav-trigger">Ajustes</a>
+    <a href="#" id="menuAjustes" data-target="slide-out-Ajustes" class="sidenav-trigger"></a>
     <div id="menuLateralAjustes">
         <ul id="slide-out-Ajustes" class="sidenav">
             <div class="liWrapper" id="ajustesWrapper">
@@ -202,22 +203,37 @@
 
     <div id="webContainer">
         <div class="cuadriculaPeliculas" id="pelisMasVotadas">
-            <h4>Películas más votadas</h4>
+            <div class="tituloWrapperPeliculas">
+                <h4>Películas más votadas</h4>
+                <a href="">Ver más <i class="material-icons">keyboard_arrow_right</i> </a>
+            </div>
             <div id="PelisMasVotadasWrapper">
             </div>
         </div>
         <div class="cuadriculaPeliculas" id="pelisUltimosEstrenos">
-            <h4>Últimos estrenos en cartelera</h4>
+            <div class="tituloWrapperPeliculas">
+                <h4>Últimos estrenos en cartelera</h4>
+                <a href="">Ver más <i class="material-icons">keyboard_arrow_right</i> </a>
+            </div>
             <div id="ultimosEstrenosCarteleraWrapper">
             </div>
         </div>
         <div class="cuadriculaPeliculas" id="pelisUltimasAdd">
-            <h4>Últimas Películas añadidas</h4>
+            <div class="tituloWrapperPeliculas">
+                <h4>Últimas Películas añadidas</h4>
+                <a href="">Ver más <i class="material-icons">keyboard_arrow_right</i> </a>
+            </div>
             <div id="UltimasPelisAddWrapper">
             </div>
         </div>
     </div>
-    <footer>fin</footer>
+    <footer class="page-footer">
+        <div class="footer-copyright">
+            <div class="container">
+                <h6>Guillermo Sesé Santos - 2SI FSV - 2018</h6>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>

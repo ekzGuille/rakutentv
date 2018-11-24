@@ -1,15 +1,34 @@
 document.addEventListener('DOMContentLoaded', function () {
 	M.AutoInit();
 
-	// $("body").mousemove(function (e) {
-	// 	if (e.pageX < window.innerWidth * 0.1) {
-	// 		$('#anchorMenu')[0].click();
-	// 	}
-	// })
+	var anchorPeliciulas = document.getElementById('anchorPeliciulas');
+	anchorPeliciulas.addEventListener('click', function () {
 
-	cargarPelisMasVotadas(1);
-	cargarPelisEstrenos(3);
-	cargarultimasPelisAdd(4);
+	});
+	var anchorEntra = document.getElementById('anchorEntra');
+	anchorEntra.addEventListener('click', function () {
+		$('#menuEntra')[0].click();
+	});
+	var menuRegistrar = document.getElementById('anchorRegistrar');
+	menuRegistrar.addEventListener('click', function () {
+		$('#menuRegistrar')[0].click();
+	});
+	var menuAjustes = document.getElementById('anchorPerfil');
+	menuAjustes.addEventListener('click', function () {
+		$('#menuAjustes')[0].click();
+	});
+	var salirUsuario = document.getElementById('anchorSalir');
+	salirUsuario.addEventListener('click', function () {
+
+	});
+
+	if (window.location.pathname === "/RakutenTV/" || window.location.pathname === "/RakutenTV/index.html") {
+		cargarPelisMasVotadas(5);
+		cargarPelisEstrenos(5);
+		cargarultimasPelisAdd(5);
+	} else if (window.location.pathname === "/RakutenTV/peliculas.html") {
+		cargarTodasPelis();
+	}
 });
 
 function login(userMail, contrasena) {
@@ -87,7 +106,7 @@ function cargarTodasPelis() {
 		data: datos,
 		datatype: 'json',
 		success: function (params) {
-			console.log(params);
+			crearImagenDiv('todasLasPelis',JSON.parse(params));
 		}
 	});
 }
@@ -179,7 +198,7 @@ function crearImagenDiv(id, data) {
 		divWrapper.appendChild(divCaratulaPelicula);
 
 
-		document.getElementById('submodal' + pelicula.idPelicula).style.background = "url('images/peliculas/movieFotos/" + pelicula.imagenPeli+"')";
+		document.getElementById('submodal' + pelicula.idPelicula).style.background = "url('images/peliculas/movieFotos/" + pelicula.imagenPeli + "')";
 
 		$('.modal').modal();
 	});
