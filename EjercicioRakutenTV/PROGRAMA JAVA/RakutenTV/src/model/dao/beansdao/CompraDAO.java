@@ -134,7 +134,7 @@ public class CompraDAO implements DAO<Compra, Integer[]> {
 			pst = this.motor.connect().prepareStatement(sql);
 
 			pst.setInt(1, id[0]);
-			pst.setInt(1, id[1]);
+			pst.setInt(2, id[1]);
 
 			ResultSet rs = this.motor.executeQuery(pst);
 			lstCompra = new ArrayList<Compra>();

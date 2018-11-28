@@ -3,8 +3,11 @@ package controller.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import model.beans.MarcarFavorito;
 import model.dao.beansdao.MarcarFavoritoDAO;
+import utils.Respuesta;
 
 public class MarcarFavAction {
 
@@ -51,7 +54,13 @@ public class MarcarFavAction {
 
 			MarcarFavoritoDAO marcarFavDAO = new MarcarFavoritoDAO();
 
-			respuesta = String.valueOf(marcarFavDAO.add(marcarFav));
+			Respuesta resp = new Respuesta();
+			Gson gson = new Gson();
+
+			resp.setRespuesta(marcarFavDAO.add(marcarFav));
+			resp.setDescRespuesta("addFavorito");
+
+			respuesta = "[" + gson.toJson(resp) + "]";
 		}
 
 		return respuesta;
@@ -75,8 +84,14 @@ public class MarcarFavAction {
 			Integer[] id = new Integer[] { Integer.parseInt(pelicula), Integer.parseInt(usuario) };
 
 			MarcarFavoritoDAO marcarFavDAO = new MarcarFavoritoDAO();
+			
+			Respuesta resp = new Respuesta();
+			Gson gson = new Gson();
 
-			respuesta = String.valueOf(marcarFavDAO.delete(id));
+			resp.setRespuesta(marcarFavDAO.delete(id));
+			resp.setDescRespuesta("remFavorito");
+
+			respuesta = "[" + gson.toJson(resp) + "]";
 		}
 
 		return respuesta;

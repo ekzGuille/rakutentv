@@ -26,14 +26,14 @@ public class PuntuacionDAO implements DAO<Puntuacion, Integer[]> {
 	public int add(Puntuacion bean) {
 		String sql = "INSERT INTO `puntuacion` (`idPelicula`, `idUsuario`, `idInfoPuntuacion`, `fechaPuntuacion`) VALUES (?,?,?,?)";
 		int resp = 0;
-
+		
 		try {
 			pst = this.motor.connect().prepareStatement(sql);
 
 			pst.setInt(1, bean.getIdPelicula());
 			pst.setInt(2, bean.getIdUsuario());
 			pst.setInt(3, bean.getIdInfoPuntuacion());
-			pst.setString(4, String.valueOf(java.time.LocalDate.now()));
+			pst.setString(4, String.valueOf(new java.text.SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date())));
 
 			resp = this.motor.execute(pst);
 
@@ -77,7 +77,7 @@ public class PuntuacionDAO implements DAO<Puntuacion, Integer[]> {
 		if (bean.getFechaPuntuacion() != null) {
 			sql += "`fechaPuntuacion` = ?,";
 			contarCasos++;
-			lstCondiciones.put(contarCasos, String.valueOf(java.time.LocalDate.now()));
+			lstCondiciones.put(contarCasos, String.valueOf(new java.text.SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date())));
 		}
 
 		if (sql.endsWith(",")) {
@@ -188,7 +188,7 @@ public class PuntuacionDAO implements DAO<Puntuacion, Integer[]> {
 			pst = this.motor.connect().prepareStatement(sql);
 			
 			pst.setInt(1, id[0]);
-			pst.setInt(1, id[1]);
+			pst.setInt(2, id[1]);
 
 			
 			ResultSet rs = this.motor.executeQuery(pst);

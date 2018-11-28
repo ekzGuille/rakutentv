@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import controller.action.ComprarAction;
 import controller.action.MarcarFavAction;
 import controller.action.PeliculaAction;
+import controller.action.PuntuarAction;
 import controller.action.UserAction;
 
 /**
@@ -54,7 +55,7 @@ public class Controller extends HttpServlet {
 			break;
 			
 		case "Puntuar":
-			respuesta = new MarcarFavAction().execute(request, response);
+			respuesta = new PuntuarAction().execute(request, response);
 			break;
 			
 		case "Comprar":

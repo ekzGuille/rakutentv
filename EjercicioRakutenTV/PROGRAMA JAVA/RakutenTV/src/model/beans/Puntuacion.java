@@ -59,4 +59,11 @@ public class Puntuacion {
 		this.fechaPuntuacion = fechaPuntuacion;
 	}
 
+	@Override
+	public String toString() {
+		return "Puntuacion [idPuntuacion=" + idPuntuacion + ", idPelicula=" + idPelicula + ", idUsuario=" + idUsuario
+				+ ", idInfoPuntuacion=" + idInfoPuntuacion + ", fechaPuntuacion=" + fechaPuntuacion + "]";
+	}
+
+	  
 }
