@@ -11,7 +11,7 @@ import model.dao.DAO;
 import model.motor.Motor;
 import model.motor.MotorMySQL;
 
-public class CompraDAO implements DAO<Compra, Integer> {
+public class CompraDAO implements DAO<Compra, Integer[]> {
 
 	private Motor motor;
 	private PreparedStatement pst;
@@ -46,7 +46,7 @@ public class CompraDAO implements DAO<Compra, Integer> {
 	}
 
 	@Override
-	public int delete(Integer id) {
+	public int delete(Integer[] id) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -91,7 +91,7 @@ public class CompraDAO implements DAO<Compra, Integer> {
 	}
 
 	@Override
-	public Compra findById(Integer id) {
+	public Compra findById(Integer[] id) {
 		String sql = "SELECT * FROM `compra` WHERE `idCompra` = ?";
 
 		List<Compra> lstCompra = null;
@@ -99,7 +99,42 @@ public class CompraDAO implements DAO<Compra, Integer> {
 		try {
 			pst = this.motor.connect().prepareStatement(sql);
 
-			pst.setInt(1, id);
+			pst.setInt(1, id[0]);
+
+			ResultSet rs = this.motor.executeQuery(pst);
+			lstCompra = new ArrayList<Compra>();
+
+			while (rs.next()) {
+				Compra compra = new Compra();
+
+				compra.setIdCompra(rs.getInt(1));
+				compra.setIdUsuario(rs.getInt(2));
+				compra.setIdPelicula(rs.getInt(3));
+				compra.setPrecioCompra(rs.getDouble(4));
+				compra.setFechaCompra(rs.getString(5));
+
+				lstCompra.add(compra);
+
+			}
+
+		} catch (SQLException e) {
+
+		} finally {
+			this.motor.disconnect();
+		}
+		return (!lstCompra.isEmpty()) ? lstCompra.get(0) : null;
+	}
+
+	public Compra findByPeliUser(Integer[] id) {
+		String sql = "SELECT * FROM `compra` WHERE `idPelicula` = ? AND `idUsuario` = ?";
+
+		List<Compra> lstCompra = null;
+
+		try {
+			pst = this.motor.connect().prepareStatement(sql);
+
+			pst.setInt(1, id[0]);
+			pst.setInt(1, id[1]);
 
 			ResultSet rs = this.motor.executeQuery(pst);
 			lstCompra = new ArrayList<Compra>();

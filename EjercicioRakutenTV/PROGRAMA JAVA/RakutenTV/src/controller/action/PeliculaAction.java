@@ -51,6 +51,10 @@ public class PeliculaAction {
 		case "listMejorVotadas":
 			respuesta = findMejorVotadas(request, response);
 			break;
+			
+		case "listGenero":
+			respuesta = findByGenero(request,response);
+			break;
 
 		default:
 			respuesta = "[]";
@@ -263,6 +267,34 @@ public class PeliculaAction {
 			}
 		}
 
+		return respuesta;
+	}
+	/**
+	 * <code>SELECT `genero`.`descGenero`, `pelicula`.`idPelicula`,`tituloPeli`,`resumenPeli`,`trailerPeli`,`caratulaPeli`,`imagenPeli`,`fechaEstreno`,`audiosDisponibles`,`subtitulosDisponibles`,`duracionPeli`,`precioPeli`,`valoracionesTotales`, `mediaValoraciones` FROM `genero`,`tenergenero`,`pelicula` LEFT OUTER JOIN `valoracionglobalpelicula` ON pelicula.idPelicula = valoracionglobalpelicula.idPelicula WHERE `pelicula`.`idPelicula` = `tenergenero`.`idPelicula` AND `genero`.`idGenero` = `tenergenero`.`idGenero` AND `genero`.`idGenero` = ?
+	</code> 
+	 * 
+	 * @param request
+	 * @param response
+	 * @return String
+	 */
+	private String findByGenero(HttpServletRequest request, HttpServletResponse response) {
+		String respuesta = "";
+		List<Pelicula> lstPelicula = null;
+		
+		String genero = request.getParameter("GENERO");
+		
+		if (genero != null) {
+			
+			PeliculaDAO peliculaDAO = new PeliculaDAO();
+			Gson gson = new Gson();
+			lstPelicula = peliculaDAO.findPeliculaByGenero(genero);
+			if (lstPelicula != null) {
+				respuesta = gson.toJson(lstPelicula);
+			} else {
+				respuesta = "[]";
+			}
+		}
+		
 		return respuesta;
 	}
 }

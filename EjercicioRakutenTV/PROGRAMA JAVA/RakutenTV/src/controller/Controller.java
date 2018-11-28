@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controller.action.ComprarAction;
+import controller.action.MarcarFavAction;
 import controller.action.PeliculaAction;
 import controller.action.UserAction;
 
@@ -46,7 +48,20 @@ public class Controller extends HttpServlet {
 		case "Pelicula":
 			respuesta = new PeliculaAction().execute(request, response);
 			break;
+			
+		case "MarcarFav":
+			respuesta = new MarcarFavAction().execute(request, response);
+			break;
+			
+		case "Puntuar":
+			respuesta = new MarcarFavAction().execute(request, response);
+			break;
+			
+		case "Comprar":
+			respuesta = new ComprarAction().execute(request, response);
+			break;
 
+			
 		default:
 			respuesta = "[]";
 			break;

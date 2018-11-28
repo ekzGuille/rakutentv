@@ -77,7 +77,7 @@ public class UserAction {
 	}
 
 	/**
-	 * <code> </code>
+	 * <code>INSERT INTO `usuario` (`email`, `username`, `contrasena`, `fechaCreacion`) VALUES (?,?,?,?)</code>
 	 * 
 	 * @param request
 	 * @param response
@@ -86,6 +86,29 @@ public class UserAction {
 	private String register(HttpServletRequest request, HttpServletResponse response) {
 		String respuesta = "";
 
+		Usuario usuario = new Usuario();
+		
+		String email = request.getParameter("EMAIL");
+		String username = request.getParameter("USERNAME");
+		String contrasena = request.getParameter("CONTRASENA");
+		
+		if (email != null && username != null && contrasena != null) {
+		
+			UsuarioDAO usuarioDAO = new UsuarioDAO();
+			
+			if(usuarioDAO.findByCredentials(email, contrasena) != null) {
+				usuario.setEmail(email);
+				usuario.setUsername(username);
+				usuario.setContrasena(contrasena);
+				
+				respuesta = String.valueOf(usuarioDAO.add(usuario));
+			}else {
+//				respuesta = "0";
+			}
+			
+		
+		}
+		
 		return respuesta;
 	}
 

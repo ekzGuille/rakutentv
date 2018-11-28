@@ -13,7 +13,7 @@ import model.dao.DAO;
 import model.motor.Motor;
 import model.motor.MotorMySQL;
 
-public class PuntuacionDAO implements DAO<Puntuacion, Integer> {
+public class PuntuacionDAO implements DAO<Puntuacion, Integer[]> {
 
 	private Motor motor;
 	private PreparedStatement pst;
@@ -47,7 +47,7 @@ public class PuntuacionDAO implements DAO<Puntuacion, Integer> {
 	}
 
 	@Override
-	public int delete(Integer id) {
+	public int delete(Integer[] id) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -77,14 +77,16 @@ public class PuntuacionDAO implements DAO<Puntuacion, Integer> {
 		if (bean.getFechaPuntuacion() != null) {
 			sql += "`fechaPuntuacion` = ?,";
 			contarCasos++;
-			lstCondiciones.put(contarCasos, bean.getFechaPuntuacion());
+			lstCondiciones.put(contarCasos, String.valueOf(java.time.LocalDate.now()));
 		}
 
 		if (sql.endsWith(",")) {
 			sql = sql.substring(0, sql.length() - 1);
 		}
 
-		sql += " WHERE `idPuntuacion` = ?";
+		sql += " WHERE `idPelicula` = ? AND `idUsuario` = ?";
+		contarCasos++;
+		lstCondiciones.put(contarCasos, bean.getIdPelicula());
 		contarCasos++;
 		lstCondiciones.put(contarCasos, bean.getIdUsuario());
 
@@ -145,14 +147,14 @@ public class PuntuacionDAO implements DAO<Puntuacion, Integer> {
 	}
 
 	@Override
-	public Puntuacion findById(Integer id) {
+	public Puntuacion findById(Integer[] id) {
 		String sql = "SELECT * FROM `puntuacion` WHERE `idPuntuacion` = ?";
 		List<Puntuacion> lstPuntuacion = null;
 
 		try {
 			pst = this.motor.connect().prepareStatement(sql);
 
-			pst.setInt(1, id);
+			pst.setInt(1, id[0]);
 
 			ResultSet rs = this.motor.executeQuery(pst);
 			lstPuntuacion = new ArrayList<Puntuacion>();
@@ -175,6 +177,41 @@ public class PuntuacionDAO implements DAO<Puntuacion, Integer> {
 			this.motor.disconnect();
 		}
 
+		return (!lstPuntuacion.isEmpty()) ? lstPuntuacion.get(0) : null;
+	}
+
+	public Puntuacion findByPeliUser(Integer[] id) {
+		String sql = "SELECT * FROM `puntuacion`  WHERE `idPelicula` = ? AND `idUsuario` = ?";
+		List<Puntuacion> lstPuntuacion = null;
+		
+		try {
+			pst = this.motor.connect().prepareStatement(sql);
+			
+			pst.setInt(1, id[0]);
+			pst.setInt(1, id[1]);
+
+			
+			ResultSet rs = this.motor.executeQuery(pst);
+			lstPuntuacion = new ArrayList<Puntuacion>();
+			
+			while (rs.next()) {
+				Puntuacion puntuacion = new Puntuacion();
+				
+				puntuacion.setIdInfoPuntuacion(rs.getInt(1));
+				puntuacion.setIdPelicula(rs.getInt(2));
+				puntuacion.setIdUsuario(rs.getInt(3));
+				puntuacion.setIdInfoPuntuacion(rs.getInt(4));
+				puntuacion.setFechaPuntuacion(rs.getString(5));
+				
+				lstPuntuacion.add(puntuacion);
+			}
+			
+		} catch (SQLException e) {
+			
+		} finally {
+			this.motor.disconnect();
+		}
+		
 		return (!lstPuntuacion.isEmpty()) ? lstPuntuacion.get(0) : null;
 	}
 

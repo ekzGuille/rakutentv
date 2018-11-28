@@ -3,6 +3,7 @@ package model.dao.beansdao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -193,7 +194,7 @@ public class PeliculaDAO implements DAO<Pelicula, Integer> {
 				pelicula.setTrailerPeli(rs.getString(4));
 				pelicula.setCaratulaPeli(rs.getString(5));
 				pelicula.setImagenPeli(rs.getString(6));
-				pelicula.setFechaEstreno(rs.getString(7));
+				pelicula.setFechaEstreno(new SimpleDateFormat("dd-MM-yyyy").format(rs.getDate(7)));
 				pelicula.setAudiosDisponibles(rs.getString(8));
 				pelicula.setSubtitulosDisponibles(rs.getString(9));
 				pelicula.setDuracionPeli(rs.getInt(10));
@@ -234,7 +235,7 @@ public class PeliculaDAO implements DAO<Pelicula, Integer> {
 				pelicula.setTrailerPeli(rs.getString(4));
 				pelicula.setCaratulaPeli(rs.getString(5));
 				pelicula.setImagenPeli(rs.getString(6));
-				pelicula.setFechaEstreno(rs.getString(7));
+				pelicula.setFechaEstreno(new SimpleDateFormat("dd-MM-yyyy").format(rs.getDate(7)));
 				pelicula.setAudiosDisponibles(rs.getString(8));
 				pelicula.setSubtitulosDisponibles(rs.getString(9));
 				pelicula.setDuracionPeli(rs.getInt(10));
@@ -271,7 +272,7 @@ public class PeliculaDAO implements DAO<Pelicula, Integer> {
 				pelicula.setTrailerPeli(rs.getString(4));
 				pelicula.setCaratulaPeli(rs.getString(5));
 				pelicula.setImagenPeli(rs.getString(6));
-				pelicula.setFechaEstreno(rs.getString(7));
+				pelicula.setFechaEstreno(new SimpleDateFormat("dd-MM-yyyy").format(rs.getDate(7)));
 				pelicula.setAudiosDisponibles(rs.getString(8));
 				pelicula.setSubtitulosDisponibles(rs.getString(9));
 				pelicula.setDuracionPeli(rs.getInt(10));
@@ -308,7 +309,7 @@ public class PeliculaDAO implements DAO<Pelicula, Integer> {
 				pelicula.setTrailerPeli(rs.getString(4));
 				pelicula.setCaratulaPeli(rs.getString(5));
 				pelicula.setImagenPeli(rs.getString(6));
-				pelicula.setFechaEstreno(rs.getString(7));
+				pelicula.setFechaEstreno(new SimpleDateFormat("dd-MM-yyyy").format(rs.getDate(7)));
 				pelicula.setAudiosDisponibles(rs.getString(8));
 				pelicula.setSubtitulosDisponibles(rs.getString(9));
 				pelicula.setDuracionPeli(rs.getInt(10));
@@ -348,7 +349,7 @@ public class PeliculaDAO implements DAO<Pelicula, Integer> {
 				pelicula.setTrailerPeli(rs.getString(4));
 				pelicula.setCaratulaPeli(rs.getString(5));
 				pelicula.setImagenPeli(rs.getString(6));
-				pelicula.setFechaEstreno(rs.getString(7));
+				pelicula.setFechaEstreno(new SimpleDateFormat("dd-MM-yyyy").format(rs.getDate(7)));
 				pelicula.setAudiosDisponibles(rs.getString(8));
 				pelicula.setSubtitulosDisponibles(rs.getString(9));
 				pelicula.setDuracionPeli(rs.getInt(10));
@@ -388,7 +389,7 @@ public class PeliculaDAO implements DAO<Pelicula, Integer> {
 				pelicula.setTrailerPeli(rs.getString(4));
 				pelicula.setCaratulaPeli(rs.getString(5));
 				pelicula.setImagenPeli(rs.getString(6));
-				pelicula.setFechaEstreno(rs.getString(7));
+				pelicula.setFechaEstreno(new SimpleDateFormat("dd-MM-yyyy").format(rs.getDate(7)));
 				pelicula.setAudiosDisponibles(rs.getString(8));
 				pelicula.setSubtitulosDisponibles(rs.getString(9));
 				pelicula.setDuracionPeli(rs.getInt(10));
@@ -428,7 +429,7 @@ public class PeliculaDAO implements DAO<Pelicula, Integer> {
 				pelicula.setTrailerPeli(rs.getString(4));
 				pelicula.setCaratulaPeli(rs.getString(5));
 				pelicula.setImagenPeli(rs.getString(6));
-				pelicula.setFechaEstreno(rs.getString(7));
+				pelicula.setFechaEstreno(new SimpleDateFormat("dd-MM-yyyy").format(rs.getDate(7)));
 				pelicula.setAudiosDisponibles(rs.getString(8));
 				pelicula.setSubtitulosDisponibles(rs.getString(9));
 				pelicula.setDuracionPeli(rs.getInt(10));
@@ -468,7 +469,7 @@ public class PeliculaDAO implements DAO<Pelicula, Integer> {
 				pelicula.setTrailerPeli(rs.getString(4));
 				pelicula.setCaratulaPeli(rs.getString(5));
 				pelicula.setImagenPeli(rs.getString(6));
-				pelicula.setFechaEstreno(rs.getString(7));
+				pelicula.setFechaEstreno(new SimpleDateFormat("dd-MM-yyyy").format(rs.getDate(7)));
 				pelicula.setAudiosDisponibles(rs.getString(8));
 				pelicula.setSubtitulosDisponibles(rs.getString(9));
 				pelicula.setDuracionPeli(rs.getInt(10));
@@ -487,4 +488,89 @@ public class PeliculaDAO implements DAO<Pelicula, Integer> {
 		return lstPeliculas;
 	}
 
+	
+	
+	public List<Pelicula> findPeliculaByGenero(String descGenero) {
+		String sql = "SELECT `genero`.`descGenero`, `pelicula`.`idPelicula`,`tituloPeli`,`resumenPeli`,`trailerPeli`,`caratulaPeli`,`imagenPeli`,`fechaEstreno`,`audiosDisponibles`,`subtitulosDisponibles`,`duracionPeli`,`precioPeli`,`valoracionesTotales`, `mediaValoraciones` FROM `genero`,`tenergenero`,`pelicula` LEFT OUTER JOIN `valoracionglobalpelicula` ON pelicula.idPelicula = valoracionglobalpelicula.idPelicula WHERE `pelicula`.`idPelicula` = `tenergenero`.`idPelicula` AND `genero`.`idGenero` = `tenergenero`.`idGenero` AND `genero`.`descGenero` LIKE ?";
+		List<Pelicula> lstPeliculas = null;
+		
+		try {
+			pst = this.motor.connect().prepareStatement(sql);
+			
+			pst.setString(1, descGenero);
+			
+			ResultSet rs = this.motor.executeQuery(pst);
+			lstPeliculas = new ArrayList<Pelicula>();
+			
+			while (rs.next()) {
+				Pelicula pelicula = new Pelicula();
+				
+				pelicula.setIdPelicula(rs.getInt(1));
+				pelicula.setTituloPeli(rs.getString(2));
+				pelicula.setResumenPeli(rs.getString(3));
+				pelicula.setTrailerPeli(rs.getString(4));
+				pelicula.setCaratulaPeli(rs.getString(5));
+				pelicula.setImagenPeli(rs.getString(6));
+				pelicula.setFechaEstreno(new SimpleDateFormat("dd-MM-yyyy").format(rs.getDate(7)));
+				pelicula.setAudiosDisponibles(rs.getString(8));
+				pelicula.setSubtitulosDisponibles(rs.getString(9));
+				pelicula.setDuracionPeli(rs.getInt(10));
+				pelicula.setPrecioPeli(rs.getDouble(11));
+				
+				pelicula.setValoracionesTotales(rs.getInt(12));
+				pelicula.setMediaValoraciones(rs.getDouble(13));
+				
+				lstPeliculas.add(pelicula);
+			}
+			
+		} catch (SQLException e) {
+		} finally {
+			this.motor.disconnect();
+		}
+		return lstPeliculas;
+	}
+	
+	
+	public List<Pelicula> findPeliculaByGenero(Integer idGenero) {
+		String sql = "SELECT `genero`.`descGenero`, `pelicula`.`idPelicula`,`tituloPeli`,`resumenPeli`,`trailerPeli`,`caratulaPeli`,`imagenPeli`,`fechaEstreno`,`audiosDisponibles`,`subtitulosDisponibles`,`duracionPeli`,`precioPeli`,`valoracionesTotales`, `mediaValoraciones` FROM `genero`,`tenergenero`,`pelicula` LEFT OUTER JOIN `valoracionglobalpelicula` ON pelicula.idPelicula = valoracionglobalpelicula.idPelicula WHERE `pelicula`.`idPelicula` = `tenergenero`.`idPelicula` AND `genero`.`idGenero` = `tenergenero`.`idGenero` AND `genero`.`idGenero` = ?";
+		List<Pelicula> lstPeliculas = null;
+		
+		try {
+			pst = this.motor.connect().prepareStatement(sql);
+			
+			pst.setInt(1, idGenero);
+			
+			ResultSet rs = this.motor.executeQuery(pst);
+			lstPeliculas = new ArrayList<Pelicula>();
+			
+			while (rs.next()) {
+				Pelicula pelicula = new Pelicula();
+				
+				pelicula.setIdPelicula(rs.getInt(1));
+				pelicula.setTituloPeli(rs.getString(2));
+				pelicula.setResumenPeli(rs.getString(3));
+				pelicula.setTrailerPeli(rs.getString(4));
+				pelicula.setCaratulaPeli(rs.getString(5));
+				pelicula.setImagenPeli(rs.getString(6));
+				pelicula.setFechaEstreno(new SimpleDateFormat("dd-MM-yyyy").format(rs.getDate(7)));
+				pelicula.setAudiosDisponibles(rs.getString(8));
+				pelicula.setSubtitulosDisponibles(rs.getString(9));
+				pelicula.setDuracionPeli(rs.getInt(10));
+				pelicula.setPrecioPeli(rs.getDouble(11));
+				
+				pelicula.setValoracionesTotales(rs.getInt(12));
+				pelicula.setMediaValoraciones(rs.getDouble(13));
+				
+				lstPeliculas.add(pelicula);
+			}
+			
+		} catch (SQLException e) {
+		} finally {
+			this.motor.disconnect();
+		}
+		return lstPeliculas;
+	}
+	
+	
+	
 }

@@ -227,7 +227,7 @@ public class UsuarioDAO implements DAO<Usuario, Integer> {
 	}
 
 	public Usuario findByCredentials(String userMail, String contrasena) {
-		String sql = "SELECT * FROM `usuario` WHERE (`email` = ? AND `contrasena` = ?) OR (`username` = ? AND `contrasena` = ?)";
+		String sql = "SELECT * FROM `usuario` WHERE `activoUsuario` = 1 AND ((`email` = ? AND `contrasena` = ?) OR (`username` = ? AND `contrasena` = ?))";
 
 		List<Usuario> lstUsuario = null;
 
