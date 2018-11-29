@@ -53,7 +53,8 @@ public class GeneroDAO implements DAO<Genero, Integer> {
 				Genero genero = new Genero();
 				genero.setIdGenero(rs.getInt(1));
 				genero.setDescGenero(rs.getString(2));
-
+				
+				lstGenero.add(genero);
 			}
 
 		} catch (SQLException e) {

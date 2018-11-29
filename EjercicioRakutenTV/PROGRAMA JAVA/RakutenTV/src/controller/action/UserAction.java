@@ -1,5 +1,7 @@
 package controller.action;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -7,6 +9,7 @@ import com.google.gson.Gson;
 
 import model.beans.Usuario;
 import model.dao.beansdao.UsuarioDAO;
+import utils.Respuesta;
 
 public class UserAction {
 
@@ -37,6 +40,14 @@ public class UserAction {
 
 		case "permaDelete":
 			respuesta = permaDelete(request, response);
+			break;
+
+		case "listAll":
+			respuesta = findAll(request, response);
+			break;
+
+		case "listMasPeliculasAddFav":
+			respuesta = findMasPeliculasAddFav(request, response);
 			break;
 
 		default:
@@ -87,29 +98,38 @@ public class UserAction {
 		String respuesta = "";
 
 		Usuario usuario = new Usuario();
-		
+
 		String email = request.getParameter("EMAIL");
 		String username = request.getParameter("USERNAME");
 		String contrasena = request.getParameter("CONTRASENA");
-		
+
+		Respuesta resp = new Respuesta();
+		Gson gson = new Gson();
+
 		if (email != null && username != null && contrasena != null) {
-		
+
 			UsuarioDAO usuarioDAO = new UsuarioDAO();
-			
-			if(usuarioDAO.findByCredentials(email, contrasena) != null) {
+
+			if (usuarioDAO.findByCredentials(email, contrasena) == null) {
 				usuario.setEmail(email);
 				usuario.setUsername(username);
 				usuario.setContrasena(contrasena);
-				
-				respuesta = String.valueOf(usuarioDAO.add(usuario));
-			}else {
-//				respuesta = "0";
+
+				resp.setRespuesta(usuarioDAO.add(usuario));
+				resp.setDescRespuesta("userRegister");
+
+			} else {
+				resp.setRespuesta(0);
+				resp.setDescRespuesta("userRegister");
+
 			}
-			
-		
+
+		} else {
+			resp.setRespuesta(0);
+			resp.setDescRespuesta("userRegister");
 		}
-		
-		return respuesta;
+
+		return gson.toJson(resp);
 	}
 
 	/**
@@ -122,7 +142,66 @@ public class UserAction {
 	private String update(HttpServletRequest request, HttpServletResponse response) {
 		String respuesta = "";
 
-		return respuesta;
+		Usuario usuario = new Usuario();
+
+		String idUsuario = request.getParameter("ID_USUARIO");
+		String email = request.getParameter("EMAIL");
+		String username = request.getParameter("USERNAME");
+		String contrasena = request.getParameter("CONTRASENA");
+		String fotoUsuario = request.getParameter("FOTO");
+		String idMetodoPago = request.getParameter("ID_METODO_PAGO");
+		String infoMetodoPago = request.getParameter("INFO_METODO_PAGO");
+		String activoUsuario = request.getParameter("ACTIVO");
+
+		Respuesta resp = new Respuesta();
+		Gson gson = new Gson();
+
+		if (idUsuario != null) {
+
+			if (idUsuario != null) {
+				usuario.setIdUsuario(Integer.parseInt(idUsuario));
+			}
+
+			if (email != null) {
+				usuario.setEmail(email);
+			}
+
+			if (username != null) {
+				usuario.setUsername(username);
+			}
+
+			if (contrasena != null) {
+				usuario.setContrasena(contrasena);
+			}
+
+			if (fotoUsuario != null) {
+				usuario.setFotoUsuario(fotoUsuario);
+			}
+
+			if (idMetodoPago != null) {
+				usuario.setIdMetodoPago(Integer.parseInt(idMetodoPago));
+			}
+
+			if (infoMetodoPago != null) {
+				usuario.setInfoMetodoPago(infoMetodoPago);
+			}
+
+			if (activoUsuario != null) {
+				usuario.setActivoUsuario(Integer.parseInt(activoUsuario));
+			}
+
+			UsuarioDAO usuarioDAO = new UsuarioDAO();
+
+			resp.setRespuesta(usuarioDAO.update(usuario));
+			resp.setDescRespuesta("userUpdate");
+
+		} else {
+			resp.setRespuesta(0);
+			resp.setDescRespuesta("userUpdate");
+
+		}
+
+		return gson.toJson(resp);
 	}
 
 	/**
@@ -146,9 +225,51 @@ public class UserAction {
 	 * @return String
 	 */
 	private String permaDelete(HttpServletRequest request, HttpServletResponse response) {
-		String respuesta = "";
 
-		return respuesta;
+		String idUsuario = request.getParameter("ID_USUARIO");
+
+		Respuesta resp = new Respuesta();
+		Gson gson = new Gson();
+
+		if (idUsuario != null) {
+
+			UsuarioDAO usuarioDAO = new UsuarioDAO();
+
+			resp.setRespuesta(usuarioDAO.delete(Integer.parseInt(idUsuario)));
+			resp.setDescRespuesta("userPermaDelete");
+
+		} else {
+			resp.setRespuesta(0);
+			resp.setDescRespuesta("userPermaDelete");
+
+		}
+		return gson.toJson(resp);
 	}
 
+	private String findAll(HttpServletRequest request, HttpServletResponse response) {
+
+		List<Usuario> lstUsuario = null;
+		Gson gson = new Gson();
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
+
+		lstUsuario = usuarioDAO.findAll();
+
+		return gson.toJson(lstUsuario);
+
+	}
+
+	private String findMasPeliculasAddFav(HttpServletRequest request, HttpServletResponse response) {
+
+		List<Usuario> lstUsuario = null;
+		Gson gson = new Gson();
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
+		String cantidad = request.getParameter("CANTIDAD");
+
+		if (cantidad != null) {
+
+			lstUsuario = usuarioDAO.findMasPeliculasAddFav(Integer.parseInt(cantidad));
+		}
+		return gson.toJson(lstUsuario);
+
+	}
 }

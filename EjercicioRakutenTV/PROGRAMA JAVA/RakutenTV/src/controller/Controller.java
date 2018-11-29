@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.action.ComprarAction;
+import controller.action.GeneroAction;
 import controller.action.MarcarFavAction;
 import controller.action.PeliculaAction;
 import controller.action.PuntuarAction;
@@ -60,6 +61,10 @@ public class Controller extends HttpServlet {
 			
 		case "Comprar":
 			respuesta = new ComprarAction().execute(request, response);
+			break;
+			
+		case "Genero":
+			respuesta = new GeneroAction().execute(request, response);
 			break;
 
 			

@@ -60,6 +60,10 @@ public class PeliculaAction {
 			respuesta = findMasVotadas(request, response);
 			break;
 
+		case "listCantidadMasVotadas":
+			respuesta = findCantidadMasVotadas(request, response);
+			break;
+
 		case "listAllMejorVotadas":
 			respuesta = findAllMejorVotadas(request, response);
 			break;
@@ -317,6 +321,35 @@ public class PeliculaAction {
 			PeliculaDAO peliculaDAO = new PeliculaDAO();
 			Gson gson = new Gson();
 			lstPelicula = peliculaDAO.findMasVotada(Integer.parseInt(cantidad));
+			if (lstPelicula != null) {
+				respuesta = gson.toJson(lstPelicula);
+			} else {
+				respuesta = "[]";
+			}
+		}
+
+		return respuesta;
+	}
+
+	/**
+	 * <code>SELECT pelicula.`idPelicula`,`tituloPeli`,`resumenPeli`,`trailerPeli`,`caratulaPeli`,`imagenPeli`,`fechaEstreno`,`audiosDisponibles`,`subtitulosDisponibles`,`duracionPeli`,`precioPeli`, `valoracionesTotales`, `mediaValoraciones`  FROM `pelicula`,`valoracionglobalpelicula` WHERE `pelicula`.`idPelicula`= `valoracionglobalpelicula`.`idPelicula` ORDER BY `valoracionesTotales` DESC LIMIT ?"</code>
+	 * Las ultimas <b>1</b>
+	 * 
+	 * @param request
+	 * @param response
+	 * @return String
+	 */
+	private String findCantidadMasVotadas(HttpServletRequest request, HttpServletResponse response) {
+		String respuesta = "";
+		List<Pelicula> lstPelicula = null;
+
+		String cantidad = request.getParameter("CANTIDAD");
+
+		if (cantidad != null) {
+
+			PeliculaDAO peliculaDAO = new PeliculaDAO();
+			Gson gson = new Gson();
+			lstPelicula = peliculaDAO.findCantidadMasVotadas(Integer.parseInt(cantidad));
 			if (lstPelicula != null) {
 				respuesta = gson.toJson(lstPelicula);
 			} else {

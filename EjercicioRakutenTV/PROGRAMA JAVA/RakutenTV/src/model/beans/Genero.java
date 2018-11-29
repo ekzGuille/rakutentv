@@ -29,4 +29,9 @@ public class Genero {
 		this.descGenero = descGenero;
 	}
 
+	@Override
+	public String toString() {
+		return "Genero [idGenero=" + idGenero + ", descGenero=" + descGenero + "]";
+	}
+
 }

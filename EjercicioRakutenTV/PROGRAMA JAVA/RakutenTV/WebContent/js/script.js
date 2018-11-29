@@ -99,7 +99,7 @@ function getPelicula(idPelicula) {
 }
 
 function cargarTodasPelis() {
-	var datos = "ACTION=Pelicula.listTitulosAsc"
+	var datos = "ACTION=Pelicula.listTitulosAZ"
 	$.ajax({
 		url: 'Controller',
 		type: 'GET',

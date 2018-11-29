@@ -110,7 +110,7 @@ public class UsuarioDAO implements DAO<Usuario, Integer> {
 			contarCasos++;
 			lstCondiciones.put(contarCasos, bean.getInfoMetodoPago());
 		}
-		if (bean.getActivoUsuario() >= 0) {
+		if (bean.getActivoUsuario() > 0) {
 			sql += "`activoUsuario` = ?,";
 			contarCasos++;
 			lstCondiciones.put(contarCasos, bean.getActivoUsuario());
@@ -266,6 +266,61 @@ public class UsuarioDAO implements DAO<Usuario, Integer> {
 		}
 
 		return (!lstUsuario.isEmpty()) ? lstUsuario.get(0) : null;
+	}
+
+	public List<Usuario> findMasPeliculasAddFav(Integer cantidad) {
+		String sql = "";
+
+//		if (cantidad == 0) {
+//			sql = "SELECT `usuario`.* , COUNT(`marcarfavorito`.`idMarcarFavorito`) FROM `usuario` LEFT OUTER JOIN `marcarfavorito`ON `usuario`.`idUsuario` = `marcarfavorito`.`idUsuario` GROUP BY usuario.username ORDER BY COUNT(`marcarfavorito`.`idMarcarFavorito`) DESC";
+//		} else {
+//			sql = "SELECT `usuario`.* , COUNT(`marcarfavorito`.`idMarcarFavorito`) FROM `usuario` LEFT OUTER JOIN `marcarfavorito`ON `usuario`.`idUsuario` = `marcarfavorito`.`idUsuario` GROUP BY usuario.username ORDER BY COUNT(`marcarfavorito`.`idMarcarFavorito`) DESC LIMIT ?";
+//		}
+		if (cantidad == 0) {
+			sql = "SELECT `usuario`.`username`, COUNT(`marcarfavorito`.`idMarcarFavorito`) FROM `usuario` LEFT OUTER JOIN `marcarfavorito`ON `usuario`.`idUsuario` = `marcarfavorito`.`idUsuario` GROUP BY usuario.username ORDER BY COUNT(`marcarfavorito`.`idMarcarFavorito`) DESC";
+		} else {
+			sql = "SELECT `usuario`.`username`, COUNT(`marcarfavorito`.`idMarcarFavorito`) FROM `usuario` LEFT OUTER JOIN `marcarfavorito`ON `usuario`.`idUsuario` = `marcarfavorito`.`idUsuario` GROUP BY usuario.username ORDER BY COUNT(`marcarfavorito`.`idMarcarFavorito`) DESC LIMIT ?";
+		}
+
+		List<Usuario> lstUsuario = null;
+
+		try {
+			pst = this.motor.connect().prepareStatement(sql);
+			if (cantidad > 0) {
+				pst.setInt(1, cantidad);
+			}
+
+			ResultSet rs = this.motor.executeQuery(pst);
+			lstUsuario = new ArrayList<Usuario>();
+
+			while (rs.next()) {
+				Usuario usuario = new Usuario();
+
+//				usuario.setIdUsuario(rs.getInt(1));
+//				usuario.setEmail(rs.getString(2));
+//				usuario.setUsername(rs.getString(3));
+//				usuario.setContrasena(rs.getString(4));
+//				usuario.setFechaCreacion(rs.getString(5));
+//				usuario.setFotoUsuario(rs.getString(6));
+//				usuario.setIdMetodoPago(rs.getInt(7));
+//				usuario.setInfoMetodoPago(rs.getString(8));
+//				usuario.setActivoUsuario(rs.getInt(9));
+//				usuario.setCantidadPelisEnFavoritos(rs.getInt(10));
+
+				usuario.setUsername(rs.getString(1));
+				usuario.setCantidadPelisEnFavoritos(rs.getInt(2));
+
+				lstUsuario.add(usuario);
+
+			}
+
+		} catch (SQLException e) {
+
+		} finally {
+			this.motor.disconnect();
+		}
+
+		return lstUsuario;
 	}
 
 }

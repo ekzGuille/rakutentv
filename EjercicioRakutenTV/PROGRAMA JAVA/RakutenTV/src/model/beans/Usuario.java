@@ -18,12 +18,14 @@ public class Usuario {
 	private List<Integer> compradasPelis;
 	private List<Integer> favoritasPelis;
 
+	private int cantidadPelisEnFavoritos;
+
 	public Usuario() {
 	}
 
 	public Usuario(int idUsuario, String email, String username, String contrasena, String fechaCreacion,
 			String fotoUsuario, int idMetodoPago, String infoMetodoPago, int activoUsuario,
-			List<Integer> compradasPelis, List<Integer> favoritasPelis) {
+			List<Integer> compradasPelis, List<Integer> favoritasPelis, int cantidadPelisEnFavoritos) {
 		this.idUsuario = idUsuario;
 		this.email = email;
 		this.username = username;
@@ -35,6 +37,7 @@ public class Usuario {
 		this.activoUsuario = activoUsuario;
 		this.compradasPelis = compradasPelis;
 		this.favoritasPelis = favoritasPelis;
+		this.cantidadPelisEnFavoritos = cantidadPelisEnFavoritos;
 	}
 
 	public int getIdUsuario() {
@@ -123,6 +126,14 @@ public class Usuario {
 
 	public void setFavoritasPelis(List<Integer> favoritasPelis) {
 		this.favoritasPelis = favoritasPelis;
+	}
+
+	public int getCantidadPelisEnFavoritos() {
+		return cantidadPelisEnFavoritos;
+	}
+
+	public void setCantidadPelisEnFavoritos(int cantidadPelisEnFavoritos) {
+		this.cantidadPelisEnFavoritos = cantidadPelisEnFavoritos;
 	}
 
 	public static String toJSON(List<Usuario> lstUser) {

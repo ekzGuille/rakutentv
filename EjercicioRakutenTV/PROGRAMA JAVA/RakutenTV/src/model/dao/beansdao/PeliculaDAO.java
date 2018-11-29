@@ -290,18 +290,19 @@ public class PeliculaDAO implements DAO<Pelicula, Integer> {
 		}
 		return lstPeliculas;
 	}
+
 	public List<Pelicula> findAllTituloZA() {
 		String sql = "SELECT pelicula.`idPelicula`,`tituloPeli`,`resumenPeli`,`trailerPeli`,`caratulaPeli`,`imagenPeli`,`fechaEstreno`,`audiosDisponibles`,`subtitulosDisponibles`,`duracionPeli`,`precioPeli`, `valoracionesTotales`, `mediaValoraciones` FROM `pelicula` LEFT OUTER JOIN `valoracionglobalpelicula` ON pelicula.idPelicula = valoracionglobalpelicula.idPelicula ORDER BY `pelicula`.`tituloPeli` DESC";
 		List<Pelicula> lstPeliculas = null;
-		
+
 		try {
 			pst = this.motor.connect().prepareStatement(sql);
 			ResultSet rs = this.motor.executeQuery(pst);
 			lstPeliculas = new ArrayList<Pelicula>();
-			
+
 			while (rs.next()) {
 				Pelicula pelicula = new Pelicula();
-				
+
 				pelicula.setIdPelicula(rs.getInt(1));
 				pelicula.setTituloPeli(rs.getString(2));
 				pelicula.setResumenPeli(rs.getString(3));
@@ -313,13 +314,13 @@ public class PeliculaDAO implements DAO<Pelicula, Integer> {
 				pelicula.setSubtitulosDisponibles(rs.getString(9));
 				pelicula.setDuracionPeli(rs.getInt(10));
 				pelicula.setPrecioPeli(rs.getDouble(11));
-				
+
 				pelicula.setValoracionesTotales(rs.getInt(12));
 				pelicula.setMediaValoraciones(rs.getDouble(13));
-				
+
 				lstPeliculas.add(pelicula);
 			}
-			
+
 		} catch (SQLException e) {
 		} finally {
 			this.motor.disconnect();
@@ -363,18 +364,19 @@ public class PeliculaDAO implements DAO<Pelicula, Integer> {
 		}
 		return lstPeliculas;
 	}
+
 	public List<Pelicula> findAllEstrenosViejas() {
 		String sql = "SELECT pelicula.`idPelicula`,`tituloPeli`,`resumenPeli`,`trailerPeli`,`caratulaPeli`,`imagenPeli`,`fechaEstreno`,`audiosDisponibles`,`subtitulosDisponibles`,`duracionPeli`,`precioPeli`, `valoracionesTotales`, `mediaValoraciones` FROM `pelicula` LEFT OUTER JOIN `valoracionglobalpelicula` ON pelicula.idPelicula = valoracionglobalpelicula.idPelicula ORDER BY `pelicula`.`fechaEstreno`";
 		List<Pelicula> lstPeliculas = null;
-		
+
 		try {
 			pst = this.motor.connect().prepareStatement(sql);
 			ResultSet rs = this.motor.executeQuery(pst);
 			lstPeliculas = new ArrayList<Pelicula>();
-			
+
 			while (rs.next()) {
 				Pelicula pelicula = new Pelicula();
-				
+
 				pelicula.setIdPelicula(rs.getInt(1));
 				pelicula.setTituloPeli(rs.getString(2));
 				pelicula.setResumenPeli(rs.getString(3));
@@ -386,13 +388,13 @@ public class PeliculaDAO implements DAO<Pelicula, Integer> {
 				pelicula.setSubtitulosDisponibles(rs.getString(9));
 				pelicula.setDuracionPeli(rs.getInt(10));
 				pelicula.setPrecioPeli(rs.getDouble(11));
-				
+
 				pelicula.setValoracionesTotales(rs.getInt(12));
 				pelicula.setMediaValoraciones(rs.getDouble(13));
-				
+
 				lstPeliculas.add(pelicula);
 			}
-			
+
 		} catch (SQLException e) {
 		} finally {
 			this.motor.disconnect();
@@ -809,7 +811,7 @@ public class PeliculaDAO implements DAO<Pelicula, Integer> {
 		}
 		return lstPeliculas;
 	}
-	
+
 	public List<Pelicula> findAllMejorVotadas() {
 		String sql = "SELECT pelicula.`idPelicula`,`tituloPeli`,`resumenPeli`,`trailerPeli`,`caratulaPeli`,`imagenPeli`,`fechaEstreno`,`audiosDisponibles`,`subtitulosDisponibles`,`duracionPeli`,`precioPeli`, `valoracionesTotales`, `mediaValoraciones` FROM `pelicula` LEFT OUTER JOIN `valoracionglobalpelicula` ON pelicula.idPelicula = valoracionglobalpelicula.idPelicula ORDER BY `valoracionglobalpelicula`.`mediaValoraciones` DESC";
 		List<Pelicula> lstPeliculas = null;
@@ -846,18 +848,19 @@ public class PeliculaDAO implements DAO<Pelicula, Integer> {
 		}
 		return lstPeliculas;
 	}
+
 	public List<Pelicula> findAllMasVotadas() {
 		String sql = "SELECT pelicula.`idPelicula`,`tituloPeli`,`resumenPeli`,`trailerPeli`,`caratulaPeli`,`imagenPeli`,`fechaEstreno`,`audiosDisponibles`,`subtitulosDisponibles`,`duracionPeli`,`precioPeli`, `valoracionesTotales`, `mediaValoraciones` FROM `pelicula` LEFT OUTER JOIN `valoracionglobalpelicula` ON pelicula.idPelicula = valoracionglobalpelicula.idPelicula ORDER BY `valoracionglobalpelicula`.`valoracionesTotales` DESC";
 		List<Pelicula> lstPeliculas = null;
-		
+
 		try {
 			pst = this.motor.connect().prepareStatement(sql);
 			ResultSet rs = this.motor.executeQuery(pst);
 			lstPeliculas = new ArrayList<Pelicula>();
-			
+
 			while (rs.next()) {
 				Pelicula pelicula = new Pelicula();
-				
+
 				pelicula.setIdPelicula(rs.getInt(1));
 				pelicula.setTituloPeli(rs.getString(2));
 				pelicula.setResumenPeli(rs.getString(3));
@@ -869,13 +872,59 @@ public class PeliculaDAO implements DAO<Pelicula, Integer> {
 				pelicula.setSubtitulosDisponibles(rs.getString(9));
 				pelicula.setDuracionPeli(rs.getInt(10));
 				pelicula.setPrecioPeli(rs.getDouble(11));
-				
+
 				pelicula.setValoracionesTotales(rs.getInt(12));
 				pelicula.setMediaValoraciones(rs.getDouble(13));
-				
+
 				lstPeliculas.add(pelicula);
 			}
-			
+
+		} catch (SQLException e) {
+		} finally {
+			this.motor.disconnect();
+		}
+		return lstPeliculas;
+	}
+
+	public List<Pelicula> findCantidadMasVotadas(Integer cantidad) {
+		String sql = "";
+		if (cantidad == 0) {
+			sql = "SELECT pelicula.`idPelicula`,`tituloPeli`,`resumenPeli`,`trailerPeli`,`caratulaPeli`,`imagenPeli`,`fechaEstreno`,`audiosDisponibles`,`subtitulosDisponibles`,`duracionPeli`,`precioPeli`, `valoracionesTotales`, `mediaValoraciones` FROM `pelicula` LEFT OUTER JOIN `valoracionglobalpelicula` ON pelicula.idPelicula = valoracionglobalpelicula.idPelicula ORDER BY `valoracionglobalpelicula`.`valoracionesTotales` DESC";
+		} else {
+			sql = "SELECT pelicula.`idPelicula`,`tituloPeli`,`resumenPeli`,`trailerPeli`,`caratulaPeli`,`imagenPeli`,`fechaEstreno`,`audiosDisponibles`,`subtitulosDisponibles`,`duracionPeli`,`precioPeli`, `valoracionesTotales`, `mediaValoraciones` FROM `pelicula` LEFT OUTER JOIN `valoracionglobalpelicula` ON pelicula.idPelicula = valoracionglobalpelicula.idPelicula ORDER BY `valoracionglobalpelicula`.`valoracionesTotales` DESC LIMIT ?";
+		}
+		List<Pelicula> lstPeliculas = null;
+
+		try {
+			pst = this.motor.connect().prepareStatement(sql);
+
+			if (cantidad > 0) {
+				pst.setInt(1, cantidad);
+			}
+			ResultSet rs = this.motor.executeQuery(pst);
+			lstPeliculas = new ArrayList<Pelicula>();
+
+			while (rs.next()) {
+				Pelicula pelicula = new Pelicula();
+
+				pelicula.setIdPelicula(rs.getInt(1));
+				pelicula.setTituloPeli(rs.getString(2));
+				pelicula.setResumenPeli(rs.getString(3));
+				pelicula.setTrailerPeli(rs.getString(4));
+				pelicula.setCaratulaPeli(rs.getString(5));
+				pelicula.setImagenPeli(rs.getString(6));
+				pelicula.setFechaEstreno(new SimpleDateFormat("dd-MM-yyyy").format(rs.getDate(7)));
+				pelicula.setAudiosDisponibles(rs.getString(8));
+				pelicula.setSubtitulosDisponibles(rs.getString(9));
+				pelicula.setDuracionPeli(rs.getInt(10));
+				pelicula.setPrecioPeli(rs.getDouble(11));
+
+				pelicula.setValoracionesTotales(rs.getInt(12));
+				pelicula.setMediaValoraciones(rs.getDouble(13));
+
+				lstPeliculas.add(pelicula);
+			}
+
 		} catch (SQLException e) {
 		} finally {
 			this.motor.disconnect();
@@ -886,15 +935,15 @@ public class PeliculaDAO implements DAO<Pelicula, Integer> {
 	public List<Pelicula> findAllCaras() {
 		String sql = "SELECT pelicula.`idPelicula`,`tituloPeli`,`resumenPeli`,`trailerPeli`,`caratulaPeli`,`imagenPeli`,`fechaEstreno`,`audiosDisponibles`,`subtitulosDisponibles`,`duracionPeli`,`precioPeli`, `valoracionesTotales`, `mediaValoraciones` FROM `pelicula` LEFT OUTER JOIN `valoracionglobalpelicula` ON pelicula.idPelicula = valoracionglobalpelicula.idPelicula ORDER BY `pelicula`.`precioPeli` DESC";
 		List<Pelicula> lstPeliculas = null;
-		
+
 		try {
 			pst = this.motor.connect().prepareStatement(sql);
 			ResultSet rs = this.motor.executeQuery(pst);
 			lstPeliculas = new ArrayList<Pelicula>();
-			
+
 			while (rs.next()) {
 				Pelicula pelicula = new Pelicula();
-				
+
 				pelicula.setIdPelicula(rs.getInt(1));
 				pelicula.setTituloPeli(rs.getString(2));
 				pelicula.setResumenPeli(rs.getString(3));
@@ -906,31 +955,32 @@ public class PeliculaDAO implements DAO<Pelicula, Integer> {
 				pelicula.setSubtitulosDisponibles(rs.getString(9));
 				pelicula.setDuracionPeli(rs.getInt(10));
 				pelicula.setPrecioPeli(rs.getDouble(11));
-				
+
 				pelicula.setValoracionesTotales(rs.getInt(12));
 				pelicula.setMediaValoraciones(rs.getDouble(13));
-				
+
 				lstPeliculas.add(pelicula);
 			}
-			
+
 		} catch (SQLException e) {
 		} finally {
 			this.motor.disconnect();
 		}
 		return lstPeliculas;
 	}
+
 	public List<Pelicula> findAllBaratas() {
 		String sql = "SELECT pelicula.`idPelicula`,`tituloPeli`,`resumenPeli`,`trailerPeli`,`caratulaPeli`,`imagenPeli`,`fechaEstreno`,`audiosDisponibles`,`subtitulosDisponibles`,`duracionPeli`,`precioPeli`, `valoracionesTotales`, `mediaValoraciones` FROM `pelicula` LEFT OUTER JOIN `valoracionglobalpelicula` ON pelicula.idPelicula = valoracionglobalpelicula.idPelicula ORDER BY `pelicula`.`precioPeli` ASC";
 		List<Pelicula> lstPeliculas = null;
-		
+
 		try {
 			pst = this.motor.connect().prepareStatement(sql);
 			ResultSet rs = this.motor.executeQuery(pst);
 			lstPeliculas = new ArrayList<Pelicula>();
-			
+
 			while (rs.next()) {
 				Pelicula pelicula = new Pelicula();
-				
+
 				pelicula.setIdPelicula(rs.getInt(1));
 				pelicula.setTituloPeli(rs.getString(2));
 				pelicula.setResumenPeli(rs.getString(3));
@@ -942,18 +992,18 @@ public class PeliculaDAO implements DAO<Pelicula, Integer> {
 				pelicula.setSubtitulosDisponibles(rs.getString(9));
 				pelicula.setDuracionPeli(rs.getInt(10));
 				pelicula.setPrecioPeli(rs.getDouble(11));
-				
+
 				pelicula.setValoracionesTotales(rs.getInt(12));
 				pelicula.setMediaValoraciones(rs.getDouble(13));
-				
+
 				lstPeliculas.add(pelicula);
 			}
-			
+
 		} catch (SQLException e) {
 		} finally {
 			this.motor.disconnect();
 		}
 		return lstPeliculas;
 	}
-	
+
 }
