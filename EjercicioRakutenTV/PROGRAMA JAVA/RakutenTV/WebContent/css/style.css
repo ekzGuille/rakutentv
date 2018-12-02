@@ -7,6 +7,7 @@
     --colorDorado: #F0BC13;
     --colorBlanco: #FFF;
     --colorNegro: #000;
+    --colorRojo: #FF5D5D;
 }
 
 html {
@@ -14,6 +15,8 @@ html {
 }
 
 body {
+    width: 100%;
+    margin: 0 auto 0 auto;
     color: var(--colorBlanco);
     background: var(--colorFondo);
 }
@@ -132,8 +135,7 @@ input:focus {
 }
 
 #webContainer {
-    /* margin: 0 18%; */
-    width: 70%;
+    width: 80%;
     margin: 0 auto 0 auto;
 }
 
@@ -152,9 +154,14 @@ input:focus {
 }
 
 .caratulaPelicula {
-    /* padding: 1% 1% 1% 1%; */
     padding: 1%;
     display: inline-block;
+}
+
+.caratulaFichaPelicula {
+    padding: 1%;
+    display: inline-block;
+    width: 100%;
 }
 
 .fondoModal {
@@ -190,22 +197,29 @@ h4 {
 }
 
 #darBajaWrapper {
-    height: 50%;
+    /* height: 50%; */
 }
 
 #darseBaja {
-    font-size: 12pt !important;
+    font-size: 1.1em !important;
     font-weight: 500 !important;
     position: absolute;
-    bottom: 10%;
+    bottom: 20%;
     left: 10%;
     color: #FF5D5D !important;
+    cursor: pointer;
 }
 
 .perfilTextIcon {
-    font-size: 12pt !important;
+    font-size: 1.1em !important;
     font-weight: 300 !important;
     color: var(--colorInput) !important;
+}
+
+.perfilTextIcon:hover{
+    cursor: pointer;
+    color: var(--colorDorado) !important;
+
 }
 
 .perfilTextIcon>i {
@@ -346,12 +360,6 @@ h4 {
     font-size: 1.2em;
 }
 
-.btnTrailer {
-    background-color: var(--colorNav) !important;
-    color: var(--colorNegro) !important;
-    margin: 0 25px 25px 0;
-}
-
 .select-wrapper input.select-dropdown {
     width: 25% !important;
     text-align: center !important;
@@ -393,12 +401,6 @@ h4 {
     display: none !important;
 }
 
-#btnFavorito i,
-#btnComprar i,
-#btnMostrarTrailer i {
-    color: var(--colorBlanco);
-}
-
 .infoFichaPelicula p,
 .textoPeli p {
     font-style: italic;
@@ -424,4 +426,31 @@ h4 {
     margin: 2% 0 0 2%;
     max-height: 300px;
     border-radius: 5px;
+}
+
+#filtroPeliculas {
+    width: 60%;
+    margin: 0 auto 0 auto;
+}
+
+#informacionBusqueda {
+    margin: 2% 0 2% 5%;
+}
+
+.btnTrailer {
+    color: var(--colorNegro);
+    margin: 0 2% 0 2% !important;
+}
+.btnDefecto {
+    background-color: var(--colorNav) !important;
+    color: var(--colorNegro) !important;
+}
+
+.btnTriggerFav {
+    background-color: var(--colorRojo) !important;
+    color: var(--colorNegro) !important;
+}
+.btnTriggerCompra {
+    background-color: var(--colorDorado) !important;
+    color: var(--colorNegro) !important;
 }

@@ -121,7 +121,25 @@
     <!-- Contenido de la web -->
     <div id="webContainer">
         <div id="filtroPeliculas">
-
+            <h4>Busca tu película</h4>
+            <div id="buscarNombre">
+                <input type="text" id="inputNombre" placeholder="Introduce el titulo que quieres buscar">
+            </div>
+            <div id="buscarGenero">
+                <select id="generoSelector">
+                    <option value="0">Selecciona un género</option>
+                    <option value="1">Acción</option>
+                    <option value="2">Animación</option>
+                    <option value="3">Ciencia ficción</option>
+                    <option value="4">Cine español</option>
+                    <option value="5">Comedia</option>
+                    <option value="6">Thriller</option>
+                    <option value="7">Romántico</option>
+                </select>
+            </div>
+        </div>
+        <div>
+            <h6 id="informacionBusqueda">Se están mostrando todas las películas</h6>
         </div>
         <div class="cuadriculaPeliculas" id="todasLasPelis">
         </div>

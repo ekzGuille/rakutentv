@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 29-11-2018 a las 00:28:39
+-- Tiempo de generación: 03-12-2018 a las 00:28:09
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -195,13 +195,12 @@ CREATE TABLE `marcarfavorito` (
 --
 
 INSERT INTO `marcarfavorito` (`idMarcarFavorito`, `idPelicula`, `idUsuario`) VALUES
-(1, 7, 3),
-(2, 15, 3),
-(3, 12, 2),
+(11, 2, 2),
 (4, 3, 1),
-(5, 6, 2),
+(5, 6, 3),
+(1, 7, 3),
 (7, 8, 5),
-(8, 12, 2);
+(2, 15, 3);
 
 -- --------------------------------------------------------
 
@@ -383,9 +382,9 @@ CREATE TABLE `usuario` (
   `username` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
   `contrasena` varchar(15) COLLATE utf8_spanish2_ci NOT NULL,
   `fechaCreacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `fotoUsuario` varchar(25) COLLATE utf8_spanish2_ci NOT NULL,
+  `fotoUsuario` varchar(25) COLLATE utf8_spanish2_ci NOT NULL DEFAULT 'undefinedProfile.png',
   `idMetodoPago` int(11) NOT NULL DEFAULT '-1',
-  `infoMetodoPago` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
+  `infoMetodoPago` varchar(20) COLLATE utf8_spanish2_ci NOT NULL DEFAULT 'ninguno',
   `activoUsuario` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
@@ -394,11 +393,11 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`idUsuario`, `email`, `username`, `contrasena`, `fechaCreacion`, `fotoUsuario`, `idMetodoPago`, `infoMetodoPago`, `activoUsuario`) VALUES
-(1, 'ejemplo@ejemplo.com', 'ejemplo', 'ejemplo1', '2018-11-14 23:00:00', '', -1, '', 1),
-(2, 'gss@svalero.com', 'gss', '1234', '2018-11-21 23:00:00', '', -1, '', 1),
-(3, 'alberto@svalero.com', 'alberto', 'akk', '2018-11-21 23:00:00', '', -1, '', 1),
-(4, 'ricardo@svalero.com', 'richi', 'ric', '2018-11-28 20:15:57', '', -1, '', 1),
-(5, 'juanito@juan.com', 'juan', 'jon', '2018-11-28 20:16:27', '', -1, '', 1);
+(1, 'ejemplo@ejemplo.com', 'ejemplo', 'ejemplo1', '2018-11-14 23:00:00', 'undefinedProfile.png', -1, 'ninguno', 1),
+(2, 'gss@svalero.com', 'gss', '1234', '2018-11-21 23:00:00', 'undefinedProfile.png', -1, 'ninguno', 1),
+(3, 'alberto@svalero.com', 'alberto', 'akk', '2018-11-21 23:00:00', 'undefinedProfile.png', -1, 'ninguno', 1),
+(5, 'juanito@juan.com', 'juan', 'jon', '2018-11-28 20:16:27', 'undefinedProfile.png', -1, 'ninguno', 1),
+(8, 'examen@svalero.com', 'examen', 'ex', '2018-11-28 23:00:00', 'undefinedProfile.png', -1, 'ninguno', 1);
 
 -- --------------------------------------------------------
 
@@ -444,8 +443,8 @@ ALTER TABLE `comentario`
 --
 ALTER TABLE `compra`
   ADD PRIMARY KEY (`idCompra`),
-  ADD KEY `FK_idPeliculaCompra` (`idPelicula`),
-  ADD KEY `FK_idUsuarioCompra` (`idUsuario`);
+  ADD UNIQUE KEY `idUsuario` (`idUsuario`,`idPelicula`),
+  ADD KEY `FK_idPeliculaCompra` (`idPelicula`);
 
 --
 -- Indices de la tabla `director`
@@ -477,8 +476,8 @@ ALTER TABLE `infopuntuacion`
 --
 ALTER TABLE `marcarfavorito`
   ADD PRIMARY KEY (`idMarcarFavorito`),
-  ADD KEY `FK_idUsuarioFav` (`idUsuario`),
-  ADD KEY `FK_idPeliculaFav` (`idPelicula`);
+  ADD UNIQUE KEY `idPelicula` (`idPelicula`,`idUsuario`),
+  ADD KEY `FK_idUsuarioFav` (`idUsuario`);
 
 --
 -- Indices de la tabla `metodopago`
@@ -582,7 +581,7 @@ ALTER TABLE `infopuntuacion`
 -- AUTO_INCREMENT de la tabla `marcarfavorito`
 --
 ALTER TABLE `marcarfavorito`
-  MODIFY `idMarcarFavorito` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idMarcarFavorito` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `metodopago`
@@ -624,7 +623,7 @@ ALTER TABLE `tenergenero`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Restricciones para tablas volcadas

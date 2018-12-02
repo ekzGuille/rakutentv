@@ -192,8 +192,6 @@ function getInfoPelicula(idPelicula, idUsuario) {
 	});
 }
 
-
-
 function cargarTodasPelis() {
 	var datos = "ACTION=Pelicula.listTitulosAZ"
 	$.ajax({
@@ -202,6 +200,47 @@ function cargarTodasPelis() {
 		data: datos,
 		datatype: 'json',
 		success: function (params) {
+			if (document.getElementById('informacionBusqueda') !== null) {
+				document.getElementById('informacionBusqueda').innerText = `Se están mostrando todas las películas`;
+			} else {
+				document.getElementById('informacionBusqueda').innerText = ``;
+			}
+			crearImagenDiv('todasLasPelis', JSON.parse(params));
+		}
+	});
+}
+
+function buscarTitulo(titulo) {
+	var datos = `ACTION=Pelicula.filtrarNombre&NOMBRE=${titulo}`;
+	$.ajax({
+		url: 'Controller',
+		type: 'GET',
+		data: datos,
+		datatype: 'json',
+		success: function (params) {
+			if (document.getElementById('informacionBusqueda') !== null) {
+				document.getElementById('informacionBusqueda').innerText = `Se están mostrando todas las películas relacionadas con '${titulo}'`;
+			}else{
+				document.getElementById('informacionBusqueda').innerText = ``;
+			}
+			crearImagenDiv('todasLasPelis', JSON.parse(params));
+		}
+	});
+}
+
+function buscarGenero(idGenero) {
+	var datos = `ACTION=Pelicula.listGenero&GENERO=${idGenero}`;
+	$.ajax({
+		url: 'Controller',
+		type: 'GET',
+		data: datos,
+		datatype: 'json',
+		success: function (params) {
+			if (document.getElementById('informacionBusqueda') !== null && document.getElementById('generoSelector') !== null) {
+				document.getElementById('informacionBusqueda').innerText = `Se están mostrando todas las películas de '${document.getElementById('generoSelector')[document.getElementById('generoSelector').value].innerText}'`;
+			} else {
+				document.getElementById('informacionBusqueda').innerText = ``;
+			}
 			crearImagenDiv('todasLasPelis', JSON.parse(params));
 		}
 	});
@@ -422,7 +461,7 @@ function crearFichaPelicula(pelicula) {
 
 	// <div class="caratulaPelicula" id="1">
 	var divCaratulaPelicula = document.createElement('div');
-	divCaratulaPelicula.setAttribute('class', 'caratulaPelicula');
+	divCaratulaPelicula.setAttribute('class', 'caratulaFichaPelicula');
 	divCaratulaPelicula.setAttribute('id', pelicula.idPelicula);
 
 	//  <div class="fichaTituloAnio">
@@ -490,7 +529,7 @@ function crearFichaPelicula(pelicula) {
 
 	// <div class="textoPeli">
 	var textoPeli = document.createElement('div');
-	textoPeli.setAttribute('class','textoPeli')
+	textoPeli.setAttribute('class', 'textoPeli')
 	var pSinopsis = document.createElement('p');
 	pSinopsis.innerText = 'Sinopsis:';
 	textoPeli.appendChild(pSinopsis);
@@ -560,31 +599,37 @@ function crearFichaPelicula(pelicula) {
 	// <option value="1">Mala</option>
 	var option1 = document.createElement('option');
 	option1.setAttribute('value', '1');
+	pelicula.idPuntuacion === 1 ? option1.setAttribute('selected','true'):false;
 	option1.innerText = 'Mala';
 	select.appendChild(option1);
+
+
 
 	// <option value="2">Regular</option>
 	var option2 = document.createElement('option');
 	option2.setAttribute('value', '2');
+	pelicula.idPuntuacion === 2 ? option2.setAttribute('selected', 'true') : false;
 	option2.innerText = 'Regular';
 	select.appendChild(option2);
 
 	//  <option value="3">Buena</option>
 	var option3 = document.createElement('option');
 	option3.setAttribute('value', '3');
+	pelicula.idPuntuacion === 2 ? option3.setAttribute('selected', 'true') : false;
 	option3.innerText = 'Buena';
 	select.appendChild(option3);
 
 	// <option value="4">Excelente</option>
-
 	var option4 = document.createElement('option');
 	option4.setAttribute('value', '4');
+	pelicula.idPuntuacion === 4 ? option4.setAttribute('selected', 'true') : false;
 	option4.innerText = 'Excelente';
 	select.appendChild(option4);
 
 	// <option value="5">Obra maestra</option>
 	var option5 = document.createElement('option');
 	option5.setAttribute('value', '5');
+	pelicula.idPuntuacion === 5 ? option5.setAttribute('selected', 'true') : false;
 	option5.innerText = 'Obra Maestra';
 	select.appendChild(option5);
 
@@ -594,7 +639,11 @@ function crearFichaPelicula(pelicula) {
 	// <button id = "btnFavorito" class="btn btn-large btn-floating waves-effect waves-light btnTrailer">
 	var btnFavorito = document.createElement('button');
 	btnFavorito.setAttribute('id', 'btnFavorito');
-	btnFavorito.setAttribute('class', 'btn btn-large btn-floating waves-effect waves-light btnTrailer')
+	if (pelicula.idMarcarFavorito === 0){
+		btnFavorito.setAttribute('class', 'btn btn-large btn-floating waves-effect waves-light btnTrailer btnDefecto');
+	}else{
+		btnFavorito.setAttribute('class', 'btn btn-large btn-floating waves-effect waves-light btnTrailer btnTriggerFav');
+	}
 
 	//  <i class="material-icons right">favorite</i>
 	var iBtnFavorito = document.createElement('i');
@@ -607,7 +656,11 @@ function crearFichaPelicula(pelicula) {
 	// <button id="btnComprar" class="btn btn-large btn-floating waves-effect waves-light btnTrailer">
 	var btnComprar = document.createElement('button');
 	btnComprar.setAttribute('id', 'btnComprar');
-	btnComprar.setAttribute('class', 'btn btn-large btn-floating waves-effect waves-light btnTrailer')
+	if(pelicula.idCompra === 0){
+		btnComprar.setAttribute('class', 'btn btn-large btn-floating waves-effect waves-light btnTrailer btnDefecto');
+	}else{
+		btnComprar.setAttribute('class', 'btn btn-large btn-floating waves-effect waves-light btnTrailer btnTriggerCompra');
+	}
 
 	// <i class="material-icons right">local_grocery_store</i>
 	var ibtnComprar = document.createElement('i');
@@ -620,7 +673,7 @@ function crearFichaPelicula(pelicula) {
 	// <button id="btnMostrarTrailer" class="btn btn-large btn-floating waves-effect waves-light btnTrailer">
 	var btnMostrarTrailer = document.createElement('button');
 	btnMostrarTrailer.setAttribute('id', 'btnMostrarTrailer');
-	btnMostrarTrailer.setAttribute('class', 'btn btn-large btn-floating waves-effect waves-light btnTrailer')
+	btnMostrarTrailer.setAttribute('class', 'btn btn-large btn-floating waves-effect waves-light btnTrailer btnDefecto')
 
 	// <i class="material-icons right">live_tv</i>
 	var ibtnMostrarTrailer = document.createElement('i');
@@ -823,6 +876,23 @@ function cargarComponentes() {
 		// 	});
 		// }
 
+		var generoSelector = document.getElementById('generoSelector');
+		if (generoSelector !== null) {
+			generoSelector.addEventListener('change', function () {
+				if (generoSelector.value === "0") {
+					cargarTodasPelis();
+				} else {
+					buscarGenero(generoSelector.value);
+				}
+			});
+		}
+
+		var inputNombre = document.getElementById('inputNombre');
+		if (inputNombre !== null) {
+			inputNombre.addEventListener('keyup', function () {
+				buscarTitulo(inputNombre.value);
+			});
+		}
 
 	}
 }

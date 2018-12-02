@@ -113,8 +113,11 @@
                         <div id="profImg" class="circle"><img class="circle" src="images/usuarios/default/undefinedProfile.png"></div>
                     </div>
                 </li>
-                <li><a class="aAjustes perfilTextIcon">Modificar mi perfil<i class="material-icons left">settings</i></a></li>
-                <li><a class="aAjustes perfilTextIcon">Mis peliculas favoritas<i class="material-icons left">star</i></a></li>
+                <li><a class="aAjustes perfilTextIcon" id="EmailUsuario"></a></li>
+                <!-- <li><a class="aAjustes perfilTextIcon">Modificar mi perfil</a></li> -->
+                <li><a href="peliculas.html" class="aAjustes perfilTextIcon">Peliculas favoritas</a></li>
+                <li><a class="aAjustes perfilTextIcon">Peliculas compradas</a></li>
+                <li><a class="aAjustes perfilTextIcon">Peliculas puntuadas</a></li>
             </div>
             <div class="liWrapper" id="darBajaWrapper">
                 <li><a class="aAjustes" id="darseBaja">Dar de baja mi cuenta</a></li>
@@ -122,89 +125,42 @@
         </ul>
     </div>
 
-
-        <!-- Pruebas de peliculas BORRAR -->
-    <!-- <div class="row">
-        <div class="caratulaPelicula">
-            <a href="#m1" class="modal-trigger"></a><img class="imagenCaratula" src="images/peliculas/movieCaratula/JohnWick_caratula.jpg"
-                    alt=""></a>
-            <div class="imgValoracion">
-                <img class="estrellasValoracion" src="images/icon/estrellas/2Estrella.png" alt="">
+    <!-- Contenido de la web -->
+    <div id="webContainer">
+        <div class="cuadriculaPeliculas" id="pelisMasVotadas">
+            <div class="tituloWrapperPeliculas">
+                <h4>Películas más votadas</h4>
+                <a href="">Ver más <i class="material-icons">keyboard_arrow_right</i> </a>
             </div>
-            <div class="infoValoracion">
-                200 votos
-            </div>
-
-            <div class="modal-content fondoModal" style="background-image: url('images/peliculas/movieFotos/JohnWick_foto.jpg')">
-                <div class="wrapperTituloAnio">
-                    <h4>Modal Header</h4>
-                    <span>(2001)</span>
-                </div>
-                <div class="headerPeli">
-                    <img class="imagenCaratula" src="images/peliculas/movieCaratula/JohnWick_caratula.jpg" alt="">
-                    <p class="pModalClass">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam
-                        consequuntur,
-                        neque quo itaque
-                        consequatur
-                        pariatur velit aliquid molestiae, provident voluptates dolor porro voluptatum magni fugiat,
-                        nisi
-                        odio
-                        quis sequi atque.</p>
-                </div>
-                <iframe width="426" height="240" src="https://www.youtube.com/embed/uNWWV4mbv3Q?controls=0&autoplay=0&disablekb=0&fs=0&modestbranding=1&rel=0&showinfo=0"
-                        frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
-                <div class="wrapperInfoBtn">
-                    <div class="infoPeli">
-                        <div><span>6</span><i class="material-icons">people</i></div>
-                        <div><span>3</span><i class="material-icons">star</i></div>
-                        <div><span>5.5€</span><i class="material-icons">local_activity</i></div>
-                    </div>
-                    <button onclick="fichaPelicula(console.log('dsfsf'))" class="<btn waves-effect waves-light btnVerMas">Ver ficha completa
-                        <i class="material-icons right">forward</i>
-                    </button>
-
-                </div>
-            </div>
-        </div> -->
-        
-
-        <!-- Contenido de la web -->
-        <div id="webContainer">
-            <div class="cuadriculaPeliculas" id="pelisMasVotadas">
-                <div class="tituloWrapperPeliculas">
-                    <h4>Películas más votadas</h4>
-                    <a href="">Ver más <i class="material-icons">keyboard_arrow_right</i> </a>
-                </div>
-                <div id="PelisMasVotadasWrapper">
-                </div>
-            </div>
-            <div class="cuadriculaPeliculas" id="pelisUltimosEstrenos">
-                <div class="tituloWrapperPeliculas">
-                    <h4>Últimos estrenos en cartelera</h4>
-                    <a href="">Ver más <i class="material-icons">keyboard_arrow_right</i> </a>
-                </div>
-                <div id="ultimosEstrenosCarteleraWrapper">
-                </div>
-            </div>
-            <div class="cuadriculaPeliculas" id="pelisUltimasAdd">
-                <div class="tituloWrapperPeliculas">
-                    <h4>Últimas Películas añadidas</h4>
-                    <a href="">Ver más <i class="material-icons">keyboard_arrow_right</i> </a>
-                </div>
-                <div id="UltimasPelisAddWrapper">
-                </div>
+            <div id="PelisMasVotadasWrapper">
             </div>
         </div>
-
-        <!-- Footer -->
-        <footer class="page-footer">
-            <div class="footer-copyright">
-                <div class="container">
-                    <h6>Guillermo Sesé Santos - 2SI FSV - 2018</h6>
-                </div>
+        <div class="cuadriculaPeliculas" id="pelisUltimosEstrenos">
+            <div class="tituloWrapperPeliculas">
+                <h4>Últimos estrenos en cartelera</h4>
+                <a href="">Ver más <i class="material-icons">keyboard_arrow_right</i> </a>
             </div>
-        </footer>
+            <div id="ultimosEstrenosCarteleraWrapper">
+            </div>
+        </div>
+        <div class="cuadriculaPeliculas" id="pelisUltimasAdd">
+            <div class="tituloWrapperPeliculas">
+                <h4>Últimas Películas añadidas</h4>
+                <a href="">Ver más <i class="material-icons">keyboard_arrow_right</i> </a>
+            </div>
+            <div id="UltimasPelisAddWrapper">
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="page-footer">
+        <div class="footer-copyright">
+            <div class="container">
+                <h6>Guillermo Sesé Santos - 2SI FSV - 2018</h6>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>
