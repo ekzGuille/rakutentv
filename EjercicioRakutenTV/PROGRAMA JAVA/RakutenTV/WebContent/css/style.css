@@ -4,6 +4,9 @@
     --colorInput: #9E9E9E;
     --colorNav: #484848;
     --colorCirculoImg: #A0A0A0;
+    --colorDorado: #F0BC13;
+    --colorBlanco: #FFF;
+    --colorNegro: #000;
 }
 
 html {
@@ -11,7 +14,7 @@ html {
 }
 
 body {
-    color: #FFF;
+    color: var(--colorBlanco);
     background: var(--colorFondo);
 }
 
@@ -30,6 +33,14 @@ nav {
 .sidenav {
     background-color: var(--colorFondo) !important;
     width: 350px !important;
+}
+
+.sidenav li>a {
+    color: var(--colorBlanco) !important;
+}
+
+#mobile-menu .material-icons {
+    color: var(--colorBlanco) !important;
 }
 
 .liWrapper {
@@ -62,6 +73,25 @@ nav {
     padding: 0 12% 0 12% !important;
 }
 
+p.formHeader {
+    color: var(--colorDorado) !important;
+}
+
+#checkboxSesion {
+    margin-top: 12%;
+    text-align: center;
+}
+
+[type="checkbox"].filled-in:checked+span:not(.lever):after {
+    border: 2px solid var(--colorDorado) !important;
+    background-color: var(--colorDorado) !important;
+}
+
+[type="checkbox"].filled-in:checked+span:not(.lever):before {
+    border-right: 2px solid var(--colorFondo) !important;
+    border-bottom: 2px solid var(--colorFondo) !important;
+}
+
 .headerFormWrapper {
     font-size: 12pt !important;
     font-weight: 400 !important;
@@ -92,17 +122,19 @@ nav {
 }
 
 input {
-    color: var(--colorInput) !important;
+    color: var(--colorDorado) !important;
     border-bottom: 1px solid var(--colorInput) !important;
 }
 
 input:focus {
-    border-bottom: 1px solid var(--colorInput) !important;
-    box-shadow: 0 1px 0 0 var(--colorInput) !important
+    border-bottom: 1px solid var(--colorDorado) !important;
+    box-shadow: 0 1px 0 0 var(--colorDorado) !important
 }
 
 #webContainer {
-    margin: 0 18%;
+    /* margin: 0 18%; */
+    width: 70%;
+    margin: 0 auto 0 auto;
 }
 
 .modalContent {
@@ -130,9 +162,14 @@ input:focus {
     background-repeat: no-repeat !important;
 }
 
+.modal {
+    min-width: 60% !important;
+    width: 70% !important;
+}
+
 .pModalClass {
     font-size: 16pt !important;
-    text-shadow: 2px 2px 10px #000 !important;
+    text-shadow: 2px 2px 10px var(--colorNegro) !important;
 }
 
 .imgValoracion,
@@ -145,7 +182,7 @@ input:focus {
 }
 
 h4 {
-    color: #FFF;
+    color: var(--colorBlanco);
 }
 
 .aAjustes {
@@ -166,7 +203,7 @@ h4 {
     position: absolute;
     bottom: 10%;
     left: 10%;
-    color: #FF5D5D;
+    color: #FF5D5D !important;
 }
 
 .perfilTextIcon {
@@ -180,14 +217,22 @@ h4 {
     margin-right: 2% !important;
 }
 
-#anchorEntra,
-#anchorRegistrar {
+/* #anchorEntra,
+#anchorRegistrar,
+#anchorEntraB,
+#anchorRegistrarB {
     display: block;
 }
 
 #anchorPerfil,
-#anchorSalir {
+#anchorSalir,
+#anchorPerfilB,
+#anchorSalirB {
     display: none;
+} */
+
+#mobile-demo {
+    color: var(--colorBlanco) !important;
 }
 
 .tituloWrapperPeliculas {
@@ -195,7 +240,7 @@ h4 {
 }
 
 .tituloWrapperPeliculas>a {
-    color: #FFF;
+    color: var(--colorBlanco);
     display: inline-flex;
     margin-top: 32px;
     margin-left: 15px;
@@ -206,15 +251,29 @@ h4 {
 }
 
 .tituloWrapperPeliculas>a:hover {
-    color: #FFF;
+    color: var(--colorBlanco);
     display: inline-flex;
     margin-top: 32px;
 
     margin-left: 20px;
 }
 
-.page-footer{
+.page-footer {
     background-color: var(--colorFondoSec) !important;
     text-align: center;
     font-weight: 600 !important;
 }
+
+/* header,
+main,
+footer {
+    padding-left: 350px;
+}
+
+@media only screen and (max-width : 992px) {
+    header,
+    main,
+    footer {
+        padding-left: 0;
+    }
+} */

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
@@ -13,7 +14,12 @@ import utils.Respuesta;
 
 public class UserAction {
 
+	private HttpSession sesion;
+
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
+
+		sesion = request.getSession(true);
+
 		String respuesta = "";
 
 		String actionReived = request.getParameter("ACTION");
@@ -21,6 +27,14 @@ public class UserAction {
 		String[] actions = actionReived.split("\\.");
 
 		switch (actions[1]) {
+
+		case "getSessionUser":
+			respuesta = getSessionUser(request, response);
+			break;
+
+		case "logout":
+			respuesta = logout(request, response);
+			break;
 
 		case "login":
 			respuesta = login(request, response);
@@ -57,6 +71,39 @@ public class UserAction {
 		return respuesta;
 	}
 
+	private String getSessionUser(HttpServletRequest request, HttpServletResponse response) {
+		Gson gson = new Gson();
+		String respuesta = "";
+
+		HttpSession sesion = (HttpSession) request.getSession();
+
+		if (sesion != null && sesion.getAttribute("usuario") != null) {
+			Usuario usuario = (Usuario) sesion.getAttribute("usuario");
+			respuesta = gson.toJson(usuario);
+
+		} else {
+			Respuesta resp = new Respuesta();
+			resp.setRespuesta(0);
+			resp.setDescRespuesta("getSesion");
+			respuesta = gson.toJson(resp);
+		}
+
+		return respuesta;
+	}
+
+	private String logout(HttpServletRequest request, HttpServletResponse response) {
+		Gson gson = new Gson();
+
+		HttpSession sesion = (HttpSession) request.getSession();
+		sesion.invalidate();
+
+		Respuesta resp = new Respuesta();
+		resp.setRespuesta(1);
+		resp.setDescRespuesta("userLogout");
+
+		return gson.toJson(resp);
+	}
+
 	/**
 	 * <code>SELECT * FROM `usuario` WHERE (`email` = ? AND `contrasena` = ?) OR (`username` = ? AND `contrasena` = ?)</code>
 	 * 
@@ -69,21 +116,35 @@ public class UserAction {
 		Usuario usuario = null;
 		String userMail = request.getParameter("userMail");
 		String contrasena = request.getParameter("contrasena");
+		String saveSession = request.getParameter("SAVE_SESSION");
 
 		if (userMail != null && contrasena != null) {
+			boolean guardarSesion = true;
+			if (saveSession == null) {
+				guardarSesion = true;
+			} else {
+				guardarSesion = Boolean.parseBoolean(saveSession);
+			}
 			Gson gson = new Gson();
 			UsuarioDAO usuarioDAO = new UsuarioDAO();
 
 			usuario = usuarioDAO.findByCredentials(userMail, contrasena);
 
 			if (usuario != null) {
-				respuesta = "[" + gson.toJson(usuario) + "]";
+				if (guardarSesion) {
+					HttpSession sesion = (HttpSession) request.getSession();
+					sesion.setAttribute("usuario", usuario);
+				}
+				respuesta = gson.toJson(usuario);
 			} else {
-				respuesta = "[]";
+				Respuesta resp = new Respuesta();
+				resp.setRespuesta(0);
+				resp.setDescRespuesta("userLogIn");
+				respuesta = gson.toJson(resp);
 			}
 		}
 
-		return respuesta;
+		return "[" + respuesta + "]";
 
 	}
 
@@ -96,7 +157,6 @@ public class UserAction {
 	 */
 	private String register(HttpServletRequest request, HttpServletResponse response) {
 		String respuesta = "";
-
 		Usuario usuario = new Usuario();
 
 		String email = request.getParameter("EMAIL");
@@ -111,25 +171,34 @@ public class UserAction {
 			UsuarioDAO usuarioDAO = new UsuarioDAO();
 
 			if (usuarioDAO.findByCredentials(email, contrasena) == null) {
+
 				usuario.setEmail(email);
 				usuario.setUsername(username);
 				usuario.setContrasena(contrasena);
 
-				resp.setRespuesta(usuarioDAO.add(usuario));
+				int respuestaRegistro = usuarioDAO.add(usuario);
+				resp.setRespuesta(respuestaRegistro);
 				resp.setDescRespuesta("userRegister");
 
+				if (respuestaRegistro == 1) {
+					HttpSession sesion = (HttpSession) request.getSession();
+					Usuario usrRegistered = usuarioDAO.findByCredentials(email, contrasena);
+					sesion.setAttribute("usuario", usrRegistered);
+					respuesta = gson.toJson(usrRegistered);
+				}
 			} else {
 				resp.setRespuesta(0);
 				resp.setDescRespuesta("userRegister");
-
+				respuesta = gson.toJson(resp);
 			}
 
 		} else {
 			resp.setRespuesta(0);
 			resp.setDescRespuesta("userRegister");
+			respuesta = gson.toJson(resp);
 		}
 
-		return gson.toJson(resp);
+		return "[" + respuesta + "]";
 	}
 
 	/**
@@ -141,7 +210,6 @@ public class UserAction {
 	 */
 	private String update(HttpServletRequest request, HttpServletResponse response) {
 		String respuesta = "";
-
 		Usuario usuario = new Usuario();
 
 		String idUsuario = request.getParameter("ID_USUARIO");
@@ -200,8 +268,9 @@ public class UserAction {
 			resp.setDescRespuesta("userUpdate");
 
 		}
+		respuesta = gson.toJson(resp);
 
-		return gson.toJson(resp);
+		return "[" + respuesta + "]";
 	}
 
 	/**
@@ -225,7 +294,7 @@ public class UserAction {
 	 * @return String
 	 */
 	private String permaDelete(HttpServletRequest request, HttpServletResponse response) {
-
+		String respuesta = "";
 		String idUsuario = request.getParameter("ID_USUARIO");
 
 		Respuesta resp = new Respuesta();
@@ -243,7 +312,8 @@ public class UserAction {
 			resp.setDescRespuesta("userPermaDelete");
 
 		}
-		return gson.toJson(resp);
+		respuesta = gson.toJson(resp);
+		return "[" + respuesta + "]";
 	}
 
 	private String findAll(HttpServletRequest request, HttpServletResponse response) {
@@ -272,4 +342,5 @@ public class UserAction {
 		return gson.toJson(lstUsuario);
 
 	}
+
 }

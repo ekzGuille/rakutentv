@@ -23,11 +23,13 @@
 </head>
 
 <body>
+
+    <!-- Menu navegacion -->
     <nav>
         <div class="nav-wrapper">
             <a class="brand-logo center"><img id="logoPelis" src="images/icon/logo/LogoNegro.png"></a>
             <ul id="nav-mobile" class="right">
-                <li><a href="index.html" id="anchorPeliciulas">Inicio <i class="material-icons left">home</i> </a></li>
+                <li><a href="index.html" id="anchorPeliciulas">Inicio <i class="material-icons left">home</i></a></li>
                 <li><a id="anchorEntra">Entra</a></li>
                 <li><a id="anchorRegistrar">Registrate</a></li>
                 <li><a id="anchorPerfil">Mi perfil <i class="material-icons left">person</i></a></li>
@@ -35,42 +37,58 @@
             </ul>
         </div>
     </nav>
+    <ul id="mobile-menu" class="sidenav">
+        <li><a href="index.html" id="anchorPeliciulas">Inicio <i class="material-icons left">home</i></a></li>
+        <li><a id="anchorEntraB">Entra</a></li>
+        <li><a id="anchorRegistrarB">Registrate</a></li>
+        <li><a id="anchorPerfilB">Mi perfil <i class="material-icons left">person</i></a></li>
+        <li><a id="anchorSalirB">Salir<i class="material-icons left">exit_to_app</i></a></li>
+    </ul>
 
+    <!-- Menu lateral de login  -->
     <a href="#" id="menuEntra" data-target="slide-out-Entra" class="sidenav-trigger"></a>
     <div id="menuLateralEntra">
         <ul id="slide-out-Entra" class="sidenav">
             <div class="liWrapper">
                 <p class="headerFormWrapper formHeader">Ingresa con tus datos</p>
-                <form id="formEntra">
+                <form id="formEntra" autocomplete="off">
                     <li>
                         <div class="formHeader">Email o nombre de usuario<input type="text" name="userMail" id="userMailEntrar"></div>
                     </li>
                     <li>
                         <div class="formHeader">Contraseña<input type="password" name="contrasena" id="contrasenaEntrar"></div>
                     </li>
+                    <div id="checkboxSesion" class="formHeader"><label>
+                            <input id="saveSession" type="checkbox" class="filled-in" name="SAVE_SESSION" />
+                            <span>No cerrar sesión</span>
+                        </label>
+                    </div>
                 </form>
                 <div class="btnWrapper">
-                    <button id="btnSubmitRegister" class="waves-effect waves-light btn">Entrar</button>
+                    <button id="btnSubmitLogin" class="waves-effect waves-light btn">Entrar</button>
                 </div>
             </div>
         </ul>
     </div>
 
+    <!-- Menu lateral de registar -->
     <a href="#" id="menuRegistrar" data-target="slide-out-Register" class="sidenav-trigger"></a>
     <div id="menuLateralRegister">
         <ul id="slide-out-Register" class="sidenav">
             <div class="liWrapper">
                 <p class="headerFormWrapper formHeader">Completa tus datos para registrarte</p>
-                <form id="formRegister">
+                <form id="formRegister" autocomplete="off">
                     <li>
-                        <div class="formHeader">Email<input type="text" name="userMail" id="userMailRegistrar"></div>
+                        <div class="formHeader">Email<input type="text" name="EMAIL" id="userMailRegistrar"></div>
                     </li>
                     <li>
-                        <div class="formHeader">Contraseña<input type="password" name="contrasena" id="contrasenaRegistrar"></div>
+                        <div class="formHeader">Nombre de usuario<input type="text" name="USERNAME" id="userUserNameRegistrar"></div>
                     </li>
                     <li>
-                        <div class="formHeader">Repite la contraseña<input type="password" name="contrasenaRRegistrar"
-                                id="contrasenaR"></div>
+                        <div class="formHeader">Contraseña<input type="password" name="CONTRASENA" id="contrasenaRegistrar"></div>
+                    </li>
+                    <li>
+                        <div class="formHeader">Repite la contraseña<input type="password" name="CONTRASENAR" id="contrasenaRRegistrar"></div>
                     </li>
                 </form>
                 <div class="btnWrapper">
@@ -80,6 +98,7 @@
         </ul>
     </div>
 
+    <!-- Menu lateral de ajustes -->
     <a href="#" id="menuAjustes" data-target="slide-out-Ajustes" class="sidenav-trigger"></a>
     <div id="menuLateralAjustes">
         <ul id="slide-out-Ajustes" class="sidenav">
@@ -99,18 +118,7 @@
         </ul>
     </div>
 
-    <!-- <div class="fixed-action-btn">
-        <a class="btn-floating btn-large red">
-            <i class="large material-icons">mode_edit</i>
-        </a>
-        <ul>
-            <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
-            <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
-            <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
-            <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
-        </ul>
-    </div> -->
-
+    <!-- Contenido de la web -->
     <div id="webContainer">
         <div id="filtroPeliculas">
 
@@ -118,6 +126,8 @@
         <div class="cuadriculaPeliculas" id="todasLasPelis">
         </div>
     </div>
+
+    <!-- Footer -->
     <footer class="page-footer">
         <div class="footer-copyright">
             <div class="container">

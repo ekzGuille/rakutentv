@@ -100,6 +100,10 @@ public class PeliculaAction {
 			respuesta = findAllBaratas(request, response);
 			break;
 
+		case "infoPeliSeleccionada":
+			respuesta = infoPeliSeleccionada(request,response);
+			break;
+			
 		default:
 			respuesta = "[]";
 		}
@@ -609,4 +613,32 @@ public class PeliculaAction {
 		return respuesta;
 	}
 
+	/**
+	 * <code>SELECT `pelicula`.*, `puntuacion`.`idPuntuacion`, `compra`.`idCompra`, `marcarfavorito`.`idMarcarFavorito` FROM `usuario`,`pelicula` LEFT OUTER JOIN `puntuacion` ON `puntuacion`.`idPelicula` = `pelicula`.`idPelicula` AND `puntuacion`.`idUsuario` = 3 LEFT OUTER JOIN `compra` ON `compra`.`idPelicula` = `pelicula`.`idPelicula` AND `compra`.`idUsuario` = 3 LEFT OUTER JOIN `marcarfavorito` ON `marcarfavorito`.`idPelicula` = `pelicula`.`idPelicula` AND `marcarfavorito`.`idUsuario` = 3 WHERE `pelicula`.`idPelicula` = 6 AND `usuario`.`idUsuario` = 3</code>
+	 * 
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	private String infoPeliSeleccionada(HttpServletRequest request, HttpServletResponse response) {
+		String respuesta = "";
+		Pelicula pelicula = null;
+		String idPelicula = request.getParameter("ID_PELICULA");
+		String idUsuario = request.getParameter("ID_USUARIO");
+
+		if (idPelicula != null && idUsuario != null) {
+			Gson gson = new Gson();
+			PeliculaDAO peliculaDAO = new PeliculaDAO();
+			Integer[] id = new Integer[] { Integer.parseInt(idUsuario), Integer.parseInt(idPelicula) };
+			pelicula = peliculaDAO.infoPeliSeleccionada(id);
+			if (pelicula != null) {
+				respuesta = "[" + gson.toJson(pelicula) + "]";
+			} else {
+				respuesta = "[]";
+			}
+		}
+		return respuesta;
+	}
+
 }
+

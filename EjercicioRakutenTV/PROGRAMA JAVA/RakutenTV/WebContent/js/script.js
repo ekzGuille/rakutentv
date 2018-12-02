@@ -1,26 +1,17 @@
+//CERRAR EL NAVEGADOR LATERAL
+// $('.sidenav').sidenav('close');
+
+if (sessionStorage['usuario'] === undefined || sessionStorage['usuario'] === "") {
+	sessionStorage['usuario'] = "{}";
+}
+
+var usuarioSesion = sessionStorage['usuario'] === "{}" ? JSON.parse(sessionStorage['usuario']) : JSON.parse(sessionStorage['usuario'])[0];
+var respuestaServer;
+
 document.addEventListener('DOMContentLoaded', function () {
 	M.AutoInit();
 
-	var anchorPeliciulas = document.getElementById('anchorPeliciulas');
-	anchorPeliciulas.addEventListener('click', function () {
-
-	});
-	var anchorEntra = document.getElementById('anchorEntra');
-	anchorEntra.addEventListener('click', function () {
-		$('#menuEntra')[0].click();
-	});
-	var menuRegistrar = document.getElementById('anchorRegistrar');
-	menuRegistrar.addEventListener('click', function () {
-		$('#menuRegistrar')[0].click();
-	});
-	var menuAjustes = document.getElementById('anchorPerfil');
-	menuAjustes.addEventListener('click', function () {
-		$('#menuAjustes')[0].click();
-	});
-	var salirUsuario = document.getElementById('anchorSalir');
-	salirUsuario.addEventListener('click', function () {
-
-	});
+	cargarNavBar();
 
 	if (window.location.pathname === "/RakutenTV/" || window.location.pathname === "/RakutenTV/index.html") {
 		cargarPelisMasVotadas(5);
@@ -29,18 +20,96 @@ document.addEventListener('DOMContentLoaded', function () {
 	} else if (window.location.pathname === "/RakutenTV/peliculas.html") {
 		cargarTodasPelis();
 	}
+	
 });
 
-function login(userMail, contrasena) {
-	var datos = "ACTION=Usuario.login&userMail=" + userMail + "&contrasena=" + contrasena;
-	console.log(datos);
+//Deprecated
+function cerrarSesionController() {
+	var datos = "ACTION=Usuario.logout";
 	$.ajax({
 		url: 'Controller',
 		type: 'POST', //'GET'
 		data: datos,
 		datatype: 'json',
 		success: function (params) {
-			console.log(params);
+			$('.sidenav').sidenav('close');
+			if (window.location.pathname === "/RakutenTV/" || window.location.pathname === "/RakutenTV/index.html") {
+				cargarMenuIndex();
+			} else if (window.location.pathname === "/RakutenTV/peliculas.html") {
+				cargarMenuNoIndex();
+			}
+		}
+	});
+}
+//Deprecated
+function getSesionUserController() {
+	var datos = "ACTION=Usuario.getSessionUser";
+	$.ajax({
+		url: 'Controller',
+		type: 'POST', //'GET'
+		data: datos,
+		datatype: 'json',
+		success: function (params) {
+			usuarioSesion = JSON.parse(params);
+			if (window.location.pathname === "/RakutenTV/" || window.location.pathname === "/RakutenTV/index.html") {
+				cargarMenuIndex();
+			} else if (window.location.pathname === "/RakutenTV/peliculas.html") {
+				cargarMenuNoIndex();
+			}
+		}
+	});
+}
+
+function cerrarSesion() {
+	sessionStorage['usuario'] = "{}";
+	cargarNavBar();
+	M.toast({ html: 'Has cerrado sesión', classes: 'rounded' });
+}
+
+function getSesionUser() {
+	usuarioSesion = JSON.parse(sessionStorage['usuario'])[0];
+}
+
+function login(formData) {
+	var datos = "ACTION=Usuario.login&" + formData;
+	$.ajax({
+		url: 'Controller',
+		type: 'POST', //'GET'
+		data: datos,
+		datatype: 'json',
+		success: function (params) {
+			respuestaServer = JSON.parse(params)[0];
+			if(respuestaServer.hasOwnProperty('respuesta')){
+				M.toast({ html: 'Error al entrar', classes: 'rounded' });
+				sessionStorage['usuario'] = "{}";
+			} else if (respuestaServer.hasOwnProperty("idUsuario")){
+				sessionStorage['usuario'] = params;
+				$('.sidenav').sidenav('close');
+				cargarNavBar();
+				$('#formEntra')[0].reset();
+			}
+		}
+	});
+}
+
+function register(formData) {
+	var datos = "ACTION=Usuario.register&" + formData;
+	$.ajax({
+		url: 'Controller',
+		type: 'POST', //'GET'
+		data: datos,
+		datatype: 'json',
+		success: function (params) {
+			respuestaServer = JSON.parse(params)[0];
+			if (respuestaServer.hasOwnProperty('respuesta')) {
+				M.toast({ html: 'Error al registrar', classes: 'rounded' });
+				sessionStorage['usuario'] = "{}";
+			} else if (respuestaServer.hasOwnProperty("idUsuario")) {
+				sessionStorage['usuario'] = params;
+				$('.sidenav').sidenav('close');
+				cargarNavBar();
+				$('#formRegistrar')[0].reset();
+			}
 		}
 	});
 }
@@ -106,7 +175,7 @@ function cargarTodasPelis() {
 		data: datos,
 		datatype: 'json',
 		success: function (params) {
-			crearImagenDiv('todasLasPelis',JSON.parse(params));
+			crearImagenDiv('todasLasPelis', JSON.parse(params));
 		}
 	});
 }
@@ -117,8 +186,13 @@ function getFormData(idFormulario) {
 	var arrayDatos = new Array();
 	var texto = "";
 	for (var i = 0; i < contenidoFormulario.length; i++) {
-		texto = encodeURIComponent(contenidoFormulario[i].name) + "=";
-		texto += encodeURIComponent(contenidoFormulario[i].value);
+		if (contenidoFormulario[i].type === "checkbox") {
+			texto = encodeURIComponent(contenidoFormulario[i].name) + "=";
+			texto += encodeURIComponent(contenidoFormulario[i].checked);
+		} else {
+			texto = encodeURIComponent(contenidoFormulario[i].name) + "=";
+			texto += encodeURIComponent(contenidoFormulario[i].value);
+		}
 		arrayDatos.push(texto);
 	}
 	texto = arrayDatos.join("&");
@@ -202,5 +276,134 @@ function crearImagenDiv(id, data) {
 
 		$('.modal').modal();
 	});
+}
 
+function cargarNavBar() {
+	if (sessionStorage['usuario'] === undefined || sessionStorage['usuario'] === "") {
+		sessionStorage['usuario'] = "{}";
+	}
+	usuarioSesion = sessionStorage['usuario'] === "{}" ? JSON.parse(sessionStorage['usuario']) : JSON.parse(sessionStorage['usuario'])[0];
+
+	if (usuarioSesion.hasOwnProperty("idUsuario")) {
+
+		document.querySelector('#anchorEntra').style.display = 'none';
+		document.querySelector('#anchorRegistrar').style.display = 'none';
+		document.querySelector('#anchorEntraB').style.display = 'none';
+		document.querySelector('#anchorRegistrarB').style.display = 'none';
+
+		document.querySelector('#anchorPerfil').style.display = 'block';
+		document.querySelector('#anchorSalir').style.display = 'block';
+		document.querySelector('#anchorPerfilB').style.display = 'block';
+		document.querySelector('#anchorSalirB').style.display = 'block';
+
+	} else {
+
+		document.querySelector('#anchorEntra').style.display = 'block';
+		document.querySelector('#anchorRegistrar').style.display = 'block';
+		document.querySelector('#anchorEntraB').style.display = 'block';
+		document.querySelector('#anchorRegistrarB').style.display = 'block';
+
+		document.querySelector('#anchorPerfil').style.display = 'none';
+		document.querySelector('#anchorSalir').style.display = 'none';
+		document.querySelector('#anchorPerfilB').style.display = 'none';
+		document.querySelector('#anchorSalirB').style.display = 'none';
+	}
+
+	$('.sidenav').sidenav();
+	cargarComponentes();
+}
+
+function cargarMenuNoIndex(idMenu) {
+
+}
+
+function cargarComponentes() {
+
+	var anchorPeliciulas = document.getElementById('anchorPeliciulas');
+	if (anchorPeliciulas !== null) {
+		anchorPeliciulas.addEventListener('click', function () {
+
+		});
+	}
+
+	var anchorEntra = document.getElementById('anchorEntra');
+	if (anchorEntra !== null) {
+		anchorEntra.addEventListener('click', function () {
+			$('#formEntra')[0].reset();
+			$('#menuEntra')[0].click();
+		});
+	}
+
+	var anchorRegistrar = document.getElementById('anchorRegistrar');
+	if (anchorRegistrar !== null) {
+		anchorRegistrar.addEventListener('click', function () {
+			$('#formRegistrar')[0].reset();
+			$('#menuRegistrar')[0].click();
+		});
+
+		var anchorPerfil = document.getElementById('anchorPerfil');
+		if (anchorPerfil !== null) {
+			anchorPerfil.addEventListener('click', function () {
+				$('#menuAjustes')[0].click();
+			});
+		}
+
+		var salirUsuario = document.getElementById('anchorSalir');
+		if (salirUsuario !== null) {
+			salirUsuario.addEventListener('click', function () {
+				cerrarSesion();
+			});
+		}
+
+		var anchorPeliciulasB = document.getElementById('anchorPeliciulasB');
+		if (anchorPeliciulasB !== null) {
+			anchorPeliciulasB.addEventListener('click', function () {
+
+			});
+		}
+
+		var anchorEntraB = document.getElementById('anchorEntraB');
+		if (anchorEntraB !== null) {
+			anchorEntraB.addEventListener('click', function () {
+				$('#formEntra')[0].reset();
+				$('#menuEntra')[0].click();
+			});
+		}
+
+		var anchorRegistrarB = document.getElementById('anchorRegistrarB');
+		if (anchorRegistrarB !== null) {
+			anchorRegistrarB.addEventListener('click', function () {
+				$('#formRegistrar')[0].reset();
+				$('#menuRegistrar')[0].click();
+			});
+		}
+
+		var anchorPerfilB = document.getElementById('anchorPerfilB');
+		if (anchorPerfilB !== null) {
+			anchorPerfilB.addEventListener('click', function () {
+				$('#menuAjustes')[0].click();
+			});
+		}
+
+		var salirUsuarioB = document.getElementById('anchorSalirB');
+		if (salirUsuarioB !== null) {
+			salirUsuarioB.addEventListener('click', function () {
+				cerrarSesion();
+			});
+		}
+
+		var btnSubmitLogin = document.getElementById('btnSubmitLogin');
+		if (btnSubmitLogin !== null) {
+			btnSubmitLogin.addEventListener('click', function () {
+				login(getFormData('formEntra'));
+			});
+		}
+
+		var btnSubmitRegister = document.getElementById('btnSubmitRegister');
+		if (btnSubmitRegister !== null) {
+			btnSubmitRegister.addEventListener('click', function () {
+				register(getFormData('formRegistrar'));
+			});
+		}
+	}
 }

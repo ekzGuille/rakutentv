@@ -22,7 +22,11 @@ public class Pelicula {
 
 	private int valoracionesTotales;
 	private double mediaValoraciones;
-
+	
+	private int idPuntuacion;
+	private int idCompra;
+	private int idMarcarFavorito;
+	
 	public Pelicula() {
 	}
 
@@ -30,7 +34,7 @@ public class Pelicula {
 			String imagenPeli, String fechaEstreno, String audiosDisponibles, String subtitulosDisponibles,
 			int duracionPeli, double precioPeli, List<Integer> idDirectorPeli, List<Integer> idGeneroPeli,
 			List<Integer> idActorPeli, List<Integer> idComentarioPeli, int valoracionesTotales,
-			double mediaValoraciones) {
+			double mediaValoraciones, int idPuntuacion, int idCompra, int idMarcarFavorito) {
 		this.idPelicula = idPelicula;
 		this.tituloPeli = tituloPeli;
 		this.resumenPeli = resumenPeli;
@@ -48,6 +52,9 @@ public class Pelicula {
 		this.idComentarioPeli = idComentarioPeli;
 		this.valoracionesTotales = valoracionesTotales;
 		this.mediaValoraciones = mediaValoraciones;
+		this.idPuntuacion = idPuntuacion;
+		this.idCompra = idCompra;
+		this.idMarcarFavorito = idMarcarFavorito;
 	}
 
 	public int getIdPelicula() {
@@ -186,4 +193,28 @@ public class Pelicula {
 		this.mediaValoraciones = mediaValoraciones;
 	}
 
+	public int getIdPuntuacion() {
+		return idPuntuacion;
+	}
+
+	public void setIdPuntuacion(int idPuntuacion) {
+		this.idPuntuacion = idPuntuacion;
+	}
+
+	public int getIdCompra() {
+		return idCompra;
+	}
+
+	public void setIdCompra(int idCompra) {
+		this.idCompra = idCompra;
+	}
+
+	public int getIdMarcarFavorito() {
+		return idMarcarFavorito;
+	}
+
+	public void setIdMarcarFavorito(int idMarcarFavorito) {
+		this.idMarcarFavorito = idMarcarFavorito;
+	}
+	 
 }
