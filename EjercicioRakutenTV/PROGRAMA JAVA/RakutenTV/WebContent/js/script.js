@@ -1,15 +1,13 @@
-//CERRAR EL NAVEGADOR LATERAL
-// $('.sidenav').sidenav('close');
-
-if (sessionStorage['usuario'] === undefined || sessionStorage['usuario'] === "") {
-	sessionStorage['usuario'] = "{}";
-}
-
 var usuarioSesion = sessionStorage['usuario'] === "{}" ? JSON.parse(sessionStorage['usuario']) : JSON.parse(sessionStorage['usuario'])[0];
 var respuestaServer;
 
 document.addEventListener('DOMContentLoaded', function () {
 	M.AutoInit();
+
+	if (sessionStorage['usuario'] === undefined || sessionStorage['usuario'] === "") {
+		sessionStorage['usuario'] = "{}";
+	}
+	usuarioSesion = sessionStorage['usuario'] === "{}" ? JSON.parse(sessionStorage['usuario']) : JSON.parse(sessionStorage['usuario'])[0];
 
 	if (window.location.pathname === "/RakutenTV/" || window.location.pathname === "/RakutenTV/index.html") {
 		cargarPelisMasVotadas(6);
@@ -204,13 +202,12 @@ function getInfoPelicula(idPelicula, idUsuario) {
 
 function marcarPeliFav() {
 	var idPelicula = parseInt(sessionStorage['idPeli']);
-	var usuario = JSON.parse(sessionStorage['usuario'])[0];
 
-	if (usuario.hasOwnProperty('idUsuario')) {
+	if (usuarioSesion.hasOwnProperty('idUsuario')) {
 		var btnFavorito = document.getElementById('btnFavorito');
 
 		if ($('#btnFavorito').hasClass('btnTriggerFav')) {
-			var datos = `ACTION=MarcarFav.quitarFavorito&ID_PELICULA=${idPelicula}&ID_USUARIO=${usuario.idUsuario}`;
+			var datos = `ACTION=MarcarFav.quitarFavorito&ID_PELICULA=${idPelicula}&ID_USUARIO=${usuarioSesion.idUsuario}`;
 			$.ajax({
 				url: 'Controller',
 				type: 'GET', //'GET'
@@ -234,7 +231,7 @@ function marcarPeliFav() {
 			});
 		} else if ($('#btnFavorito').hasClass('btnDefecto')) {
 
-			var datos = `ACTION=MarcarFav.marcarFavorito&ID_PELICULA=${idPelicula}&ID_USUARIO=${usuario.idUsuario}`;
+			var datos = `ACTION=MarcarFav.marcarFavorito&ID_PELICULA=${idPelicula}&ID_USUARIO=${usuarioSesion.idUsuario}`;
 			$.ajax({
 				url: 'Controller',
 				type: 'GET', //'GET'
@@ -269,10 +266,9 @@ function marcarPeliFav() {
 function comprarPeli() {
 
 	var idPelicula = parseInt(sessionStorage['idPeli']);
-	var usuario = JSON.parse(sessionStorage['usuario'])[0];
 	var precio = document.getElementById('doublePrecio').innerText;
 
-	if (usuario.hasOwnProperty('idUsuario')) {
+	if (usuarioSesion.hasOwnProperty('idUsuario')) {
 		var btnComprar = document.getElementById('btnComprar');
 
 		if ($('#btnComprar').hasClass('btnTriggerCompra')) {
@@ -282,7 +278,7 @@ function comprarPeli() {
 			});
 		} else if ($('#btnComprar').hasClass('btnDefecto')) {
 
-			var datos = `ACTION=Comprar.comprar&ID_PELICULA=${idPelicula}&ID_USUARIO=${usuario.idUsuario}&PRECIO=${precio}`;
+			var datos = `ACTION=Comprar.comprar&ID_PELICULA=${idPelicula}&ID_USUARIO=${usuarioSesion.idUsuario}&PRECIO=${precio}`;
 			$.ajax({
 				url: 'Controller',
 				type: 'GET', //'GET'
@@ -318,11 +314,10 @@ function puntuarPeli(puntuacion) {
 	if (puntuacion !== "0") {
 
 		var idPelicula = parseInt(sessionStorage['idPeli']);
-		var usuario = JSON.parse(sessionStorage['usuario'])[0];
 
-		if (usuario.hasOwnProperty('idUsuario')) {
+		if (usuarioSesion.hasOwnProperty('idUsuario')) {
 
-			var datos = `ACTION=Puntuar.addPuntuacion&ID_PELICULA=${idPelicula}&ID_USUARIO=${usuario.idUsuario}&PUNTUACION=${puntuacion}`;
+			var datos = `ACTION=Puntuar.addPuntuacion&ID_PELICULA=${idPelicula}&ID_USUARIO=${usuarioSesion.idUsuario}&PUNTUACION=${puntuacion}`;
 			$.ajax({
 				url: 'Controller',
 				type: 'GET', //'GET'
@@ -777,7 +772,6 @@ function crearImagenDiv(id, data) {
 }
 
 function crearFichaPelicula(pelicula) {
-	console.log(pelicula);
 	var fichaPelicula = document.getElementById('fichaPelicula');
 	fichaPelicula.innerText = '';
 
@@ -1057,7 +1051,6 @@ function crearFichaPelicula(pelicula) {
 	var btnFavorito = document.getElementById('btnFavorito');
 	if (btnFavorito !== null) {
 		btnFavorito.addEventListener('click', function () {
-			console.log("HOL")
 			marcarPeliFav();
 		});
 	}
