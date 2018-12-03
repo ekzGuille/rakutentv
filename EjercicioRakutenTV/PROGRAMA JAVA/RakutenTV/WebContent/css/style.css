@@ -11,7 +11,7 @@
 }
 
 html {
-    height: auto;
+    /* height: auto; */
 }
 
 body {
@@ -19,6 +19,13 @@ body {
     margin: 0 auto 0 auto;
     color: var(--colorBlanco);
     background: var(--colorFondo);
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
 }
 
 img {
@@ -210,16 +217,16 @@ h4 {
     cursor: pointer;
 }
 
-.perfilTextIcon {
+.perfilTextIcon,
+.userData {
     font-size: 1.1em !important;
     font-weight: 300 !important;
     color: var(--colorInput) !important;
 }
 
-.perfilTextIcon:hover{
+.perfilTextIcon:hover {
     cursor: pointer;
     color: var(--colorDorado) !important;
-
 }
 
 .perfilTextIcon>i {
@@ -367,6 +374,13 @@ h4 {
     background-color: var(--colorFondo);
 }
 
+#spinnerBuscador .select-wrapper input.select-dropdown .selectFiltro {
+    width: auto !important;
+    text-align: center !important;
+    display: inline-flex !important;
+    background-color: var(--colorFondo);
+}
+
 .dropdown-content li>span {
     background-color: var(--colorFondo) !important;
     color: var(--colorDorado) !important;
@@ -429,7 +443,7 @@ h4 {
 }
 
 #filtroPeliculas {
-    width: 60%;
+    width: 70%;
     margin: 0 auto 0 auto;
 }
 
@@ -441,6 +455,7 @@ h4 {
     color: var(--colorNegro);
     margin: 0 2% 0 2% !important;
 }
+
 .btnDefecto {
     background-color: var(--colorNav) !important;
     color: var(--colorNegro) !important;
@@ -450,7 +465,29 @@ h4 {
     background-color: var(--colorRojo) !important;
     color: var(--colorNegro) !important;
 }
+
 .btnTriggerCompra {
     background-color: var(--colorDorado) !important;
     color: var(--colorNegro) !important;
+}
+
+#spinnerBuscador {
+    width: 100%;
+    /* display: inline-flex; */
+    display: flex;
+    margin: 0 auto 0 auto !important;
+    text-align: center;
+}
+#spinnerBuscador .select-wrapper{
+    display: inline-flex;
+    flex-wrap: wrap;
+    margin: 0 20px 0 0px !important;
+}
+
+.select-wrapper input {
+    /* margin: 0 auto 0 auto !important; */
+}
+
+.dropdown-trigger {
+    cursor: pointer !important;
 }

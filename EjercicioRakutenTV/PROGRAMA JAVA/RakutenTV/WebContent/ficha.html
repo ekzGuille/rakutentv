@@ -104,13 +104,17 @@
         <ul id="slide-out-Ajustes" class="sidenav">
             <div class="liWrapper" id="ajustesWrapper">
                 <p class="headerFormWrapper formHeader">Mi perfil</p>
+                <li><a class="aAjustes userData" id="EmailUsuario"></a></li>
                 <li>
                     <div id="profImgWrapper">
-                        <div id="profImg" class="circle"><img class="circle" src="images/usuarios/default/undefinedProfile.png"></div>
+                        <div id="profImg" class="circle"><img class="circle" id='imagenUsuario' src="images/usuarios/default/undefinedProfile.png"></div>
                     </div>
                 </li>
-                <li><a class="aAjustes perfilTextIcon">Modificar mi perfil<i class="material-icons left">settings</i></a></li>
-                <li><a class="aAjustes perfilTextIcon">Mis peliculas favoritas<i class="material-icons left">star</i></a></li>
+                <!-- <li><a class="aAjustes userData" id="userName"></a></li> -->
+                <!-- <li><a class="aAjustes perfilTextIcon">Modificar mi perfil</a></li> -->
+                <li><a id='anchorPeliFav' class="aAjustes perfilTextIcon">Peliculas favoritas</a></li>
+                <li><a id='anchorPeliComp' class="aAjustes perfilTextIcon">Peliculas compradas</a></li>
+                <li><a id='anchorPeliPunt' class="aAjustes perfilTextIcon">Peliculas puntuadas</a></li>
             </div>
             <div class="liWrapper" id="darBajaWrapper">
                 <li><a class="aAjustes" id="darseBaja">Dar de baja mi cuenta</a></li>

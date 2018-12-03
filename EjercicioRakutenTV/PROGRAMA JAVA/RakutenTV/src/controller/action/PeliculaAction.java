@@ -68,6 +68,10 @@ public class PeliculaAction {
 			respuesta = findAllMejorVotadas(request, response);
 			break;
 
+		case "listAllPeorVotadas":
+			respuesta = findAllPeorVotadas(request, response);
+			break;
+
 		case "listAllMasVotadas":
 			respuesta = findAllMasVotadas(request, response);
 			break;
@@ -558,6 +562,22 @@ public class PeliculaAction {
 		PeliculaDAO peliculaDAO = new PeliculaDAO();
 		Gson gson = new Gson();
 		lstPelicula = peliculaDAO.findAllMejorVotadas();
+		if (lstPelicula != null) {
+			respuesta = gson.toJson(lstPelicula);
+		} else {
+			respuesta = "[]";
+		}
+
+		return respuesta;
+	}
+
+	private String findAllPeorVotadas(HttpServletRequest request, HttpServletResponse response) {
+		String respuesta = "";
+		List<Pelicula> lstPelicula = null;
+
+		PeliculaDAO peliculaDAO = new PeliculaDAO();
+		Gson gson = new Gson();
+		lstPelicula = peliculaDAO.findAllPeorVotadas();
 		if (lstPelicula != null) {
 			respuesta = gson.toJson(lstPelicula);
 		} else {

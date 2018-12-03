@@ -849,6 +849,43 @@ public class PeliculaDAO implements DAO<Pelicula, Integer> {
 		return lstPeliculas;
 	}
 
+	public List<Pelicula> findAllPeorVotadas() {
+		String sql = "SELECT pelicula.`idPelicula`,`tituloPeli`,`resumenPeli`,`trailerPeli`,`caratulaPeli`,`imagenPeli`,`fechaEstreno`,`audiosDisponibles`,`subtitulosDisponibles`,`duracionPeli`,`precioPeli`, `valoracionesTotales`, `mediaValoraciones` FROM `pelicula` LEFT OUTER JOIN `valoracionglobalpelicula` ON pelicula.idPelicula = valoracionglobalpelicula.idPelicula ORDER BY `valoracionglobalpelicula`.`mediaValoraciones` ASC";
+		List<Pelicula> lstPeliculas = null;
+
+		try {
+			pst = this.motor.connect().prepareStatement(sql);
+			ResultSet rs = this.motor.executeQuery(pst);
+			lstPeliculas = new ArrayList<Pelicula>();
+
+			while (rs.next()) {
+				Pelicula pelicula = new Pelicula();
+
+				pelicula.setIdPelicula(rs.getInt(1));
+				pelicula.setTituloPeli(rs.getString(2));
+				pelicula.setResumenPeli(rs.getString(3));
+				pelicula.setTrailerPeli(rs.getString(4));
+				pelicula.setCaratulaPeli(rs.getString(5));
+				pelicula.setImagenPeli(rs.getString(6));
+				pelicula.setFechaEstreno(new SimpleDateFormat("dd-MM-yyyy").format(rs.getDate(7)));
+				pelicula.setAudiosDisponibles(rs.getString(8));
+				pelicula.setSubtitulosDisponibles(rs.getString(9));
+				pelicula.setDuracionPeli(rs.getInt(10));
+				pelicula.setPrecioPeli(rs.getDouble(11));
+
+				pelicula.setValoracionesTotales(rs.getInt(12));
+				pelicula.setMediaValoraciones(rs.getDouble(13));
+
+				lstPeliculas.add(pelicula);
+			}
+
+		} catch (SQLException e) {
+		} finally {
+			this.motor.disconnect();
+		}
+		return lstPeliculas;
+	}
+
 	public List<Pelicula> findAllMasVotadas() {
 		String sql = "SELECT pelicula.`idPelicula`,`tituloPeli`,`resumenPeli`,`trailerPeli`,`caratulaPeli`,`imagenPeli`,`fechaEstreno`,`audiosDisponibles`,`subtitulosDisponibles`,`duracionPeli`,`precioPeli`, `valoracionesTotales`, `mediaValoraciones` FROM `pelicula` LEFT OUTER JOIN `valoracionglobalpelicula` ON pelicula.idPelicula = valoracionglobalpelicula.idPelicula ORDER BY `valoracionglobalpelicula`.`valoracionesTotales` DESC";
 		List<Pelicula> lstPeliculas = null;

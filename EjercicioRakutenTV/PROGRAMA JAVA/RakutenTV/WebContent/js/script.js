@@ -20,7 +20,18 @@ document.addEventListener('DOMContentLoaded', function () {
 	} else if (window.location.pathname === "/RakutenTV/ficha.html") {
 		var idPelicula = parseInt(sessionStorage['idPeli']);
 		loadInfoMovie(idPelicula);
+	} else if (window.location.pathname === "/RakutenTV/perfil.html"){
+		if (sessionStorage['filtro'] === 'favoritas'){
+			mostrarFavoritas(usuarioSesion.idUsuario);
+		} else if (sessionStorage['filtro'] === 'compradas') {
+			mostrarCompradas(usuarioSesion.idUsuario);
+		} else if (sessionStorage['filtro'] === 'puntuadas') {
+			mostrarPuntuadas(usuarioSesion.idUsuario);
+		}
+
 	}
+
+
 	cargarComponentes();
 	cargarNavBar();
 });
@@ -69,6 +80,7 @@ function cerrarSesion() {
 		html: 'Has cerrado sesión',
 		classes: 'rounded'
 	});
+	document.location = 'index.html'
 }
 
 function getSesionUser() {
@@ -179,7 +191,6 @@ function getPelicula(idPelicula) {
 }
 
 function getInfoPelicula(idPelicula, idUsuario) {
-
 	var datos = `ACTION=Pelicula.infoPeliSeleccionada&ID_PELICULA=${idPelicula}&ID_USUARIO=${idUsuario}`
 	$.ajax({
 		url: 'Controller',
@@ -210,6 +221,60 @@ function cargarTodasPelis() {
 	});
 }
 
+function mostrarFavoritas(idUsuario) {
+	var datos = `ACTION=Pelicula.listFavoritas&USUARIO=${idUsuario}`;
+	$.ajax({
+		url: 'Controller',
+		type: 'GET',
+		data: datos,
+		datatype: 'json',
+		success: function (params) {
+			if (document.getElementById('miInfoPerfil') !== null) {
+				document.getElementById('miInfoPerfil').innerText = `Mis películas favoritas`;
+			} else {
+				document.getElementById('informacionBusqueda').innerText = ``;
+			}
+			crearImagenDiv('infoPerfil', JSON.parse(params));
+		}
+	});
+}
+function mostrarCompradas(idUsuario) {
+	var datos = `ACTION=Pelicula.listCompradas&USUARIO=${idUsuario}`;
+	$.ajax({
+		url: 'Controller',
+		type: 'GET',
+		data: datos,
+		datatype: 'json',
+		success: function (params) {
+			if (document.getElementById('miInfoPerfil') !== null) {
+				document.getElementById('miInfoPerfil').innerText = `Mis películas compradas`;
+			} else {
+				document.getElementById('informacionBusqueda').innerText = ``;
+			}
+			crearImagenDiv('infoPerfil', JSON.parse(params));
+		}
+	});
+}
+function mostrarPuntuadas(idUsuario) {
+	var datos = `ACTION=Pelicula.listPuntuadas&USUARIO=${idUsuario}`;
+	$.ajax({
+		url: 'Controller',
+		type: 'GET',
+		data: datos,
+		datatype: 'json',
+		success: function (params) {
+			if (document.getElementById('miInfoPerfil') !== null) {
+				document.getElementById('miInfoPerfil').innerText = `Mis películas puntuadas`;
+			} else {
+				document.getElementById('informacionBusqueda').innerText = ``;
+			}
+			crearImagenDiv('infoPerfil', JSON.parse(params));
+		}
+	});
+}
+
+
+
 function buscarTitulo(titulo) {
 	var datos = `ACTION=Pelicula.filtrarNombre&NOMBRE=${titulo}`;
 	$.ajax({
@@ -220,7 +285,7 @@ function buscarTitulo(titulo) {
 		success: function (params) {
 			if (document.getElementById('informacionBusqueda') !== null) {
 				document.getElementById('informacionBusqueda').innerText = `Se están mostrando todas las películas relacionadas con '${titulo}'`;
-			}else{
+			} else {
 				document.getElementById('informacionBusqueda').innerText = ``;
 			}
 			crearImagenDiv('todasLasPelis', JSON.parse(params));
@@ -237,7 +302,7 @@ function buscarGenero(idGenero) {
 		datatype: 'json',
 		success: function (params) {
 			if (document.getElementById('informacionBusqueda') !== null && document.getElementById('generoSelector') !== null) {
-				document.getElementById('informacionBusqueda').innerText = `Se están mostrando todas las películas de '${document.getElementById('generoSelector')[document.getElementById('generoSelector').value].innerText}'`;
+				document.getElementById('informacionBusqueda').innerText = `Se están mostrando todas las películas de ${(document.getElementById('generoSelector')[document.getElementById('generoSelector').value].innerText).toLowerCase()}.`;
 			} else {
 				document.getElementById('informacionBusqueda').innerText = ``;
 			}
@@ -246,9 +311,95 @@ function buscarGenero(idGenero) {
 	});
 }
 
+function buscarPrecio(idSelector) {
+	var datos = 'ACTION=Pelicula.';
+	if(idSelector === "1"){
+		datos += 'listAllCaras'
+	}else if(idSelector === "2"){
+		datos += 'listAllBaratas'
+	}
+	$.ajax({
+		url: 'Controller',
+		type: 'GET',
+		data: datos,
+		datatype: 'json',
+		success: function (params) {
+			if (document.getElementById('informacionBusqueda') !== null && document.getElementById('precioSelector') !== null) {
+				document.getElementById('informacionBusqueda').innerText = `Se están mostrando todas las películas con ${(document.getElementById('precioSelector')[document.getElementById('precioSelector').value].innerText).toLowerCase()}.`;
+			} else {
+				document.getElementById('informacionBusqueda').innerText = ``;
+			}
+			crearImagenDiv('todasLasPelis', JSON.parse(params));
+		}
+	});
+}
+
+function buscarPuntuacion(idSelector) {
+	var datos = 'ACTION=Pelicula.';
+	if(idSelector === "1"){
+		datos += 'listAllMejorVotadas'
+	}else if(idSelector === "2"){
+		datos += 'listAllPeorVotadas'
+	}
+	$.ajax({
+		url: 'Controller',
+		type: 'GET',
+		data: datos,
+		datatype: 'json',
+		success: function (params) {
+			if (document.getElementById('informacionBusqueda') !== null && document.getElementById('puntuacionSelector') !== null) {
+				document.getElementById('informacionBusqueda').innerText = `Se están mostrando todas las películas con ${(document.getElementById('puntuacionSelector')[document.getElementById('puntuacionSelector').value].innerText).toLowerCase()}.`;
+			} else {
+				document.getElementById('informacionBusqueda').innerText = ``;
+			}
+			crearImagenDiv('todasLasPelis', JSON.parse(params));
+		}
+	});
+}
+
+function buscarEstreno(idSelector) {
+	var datos = 'ACTION=Pelicula.';
+	if(idSelector === "1"){
+		datos += 'listAllEstrenosNuevas'
+	}else if(idSelector === "2"){
+		datos += 'listAllEstrenosViejas'
+	}
+	$.ajax({
+		url: 'Controller',
+		type: 'GET',
+		data: datos,
+		datatype: 'json',
+		success: function (params) {
+			if (document.getElementById('informacionBusqueda') !== null && document.getElementById('fechaSelector') !== null) {
+				document.getElementById('informacionBusqueda').innerText = `Se están mostrando todas las películas estrenadas ${(document.getElementById('fechaSelector')[document.getElementById('fechaSelector').value].innerText).toLowerCase()}.`;
+			} else {
+				document.getElementById('informacionBusqueda').innerText = ``;
+			}
+			crearImagenDiv('todasLasPelis', JSON.parse(params));
+		}
+	});
+}
+
+
+
 function fichaPelicula(idPelicula) {
 	sessionStorage['idPeli'] = idPelicula;
 	document.location = 'ficha.html';
+}
+
+function cargarFavoritas() {
+	sessionStorage['filtro'] = 'favoritas';
+	document.location = 'perfil.html'
+}
+
+function cargarCompradas() {
+	sessionStorage['filtro'] = 'compradas';
+	document.location = 'perfil.html'
+}
+
+function cargarPuntuadas() {
+	sessionStorage['filtro'] = 'puntuadas';
+	document.location = 'perfil.html'
 }
 
 function loadInfoMovie(idPelicula) {
@@ -599,7 +750,7 @@ function crearFichaPelicula(pelicula) {
 	// <option value="1">Mala</option>
 	var option1 = document.createElement('option');
 	option1.setAttribute('value', '1');
-	pelicula.idPuntuacion === 1 ? option1.setAttribute('selected','true'):false;
+	pelicula.idPuntuacion === 1 ? option1.setAttribute('selected', 'true') : false;
 	option1.innerText = 'Mala';
 	select.appendChild(option1);
 
@@ -639,9 +790,9 @@ function crearFichaPelicula(pelicula) {
 	// <button id = "btnFavorito" class="btn btn-large btn-floating waves-effect waves-light btnTrailer">
 	var btnFavorito = document.createElement('button');
 	btnFavorito.setAttribute('id', 'btnFavorito');
-	if (pelicula.idMarcarFavorito === 0){
+	if (pelicula.idMarcarFavorito === 0) {
 		btnFavorito.setAttribute('class', 'btn btn-large btn-floating waves-effect waves-light btnTrailer btnDefecto');
-	}else{
+	} else {
 		btnFavorito.setAttribute('class', 'btn btn-large btn-floating waves-effect waves-light btnTrailer btnTriggerFav');
 	}
 
@@ -656,9 +807,9 @@ function crearFichaPelicula(pelicula) {
 	// <button id="btnComprar" class="btn btn-large btn-floating waves-effect waves-light btnTrailer">
 	var btnComprar = document.createElement('button');
 	btnComprar.setAttribute('id', 'btnComprar');
-	if(pelicula.idCompra === 0){
+	if (pelicula.idCompra === 0) {
 		btnComprar.setAttribute('class', 'btn btn-large btn-floating waves-effect waves-light btnTrailer btnDefecto');
-	}else{
+	} else {
 		btnComprar.setAttribute('class', 'btn btn-large btn-floating waves-effect waves-light btnTrailer btnTriggerCompra');
 	}
 
@@ -750,6 +901,21 @@ function cargarNavBar() {
 		document.querySelector('#anchorPerfilB').style.display = 'block';
 		document.querySelector('#anchorSalirB').style.display = 'block';
 
+		if (document.getElementById('imagenUsuario') !== null) {
+			if (usuarioSesion.fotoUsuario === 'undefinedProfile.png') {
+				document.getElementById('imagenUsuario').src = `images/usuarios/default/undefinedProfile.png`;
+			} else {
+				document.getElementById('imagenUsuario').src = `images/usuarios/users/${usuarioSesion.fotoUsuario}`;
+			}
+		}
+
+		if (document.getElementById('EmailUsuario') !== null) {
+			document.getElementById('EmailUsuario').innerText = usuarioSesion.email;
+		}
+		if (document.getElementById('userName') !== null) {
+			document.getElementById('userName').innerText = usuarioSesion.username;
+		}
+
 	} else {
 
 		document.querySelector('#anchorEntra').style.display = 'block';
@@ -789,110 +955,165 @@ function cargarComponentes() {
 			$('#formRegistrar')[0].reset();
 			$('#menuRegistrar')[0].click();
 		});
-
-		var anchorPerfil = document.getElementById('anchorPerfil');
-		if (anchorPerfil !== null) {
-			anchorPerfil.addEventListener('click', function () {
-				$('#menuAjustes')[0].click();
-			});
-		}
-
-		var salirUsuario = document.getElementById('anchorSalir');
-		if (salirUsuario !== null) {
-			salirUsuario.addEventListener('click', function () {
-				cerrarSesion();
-			});
-		}
-
-		var anchorPeliciulasB = document.getElementById('anchorPeliciulasB');
-		if (anchorPeliciulasB !== null) {
-			anchorPeliciulasB.addEventListener('click', function () {
-
-			});
-		}
-
-		var anchorEntraB = document.getElementById('anchorEntraB');
-		if (anchorEntraB !== null) {
-			anchorEntraB.addEventListener('click', function () {
-				$('#formEntra')[0].reset();
-				$('#menuEntra')[0].click();
-			});
-		}
-
-		var anchorRegistrarB = document.getElementById('anchorRegistrarB');
-		if (anchorRegistrarB !== null) {
-			anchorRegistrarB.addEventListener('click', function () {
-				$('#formRegistrar')[0].reset();
-				$('#menuRegistrar')[0].click();
-			});
-		}
-
-		var anchorPerfilB = document.getElementById('anchorPerfilB');
-		if (anchorPerfilB !== null) {
-			anchorPerfilB.addEventListener('click', function () {
-				$('#menuAjustes')[0].click();
-			});
-		}
-
-		var salirUsuarioB = document.getElementById('anchorSalirB');
-		if (salirUsuarioB !== null) {
-			salirUsuarioB.addEventListener('click', function () {
-				cerrarSesion();
-			});
-		}
-
-		var btnSubmitLogin = document.getElementById('btnSubmitLogin');
-		if (btnSubmitLogin !== null) {
-			btnSubmitLogin.addEventListener('click', function () {
-				login(getFormData('formEntra'));
-			});
-		}
-
-		var btnSubmitRegister = document.getElementById('btnSubmitRegister');
-		if (btnSubmitRegister !== null) {
-			btnSubmitRegister.addEventListener('click', function () {
-				register(getFormData('formRegistrar'));
-			});
-		}
-
-		var btnFavorito = document.getElementById('btnFavorito');
-		if (btnFavorito !== null) {
-			btnFavorito.addEventListener('click', function () {
-
-			});
-		}
-
-		var btnComprar = document.getElementById('btnComprar');
-		if (btnComprar !== null) {
-			btnComprar.addEventListener('click', function () {
-
-			});
-		}
-
-		// var btnMostrarTrailer = document.getElementById('btnMostrarTrailer');
-		// if (btnMostrarTrailer !== null) {
-		// 	btnMostrarTrailer.addEventListener('click', function () {
-		// 		$('#anchorTrailer')[0].click();
-		// 	});
-		// }
-
-		var generoSelector = document.getElementById('generoSelector');
-		if (generoSelector !== null) {
-			generoSelector.addEventListener('change', function () {
-				if (generoSelector.value === "0") {
-					cargarTodasPelis();
-				} else {
-					buscarGenero(generoSelector.value);
-				}
-			});
-		}
-
-		var inputNombre = document.getElementById('inputNombre');
-		if (inputNombre !== null) {
-			inputNombre.addEventListener('keyup', function () {
-				buscarTitulo(inputNombre.value);
-			});
-		}
-
 	}
+
+	var anchorPerfil = document.getElementById('anchorPerfil');
+	if (anchorPerfil !== null) {
+		anchorPerfil.addEventListener('click', function () {
+			$('#menuAjustes')[0].click();
+		});
+	}
+
+	var salirUsuario = document.getElementById('anchorSalir');
+	if (salirUsuario !== null) {
+		salirUsuario.addEventListener('click', function () {
+			cerrarSesion();
+
+		});
+	}
+
+	var anchorPeliciulasB = document.getElementById('anchorPeliciulasB');
+	if (anchorPeliciulasB !== null) {
+		anchorPeliciulasB.addEventListener('click', function () {
+
+		});
+	}
+
+	var anchorEntraB = document.getElementById('anchorEntraB');
+	if (anchorEntraB !== null) {
+		anchorEntraB.addEventListener('click', function () {
+			$('#formEntra')[0].reset();
+			$('#menuEntra')[0].click();
+		});
+	}
+
+	var anchorRegistrarB = document.getElementById('anchorRegistrarB');
+	if (anchorRegistrarB !== null) {
+		anchorRegistrarB.addEventListener('click', function () {
+			$('#formRegistrar')[0].reset();
+			$('#menuRegistrar')[0].click();
+		});
+	}
+
+	var anchorPerfilB = document.getElementById('anchorPerfilB');
+	if (anchorPerfilB !== null) {
+		anchorPerfilB.addEventListener('click', function () {
+			$('#menuAjustes')[0].click();
+		});
+	}
+
+	var salirUsuarioB = document.getElementById('anchorSalirB');
+	if (salirUsuarioB !== null) {
+		salirUsuarioB.addEventListener('click', function () {
+			cerrarSesion();
+		});
+	}
+
+	var btnSubmitLogin = document.getElementById('btnSubmitLogin');
+	if (btnSubmitLogin !== null) {
+		btnSubmitLogin.addEventListener('click', function () {
+			login(getFormData('formEntra'));
+		});
+	}
+
+	var btnSubmitRegister = document.getElementById('btnSubmitRegister');
+	if (btnSubmitRegister !== null) {
+		btnSubmitRegister.addEventListener('click', function () {
+			register(getFormData('formRegistrar'));
+		});
+	}
+
+	var btnFavorito = document.getElementById('btnFavorito');
+	if (btnFavorito !== null) {
+		btnFavorito.addEventListener('click', function () {
+
+		});
+	}
+
+	var btnComprar = document.getElementById('btnComprar');
+	if (btnComprar !== null) {
+		btnComprar.addEventListener('click', function () {
+
+		});
+	}
+
+	// var btnMostrarTrailer = document.getElementById('btnMostrarTrailer');
+	// if (btnMostrarTrailer !== null) {
+	// 	btnMostrarTrailer.addEventListener('click', function () {
+	// 		$('#anchorTrailer')[0].click();
+	// 	});
+	// }
+
+	var generoSelector = document.getElementById('generoSelector');
+	if (generoSelector !== null) {
+		generoSelector.addEventListener('change', function () {
+			if (generoSelector.value === "0") {
+				cargarTodasPelis();
+			} else {
+				buscarGenero(generoSelector.value);
+			}
+		});
+	}
+
+	var precioSelector = document.getElementById('precioSelector');
+	if (precioSelector !== null) {
+		precioSelector.addEventListener('change', function () {
+			if (precioSelector.value === "0") {
+				cargarTodasPelis();
+			} else {
+				buscarPrecio(precioSelector.value);
+			}
+		});
+	}
+
+	var puntuacionSelector = document.getElementById('puntuacionSelector');
+	if (puntuacionSelector !== null) {
+		puntuacionSelector.addEventListener('change', function () {
+			if (puntuacionSelector.value === "0") {
+				cargarTodasPelis();
+			} else {
+				buscarPuntuacion(puntuacionSelector.value);
+			}
+		});
+	}
+
+	var fechaSelector = document.getElementById('fechaSelector');
+	if (fechaSelector !== null) {
+		fechaSelector.addEventListener('change', function () {
+			if (fechaSelector.value === "0") {
+				cargarTodasPelis();
+			} else {
+				buscarEstreno(fechaSelector.value);
+			}
+		});
+	}
+
+	var inputNombre = document.getElementById('inputNombre');
+	if (inputNombre !== null) {
+		inputNombre.addEventListener('keyup', function () {
+			buscarTitulo(inputNombre.value);
+		});
+	}
+
+	var anchorPeliFav = document.getElementById('anchorPeliFav');
+	if (anchorPeliFav !== null) {
+		anchorPeliFav.addEventListener('click', function () {
+			cargarFavoritas();
+		});
+	}
+
+	var anchorPeliComp = document.getElementById('anchorPeliComp');
+	if (anchorPeliComp !== null) {
+		anchorPeliComp.addEventListener('click', function () {
+			cargarCompradas();
+		});
+	}
+
+	var anchorPeliPunt = document.getElementById('anchorPeliPunt');
+	if (anchorPeliPunt !== null) {
+		anchorPeliPunt.addEventListener('click', function () {
+			cargarPuntuadas();
+		});
+	}
+
 }
