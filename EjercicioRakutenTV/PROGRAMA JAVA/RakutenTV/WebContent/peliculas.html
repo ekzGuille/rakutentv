@@ -28,7 +28,8 @@
     <nav>
         <div class="nav-wrapper">
             <a class="brand-logo center"><img id="logoPelis" src="images/icon/logo/LogoNegro.png"></a>
-            <ul id="nav-mobile" class="right">
+            <a href="#" data-target="mobile-menu" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="index.html" id="anchorPeliciulas">Inicio <i class="material-icons left">home</i></a></li>
                 <li><a id="anchorEntra">Entra</a></li>
                 <li><a id="anchorRegistrar">Registrate</a></li>
@@ -155,7 +156,7 @@
                     <option value="1">Más recientes</option>
                     <option value="2">Más antiguas</option>
                 </select>
-                <button class="btn btn-floating waves-effect waves-light btnTrailer btnDefecto"><i class="material-icons">autorenew</i></button>
+                <button id="btnReset" class="btn btn-floating waves-effect waves-light btnTrailer btnDefecto"><i class="material-icons">autorenew</i></button>
             </div>
         </div>
         <div>
@@ -167,11 +168,12 @@
 
     <!-- Footer -->
     <footer class="page-footer">
-        <div class="footer-copyright">
+        <!-- <div class="footer-copyright"> -->
             <div class="container">
-                <h6>Guillermo Sesé Santos - 2SI FSV - 2018</h6>
+                <!-- <h6>Guillermo Sesé Santos - 2SI FSV - 2018</h6> -->
+                <h6></h6>
             </div>
-        </div>
+        <!-- </div> -->
     </footer>
 </body>
 

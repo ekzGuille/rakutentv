@@ -22,7 +22,7 @@ SELECT
     `pelicula`.*,
     `valoracionesTotales`,
     `mediaValoraciones`,
-    `puntuacion`.`idPuntuacion`,
+    `puntuacion`.`idInfoPuntuacion`,
     `compra`.`idCompra`,
     `marcarfavorito`.`idMarcarFavorito`
 FROM
@@ -37,7 +37,7 @@ WHERE
 
 
 
-SELECT `pelicula`.*, `valoracionesTotales`, `mediaValoraciones`, `puntuacion`.`idPuntuacion`, `compra`.`idCompra`, `marcarfavorito`.`idMarcarFavorito` FROM `usuario`, `pelicula` LEFT OUTER JOIN `valoracionglobalpelicula` ON `pelicula`.`idPelicula` = `valoracionglobalpelicula`.`idPelicula` LEFT OUTER JOIN `puntuacion` ON `puntuacion`.`idPelicula` = `pelicula`.`idPelicula` AND `puntuacion`.`idUsuario` = 3 LEFT OUTER JOIN `compra` ON `compra`.`idPelicula` = `pelicula`.`idPelicula` AND `compra`.`idUsuario` = 3 LEFT OUTER JOIN `marcarfavorito` ON `marcarfavorito`.`idPelicula` = `pelicula`.`idPelicula` AND `marcarfavorito`.`idUsuario` = 3 WHERE `pelicula`.`idPelicula` = 6 AND `usuario`.`idUsuario` = 3
+SELECT `pelicula`.*, `valoracionesTotales`, `mediaValoraciones`, `puntuacion`.`idInfoPuntuacion`, `compra`.`idCompra`, `marcarfavorito`.`idMarcarFavorito` FROM `usuario`, `pelicula` LEFT OUTER JOIN `valoracionglobalpelicula` ON `pelicula`.`idPelicula` = `valoracionglobalpelicula`.`idPelicula` LEFT OUTER JOIN `puntuacion` ON `puntuacion`.`idPelicula` = `pelicula`.`idPelicula` AND `puntuacion`.`idUsuario` = 3 LEFT OUTER JOIN `compra` ON `compra`.`idPelicula` = `pelicula`.`idPelicula` AND `compra`.`idUsuario` = 3 LEFT OUTER JOIN `marcarfavorito` ON `marcarfavorito`.`idPelicula` = `pelicula`.`idPelicula` AND `marcarfavorito`.`idUsuario` = 3 WHERE `pelicula`.`idPelicula` = 6 AND `usuario`.`idUsuario` = 3
 
 
 -- select usuario.idUsuario, pelicula.idPelicula, marcarfavorito.idMarcarFavorito, puntuacion.idPuntuacion, compra.idCompra

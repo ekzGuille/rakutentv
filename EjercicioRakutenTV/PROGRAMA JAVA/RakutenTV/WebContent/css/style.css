@@ -314,7 +314,8 @@ h4 {
 }
 
 .page-footer {
-    background-color: var(--colorFondoSec) !important;
+    /* background-color: var(--colorFondoSec) !important;  */
+    background-color: var(--colorFondo) !important;
     text-align: center;
     font-weight: 600 !important;
 }
@@ -367,15 +368,15 @@ h4 {
     font-size: 1.2em;
 }
 
-.select-wrapper input.select-dropdown {
+.input-field .select-wrapper input.select-dropdown {
     width: 25% !important;
     text-align: center !important;
     display: inline-flex !important;
     background-color: var(--colorFondo);
 }
 
-#spinnerBuscador .select-wrapper input.select-dropdown .selectFiltro {
-    width: auto !important;
+#spinnerBuscador .select-wrapper input.select-dropdown{
+    width: 100% !important;
     text-align: center !important;
     display: inline-flex !important;
     background-color: var(--colorFondo);

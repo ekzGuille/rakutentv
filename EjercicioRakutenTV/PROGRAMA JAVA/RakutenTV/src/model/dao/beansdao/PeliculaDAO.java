@@ -1045,7 +1045,7 @@ public class PeliculaDAO implements DAO<Pelicula, Integer> {
 
 	public Pelicula infoPeliSeleccionada(Integer[] id) {
 
-		String sql = "SELECT `pelicula`.*, `valoracionesTotales`, `mediaValoraciones`, `puntuacion`.`idPuntuacion`, `compra`.`idCompra`, `marcarfavorito`.`idMarcarFavorito` FROM `usuario`, `pelicula` LEFT OUTER JOIN `valoracionglobalpelicula` ON `pelicula`.`idPelicula` = `valoracionglobalpelicula`.`idPelicula` LEFT OUTER JOIN `puntuacion` ON `puntuacion`.`idPelicula` = `pelicula`.`idPelicula` AND `puntuacion`.`idUsuario` = ? LEFT OUTER JOIN `compra` ON `compra`.`idPelicula` = `pelicula`.`idPelicula` AND `compra`.`idUsuario` = ? LEFT OUTER JOIN `marcarfavorito` ON `marcarfavorito`.`idPelicula` = `pelicula`.`idPelicula` AND `marcarfavorito`.`idUsuario` = ? WHERE `usuario`.`idUsuario` = ? AND `pelicula`.`idPelicula` = ?";
+		String sql = "SELECT `pelicula`.*, `valoracionesTotales`, `mediaValoraciones`, `puntuacion`.`idInfoPuntuacion`, `compra`.`idCompra`, `marcarfavorito`.`idMarcarFavorito` FROM `usuario`, `pelicula` LEFT OUTER JOIN `valoracionglobalpelicula` ON `pelicula`.`idPelicula` = `valoracionglobalpelicula`.`idPelicula` LEFT OUTER JOIN `puntuacion` ON `puntuacion`.`idPelicula` = `pelicula`.`idPelicula` AND `puntuacion`.`idUsuario` = ? LEFT OUTER JOIN `compra` ON `compra`.`idPelicula` = `pelicula`.`idPelicula` AND `compra`.`idUsuario` = ? LEFT OUTER JOIN `marcarfavorito` ON `marcarfavorito`.`idPelicula` = `pelicula`.`idPelicula` AND `marcarfavorito`.`idUsuario` = ? WHERE `usuario`.`idUsuario` = ? AND `pelicula`.`idPelicula` = ?";
 
 		List<Pelicula> lstPeliculas = null;
 
@@ -1079,7 +1079,7 @@ public class PeliculaDAO implements DAO<Pelicula, Integer> {
 				pelicula.setValoracionesTotales(rs.getInt(12));
 				pelicula.setMediaValoraciones(rs.getDouble(13));
 
-				pelicula.setIdPuntuacion(rs.getInt(14));
+				pelicula.setIdInfoPuntuacion(rs.getInt(14));
 				pelicula.setIdCompra(rs.getInt(15));
 				pelicula.setIdMarcarFavorito(rs.getInt(16));
 

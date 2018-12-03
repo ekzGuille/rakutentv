@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 03-12-2018 a las 00:28:09
+-- Tiempo de generación: 03-12-2018 a las 22:27:28
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -91,7 +91,9 @@ INSERT INTO `compra` (`idCompra`, `idUsuario`, `idPelicula`, `precioCompra`, `fe
 (2, 3, 7, '2.00', '2018-11-27 19:53:12'),
 (3, 3, 6, '4.00', '2018-11-27 19:55:51'),
 (4, 2, 20, '2.50', '2018-11-28 21:35:44'),
-(5, 1, 14, '7.50', '2018-11-28 21:38:07');
+(5, 1, 14, '7.50', '2018-11-28 21:38:07'),
+(6, 2, 14, '7.50', '2018-12-03 20:35:42'),
+(7, 5, 1, '5.50', '2018-12-03 20:50:32');
 
 -- --------------------------------------------------------
 
@@ -195,11 +197,11 @@ CREATE TABLE `marcarfavorito` (
 --
 
 INSERT INTO `marcarfavorito` (`idMarcarFavorito`, `idPelicula`, `idUsuario`) VALUES
-(11, 2, 2),
 (4, 3, 1),
 (5, 6, 3),
 (1, 7, 3),
 (7, 8, 5),
+(13, 14, 2),
 (2, 15, 3);
 
 -- --------------------------------------------------------
@@ -299,7 +301,8 @@ INSERT INTO `puntuacion` (`idPuntuacion`, `idPelicula`, `idUsuario`, `idInfoPunt
 (14, 8, 5, 3, '2018-11-28 21:37:10'),
 (15, 2, 1, 4, '2018-11-28 21:37:32'),
 (16, 14, 1, 5, '2018-11-28 21:37:40'),
-(17, 12, 2, 5, '2018-11-28 23:24:21');
+(17, 12, 2, 5, '2018-11-28 23:24:21'),
+(18, 14, 2, 1, '2018-12-03 20:43:19');
 
 -- --------------------------------------------------------
 
@@ -394,10 +397,11 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`idUsuario`, `email`, `username`, `contrasena`, `fechaCreacion`, `fotoUsuario`, `idMetodoPago`, `infoMetodoPago`, `activoUsuario`) VALUES
 (1, 'ejemplo@ejemplo.com', 'ejemplo', 'ejemplo1', '2018-11-14 23:00:00', 'undefinedProfile.png', -1, 'ninguno', 1),
-(2, 'gss@svalero.com', 'gss', '1234', '2018-11-21 23:00:00', 'undefinedProfile.png', -1, 'ninguno', 1),
-(3, 'alberto@svalero.com', 'alberto', 'akk', '2018-11-21 23:00:00', 'undefinedProfile.png', -1, 'ninguno', 1),
-(5, 'juanito@juan.com', 'juan', 'jon', '2018-11-28 20:16:27', 'undefinedProfile.png', -1, 'ninguno', 1),
-(8, 'examen@svalero.com', 'examen', 'ex', '2018-11-28 23:00:00', 'undefinedProfile.png', -1, 'ninguno', 1);
+(2, 'gss@svalero.com', 'gss', '1234', '2018-11-21 23:00:00', 'harold.jpg', -1, 'ninguno', 1),
+(3, 'alberto@svalero.com', 'alberto', 'akk', '2018-11-21 23:00:00', 'horatio.jpg', -1, 'ninguno', 1),
+(5, 'juanito@juan.com', 'juan', 'jon', '2018-11-28 20:16:27', 'repu.jpg', -1, 'ninguno', 1),
+(8, 'examen@svalero.com', 'examen', 'ex', '2018-11-28 23:00:00', 'undefinedProfile.png', -1, 'ninguno', 1),
+(9, 'svalero@svalero.com', 'svalero', 'svalero', '2018-12-02 23:00:00', 'undefinedProfile.png', -1, 'ninguno', 1);
 
 -- --------------------------------------------------------
 
@@ -551,7 +555,7 @@ ALTER TABLE `comentario`
 -- AUTO_INCREMENT de la tabla `compra`
 --
 ALTER TABLE `compra`
-  MODIFY `idCompra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idCompra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `director`
@@ -581,7 +585,7 @@ ALTER TABLE `infopuntuacion`
 -- AUTO_INCREMENT de la tabla `marcarfavorito`
 --
 ALTER TABLE `marcarfavorito`
-  MODIFY `idMarcarFavorito` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idMarcarFavorito` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `metodopago`
@@ -599,7 +603,7 @@ ALTER TABLE `pelicula`
 -- AUTO_INCREMENT de la tabla `puntuacion`
 --
 ALTER TABLE `puntuacion`
-  MODIFY `idPuntuacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `idPuntuacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `teneractor`
@@ -623,7 +627,7 @@ ALTER TABLE `tenergenero`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Restricciones para tablas volcadas

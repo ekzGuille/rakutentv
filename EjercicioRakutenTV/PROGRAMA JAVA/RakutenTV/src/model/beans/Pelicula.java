@@ -23,7 +23,7 @@ public class Pelicula {
 	private int valoracionesTotales;
 	private double mediaValoraciones;
 	
-	private int idPuntuacion;
+	private int idInfoPuntuacion;
 	private int idCompra;
 	private int idMarcarFavorito;
 	
@@ -52,7 +52,7 @@ public class Pelicula {
 		this.idComentarioPeli = idComentarioPeli;
 		this.valoracionesTotales = valoracionesTotales;
 		this.mediaValoraciones = mediaValoraciones;
-		this.idPuntuacion = idPuntuacion;
+		this.idInfoPuntuacion = idPuntuacion;
 		this.idCompra = idCompra;
 		this.idMarcarFavorito = idMarcarFavorito;
 	}
@@ -193,12 +193,12 @@ public class Pelicula {
 		this.mediaValoraciones = mediaValoraciones;
 	}
 
-	public int getIdPuntuacion() {
-		return idPuntuacion;
+	public int getIdInfoPuntuacion() {
+		return idInfoPuntuacion;
 	}
 
-	public void setIdPuntuacion(int idPuntuacion) {
-		this.idPuntuacion = idPuntuacion;
+	public void setIdInfoPuntuacion(int idInfoPuntuacion) {
+		this.idInfoPuntuacion = idInfoPuntuacion;
 	}
 
 	public int getIdCompra() {
