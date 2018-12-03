@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 03-12-2018 a las 22:27:28
+-- Tiempo de generación: 03-12-2018 a las 22:32:01
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -401,7 +401,7 @@ INSERT INTO `usuario` (`idUsuario`, `email`, `username`, `contrasena`, `fechaCre
 (3, 'alberto@svalero.com', 'alberto', 'akk', '2018-11-21 23:00:00', 'horatio.jpg', -1, 'ninguno', 1),
 (5, 'juanito@juan.com', 'juan', 'jon', '2018-11-28 20:16:27', 'repu.jpg', -1, 'ninguno', 1),
 (8, 'examen@svalero.com', 'examen', 'ex', '2018-11-28 23:00:00', 'undefinedProfile.png', -1, 'ninguno', 1),
-(9, 'svalero@svalero.com', 'svalero', 'svalero', '2018-12-02 23:00:00', 'undefinedProfile.png', -1, 'ninguno', 1);
+(9, 'svalero@svalero.com', 'svalero', 'svalero', '2018-12-02 23:00:00', 'sanvalero.jpg', -1, 'ninguno', 1);
 
 -- --------------------------------------------------------
 
