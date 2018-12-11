@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 03-12-2018 a las 23:10:41
+-- Tiempo de generación: 11-12-2018 a las 08:48:08
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -207,6 +207,7 @@ INSERT INTO `marcarfavorito` (`idMarcarFavorito`, `idPelicula`, `idUsuario`) VAL
 (14, 3, 2),
 (5, 6, 3),
 (7, 8, 5),
+(15, 11, 3),
 (2, 15, 3);
 
 -- --------------------------------------------------------
@@ -315,7 +316,9 @@ INSERT INTO `puntuacion` (`idPuntuacion`, `idPelicula`, `idUsuario`, `idInfoPunt
 (23, 18, 11, 2, '2018-12-03 22:04:12'),
 (24, 13, 11, 2, '2018-12-03 22:05:01'),
 (25, 1, 3, 4, '2018-12-03 22:05:39'),
-(26, 1, 2, 5, '2018-12-03 22:05:59');
+(26, 1, 2, 5, '2018-12-03 22:05:59'),
+(27, 11, 3, 3, '2018-12-11 07:45:48'),
+(28, 1, 8, 4, '2018-12-11 07:47:04');
 
 -- --------------------------------------------------------
 
@@ -600,7 +603,7 @@ ALTER TABLE `infopuntuacion`
 -- AUTO_INCREMENT de la tabla `marcarfavorito`
 --
 ALTER TABLE `marcarfavorito`
-  MODIFY `idMarcarFavorito` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `idMarcarFavorito` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `metodopago`
@@ -618,7 +621,7 @@ ALTER TABLE `pelicula`
 -- AUTO_INCREMENT de la tabla `puntuacion`
 --
 ALTER TABLE `puntuacion`
-  MODIFY `idPuntuacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `idPuntuacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `teneractor`

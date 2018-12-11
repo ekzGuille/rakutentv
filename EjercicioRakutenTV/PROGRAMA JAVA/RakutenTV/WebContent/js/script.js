@@ -1,4 +1,5 @@
-var usuarioSesion = sessionStorage['usuario'] === "{}" ? JSON.parse(sessionStorage['usuario']) : JSON.parse(sessionStorage['usuario'])[0];
+//var usuarioSesion = sessionStorage['usuario'] === "{}" ? JSON.parse(sessionStorage['usuario']) : JSON.parse(sessionStorage['usuario'])[0];
+var usuarioSesion;
 var respuestaServer;
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -10,9 +11,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	usuarioSesion = sessionStorage['usuario'] === "{}" ? JSON.parse(sessionStorage['usuario']) : JSON.parse(sessionStorage['usuario'])[0];
 
 	if (window.location.pathname === "/RakutenTV/" || window.location.pathname === "/RakutenTV/index.html") {
-		cargarPelisMasVotadas(6);
-		cargarPelisEstrenos(6);
-		cargarultimasPelisAdd(6);
+		cargarPelisMasVotadas(5);
+		cargarPelisEstrenos(5);
+		cargarultimasPelisAdd(5);
 	} else if (window.location.pathname === "/RakutenTV/peliculas.html") {
 		cargarTodasPelis();
 	} else if (window.location.pathname === "/RakutenTV/ficha.html") {
@@ -934,7 +935,7 @@ function crearFichaPelicula(pelicula) {
 	//  <option value="3">Buena</option>
 	var option3 = document.createElement('option');
 	option3.setAttribute('value', '3');
-	pelicula.idInfoPuntuacion === 2 ? option3.setAttribute('selected', 'true') : false;
+	pelicula.idInfoPuntuacion === 3 ? option3.setAttribute('selected', 'true') : false;
 	option3.innerText = 'Buena';
 	select.appendChild(option3);
 
